@@ -1,0 +1,13 @@
+C:\Users\Kacper\source\repos\rafcyk\projekt-zespolowy\mobile\Projekt zespolowy\Projekt zespolowy\Projekt zespolowy\bin\Debug\netstandard2.0\Projekt zespolowy.deps.json
+C:\Users\Kacper\source\repos\rafcyk\projekt-zespolowy\mobile\Projekt zespolowy\Projekt zespolowy\Projekt zespolowy\bin\Debug\netstandard2.0\Projekt zespolowy.dll
+C:\Users\Kacper\source\repos\rafcyk\projekt-zespolowy\mobile\Projekt zespolowy\Projekt zespolowy\Projekt zespolowy\bin\Debug\netstandard2.0\ref\Projekt zespolowy.dll
+C:\Users\Kacper\source\repos\rafcyk\projekt-zespolowy\mobile\Projekt zespolowy\Projekt zespolowy\Projekt zespolowy\bin\Debug\netstandard2.0\Projekt zespolowy.pdb
+C:\Users\Kacper\source\repos\rafcyk\projekt-zespolowy\mobile\Projekt zespolowy\Projekt zespolowy\Projekt zespolowy\obj\Debug\netstandard2.0\Projekt zespolowy.csprojAssemblyReference.cache
+C:\Users\Kacper\source\repos\rafcyk\projekt-zespolowy\mobile\Projekt zespolowy\Projekt zespolowy\Projekt zespolowy\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\Kacper\source\repos\rafcyk\projekt-zespolowy\mobile\Projekt zespolowy\Projekt zespolowy\Projekt zespolowy\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+C:\Users\Kacper\source\repos\rafcyk\projekt-zespolowy\mobile\Projekt zespolowy\Projekt zespolowy\Projekt zespolowy\obj\Debug\netstandard2.0\Projekt zespolowy.AssemblyInfoInputs.cache
+C:\Users\Kacper\source\repos\rafcyk\projekt-zespolowy\mobile\Projekt zespolowy\Projekt zespolowy\Projekt zespolowy\obj\Debug\netstandard2.0\Projekt zespolowy.AssemblyInfo.cs
+C:\Users\Kacper\source\repos\rafcyk\projekt-zespolowy\mobile\Projekt zespolowy\Projekt zespolowy\Projekt zespolowy\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\Kacper\source\repos\rafcyk\projekt-zespolowy\mobile\Projekt zespolowy\Projekt zespolowy\Projekt zespolowy\obj\Debug\netstandard2.0\Projekt zespolowy.dll
+C:\Users\Kacper\source\repos\rafcyk\projekt-zespolowy\mobile\Projekt zespolowy\Projekt zespolowy\Projekt zespolowy\obj\Debug\netstandard2.0\ref\Projekt zespolowy.dll
+C:\Users\Kacper\source\repos\rafcyk\projekt-zespolowy\mobile\Projekt zespolowy\Projekt zespolowy\Projekt zespolowy\obj\Debug\netstandard2.0\Projekt zespolowy.pdb
