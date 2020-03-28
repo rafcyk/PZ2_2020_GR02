@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\mobile"
+    "\\desktop",
+    "\\desktop\\SpaceShooter",
+    "\\desktop\\SpaceShooter\\SpaceShooter"
   ],
-  "SelectedNode": "\\mobile\\SpaceShooter.sln",
+  "SelectedNode": "\\desktop\\SpaceShooter\\SpaceShooter\\Game1.cs",
   "PreviewInSolutionExplorer": false
 }
