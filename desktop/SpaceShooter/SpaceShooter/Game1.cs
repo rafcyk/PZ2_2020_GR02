@@ -7,6 +7,7 @@ namespace SpaceShooter
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
+    /// //test
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
