@@ -20,3 +20,8 @@ C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShoot
 C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\obj\x86\Debug\SpaceShooter.csproj.CopyComplete
 C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\obj\x86\Debug\SpaceShooter.exe
 C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\obj\x86\Debug\SpaceShooter.pdb
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\SpaceShipSmall.xnb
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\exitButton.xnb
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\exitButtonPressed.xnb
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\startButton.xnb
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\startButtonPressed.xnb
