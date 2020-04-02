@@ -6,11 +6,13 @@
   <SourceFiles>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/exitButton.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/exitButtonPressed.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/pauseBackground.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/SpaceShipSmall.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/startButton.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/startButtonPressed.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

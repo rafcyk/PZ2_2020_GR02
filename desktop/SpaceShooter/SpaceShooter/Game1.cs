@@ -14,12 +14,14 @@ namespace SpaceShooter
         #endregion
 
         #region Textures
-        Texture2D playerTexture,startButtonTexture,startButtonPressedTexture,exitButtonTexture,exitButtonPressedTexture;
+        Texture2D playerTexture,startButtonTexture,startButtonPressedTexture,exitButtonTexture,exitButtonPressedTexture,
+                  pauseBackgroundTexture;
         #endregion
 
         #region Buttons
         Button startButton;
         Button exitButton;
+        Button exitToMainMenuButton;
         #endregion
         enum GameState
         {
@@ -29,7 +31,9 @@ namespace SpaceShooter
         }
 
         GameState _currentGameState;
-        int screenCenterX;
+        private int screenCenterX;
+        private bool isPausePressed = false;
+
 
         public Game1()
         {
@@ -52,13 +56,17 @@ namespace SpaceShooter
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             playerTexture = Content.Load<Texture2D>("SpaceShipSmall");
+
             startButtonTexture = Content.Load<Texture2D>("startButton");
             startButtonPressedTexture = Content.Load<Texture2D>("startButtonPressed");
             exitButtonTexture = Content.Load<Texture2D>("exitButton");
             exitButtonPressedTexture = Content.Load<Texture2D>("exitButtonPressed");
 
+            pauseBackgroundTexture = Content.Load<Texture2D>("pauseBackground");
+
             startButton = new Button(startButtonTexture, startButtonPressedTexture, new Rectangle(screenCenterX-122, 300, 244, 72));
             exitButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX-122, 400, 244, 72));
+            exitToMainMenuButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX-122, 400, 244, 72));
 
             player = new Player(playerTexture);
             player.playerLocation = new Rectangle(screenCenterX-50, 10, 100, 100);
@@ -71,7 +79,7 @@ namespace SpaceShooter
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) Exit();
 
             switch (_currentGameState)
             {
@@ -103,7 +111,28 @@ namespace SpaceShooter
                 exitButton.unpress();
             }
         }
-        void UpdateGameplay(GameTime gameTime) { }
+        void UpdateGameplay(GameTime gameTime) {
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                isPausePressed = true;
+
+                //TODO napisać funkcje pauzująca grę
+            }
+
+            this.IsMouseVisible = true;
+            var mouseState = Mouse.GetState();
+            var mousePoint = new Point(mouseState.X, mouseState.Y);
+
+            if (exitToMainMenuButton.location.Contains(mousePoint))
+            {
+                exitToMainMenuButton.press();
+                if (mouseState.LeftButton == ButtonState.Pressed) _currentGameState = GameState.MainMenu;
+            }
+            else
+            {
+                exitToMainMenuButton.unpress();
+            }
+        }
         void UpdateEndOfGame(GameTime gameTime) { }
 
         protected override void Draw(GameTime gameTime)
@@ -130,6 +159,14 @@ namespace SpaceShooter
             spriteBatch.Begin();
             spriteBatch.Draw(player.playerTexture, player.playerLocation, Color.White);
             spriteBatch.End();
+
+            if (isPausePressed == true)
+            {
+                spriteBatch.Begin();
+                spriteBatch.Draw(pauseBackgroundTexture, new Rectangle(screenCenterX-150, 200, 300, 300), Color.White);
+                spriteBatch.Draw(exitToMainMenuButton.texture, exitToMainMenuButton.location, Color.White);
+                spriteBatch.End();
+            }
         }
         void DrawEndOfGame(GameTime gameTime) { }
     }
