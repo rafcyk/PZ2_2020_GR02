@@ -14,6 +14,7 @@ namespace SpaceShooter
         public Texture2D mainTexture;
         public Texture2D pressedTexture;
         public Rectangle location;
+        public bool isPressed;
 
         public Button(Texture2D mainTexture, Texture2D pressedTexture, Rectangle location)
         {
@@ -26,11 +27,13 @@ namespace SpaceShooter
 
         public void press()
         {
+            isPressed = true;
             texture = pressedTexture;
         }
 
         public void unpress()
         {
+            isPressed = false;
             texture = mainTexture;
         }
     }

@@ -61,7 +61,6 @@ namespace SpaceShooter
             startButtonPressedTexture = Content.Load<Texture2D>("startButtonPressed");
             exitButtonTexture = Content.Load<Texture2D>("exitButton");
             exitButtonPressedTexture = Content.Load<Texture2D>("exitButtonPressed");
-
             pauseBackgroundTexture = Content.Load<Texture2D>("pauseBackground");
 
             startButton = new Button(startButtonTexture, startButtonPressedTexture, new Rectangle(screenCenterX-122, 300, 244, 72));
@@ -69,7 +68,7 @@ namespace SpaceShooter
             exitToMainMenuButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX-122, 400, 244, 72));
 
             player = new Player(playerTexture);
-            player.playerLocation = new Rectangle(screenCenterX-50, 10, 100, 100);
+            player.playerLocation = new Rectangle(screenCenterX-25, 10, 50, 50);
         }
 
         protected override void UnloadContent()
@@ -95,21 +94,31 @@ namespace SpaceShooter
             var mouseState = Mouse.GetState();
             var mousePoint = new Point(mouseState.X, mouseState.Y);
 
-            if (startButton.location.Contains(mousePoint))
+            if (startButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed)
             {
                 startButton.press();
-                if (mouseState.LeftButton == ButtonState.Pressed) _currentGameState = GameState.GamePlay;
             }
-            else if (exitButton.location.Contains(mousePoint))
+            else if (exitButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed)
             {
                 exitButton.press();
-                if (mouseState.LeftButton == ButtonState.Pressed) Exit();
             }
-            else
+
+            if (exitButton.isPressed)
             {
-                startButton.unpress();
-                exitButton.unpress();
+                if (exitButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released) {
+                    exitButton.unpress();
+                    Exit();
+                }
             }
+            else if (startButton.isPressed)
+            {
+                if(startButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
+                {
+                    startButton.unpress();
+                    _currentGameState = GameState.GamePlay;
+                }
+            }
+ 
         }
         void UpdateGameplay(GameTime gameTime) {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -123,15 +132,20 @@ namespace SpaceShooter
             var mouseState = Mouse.GetState();
             var mousePoint = new Point(mouseState.X, mouseState.Y);
 
-            if (exitToMainMenuButton.location.Contains(mousePoint))
+            if (exitToMainMenuButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed)
             {
                 exitToMainMenuButton.press();
-                if (mouseState.LeftButton == ButtonState.Pressed) _currentGameState = GameState.MainMenu;
             }
-            else
-            {
-                exitToMainMenuButton.unpress();
+            if (exitToMainMenuButton.isPressed) {
+                if (exitToMainMenuButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
+                {
+                    exitToMainMenuButton.unpress();
+                    isPausePressed = false;
+                    _currentGameState = GameState.MainMenu;
+                }
             }
+            
+
         }
         void UpdateEndOfGame(GameTime gameTime) { }
 
