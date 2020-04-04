@@ -28,12 +28,20 @@ namespace SpaceShooter
         public void press()
         {
             isPressed = true;
-            texture = pressedTexture;
         }
 
         public void unpress()
         {
             isPressed = false;
+        }
+
+        public void hover()
+        {
+            texture = pressedTexture;
+        }
+
+        public void unhover()
+        {
             texture = mainTexture;
         }
     }

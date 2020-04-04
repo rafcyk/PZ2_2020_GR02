@@ -14,7 +14,7 @@ namespace SpaceShooter
         #endregion
 
         #region Textures
-        Texture2D playerTexture,startButtonTexture,startButtonPressedTexture,exitButtonTexture,exitButtonPressedTexture,
+        Texture2D playerTexture, startButtonTexture, startButtonPressedTexture, exitButtonTexture, exitButtonPressedTexture,
                   pauseBackgroundTexture;
         #endregion
 
@@ -63,12 +63,12 @@ namespace SpaceShooter
             exitButtonPressedTexture = Content.Load<Texture2D>("exitButtonPressed");
             pauseBackgroundTexture = Content.Load<Texture2D>("pauseBackground");
 
-            startButton = new Button(startButtonTexture, startButtonPressedTexture, new Rectangle(screenCenterX-122, 300, 244, 72));
-            exitButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX-122, 400, 244, 72));
-            exitToMainMenuButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX-122, 400, 244, 72));
+            startButton = new Button(startButtonTexture, startButtonPressedTexture, new Rectangle(screenCenterX - 122, 300, 244, 72));
+            exitButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX - 122, 400, 244, 72));
+            exitToMainMenuButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX - 122, 400, 244, 72));
 
             player = new Player(playerTexture);
-            player.playerLocation = new Rectangle(screenCenterX-25, 10, 50, 50);
+            player.playerLocation = new Rectangle(screenCenterX - 25, 10, 50, 50);
         }
 
         protected override void UnloadContent()
@@ -94,6 +94,11 @@ namespace SpaceShooter
             var mouseState = Mouse.GetState();
             var mousePoint = new Point(mouseState.X, mouseState.Y);
 
+            #region ButtonsFunctionality
+
+            if (startButton.location.Contains(mousePoint)) startButton.hover(); else startButton.unhover();
+            if (exitButton.location.Contains(mousePoint)) exitButton.hover(); else exitButton.unhover();
+
             if (startButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed)
             {
                 startButton.press();
@@ -118,19 +123,23 @@ namespace SpaceShooter
                     _currentGameState = GameState.GamePlay;
                 }
             }
- 
+            #endregion
+
         }
         void UpdateGameplay(GameTime gameTime) {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 isPausePressed = true;
-
                 //TODO napisać funkcje pauzująca grę
             }
 
             this.IsMouseVisible = true;
             var mouseState = Mouse.GetState();
             var mousePoint = new Point(mouseState.X, mouseState.Y);
+
+            #region ButtonFunctionality
+
+            if (exitToMainMenuButton.location.Contains(mousePoint)) exitToMainMenuButton.hover(); else exitToMainMenuButton.unhover();
 
             if (exitToMainMenuButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed)
             {
@@ -144,8 +153,7 @@ namespace SpaceShooter
                     _currentGameState = GameState.MainMenu;
                 }
             }
-            
-
+            #endregion
         }
         void UpdateEndOfGame(GameTime gameTime) { }
 
