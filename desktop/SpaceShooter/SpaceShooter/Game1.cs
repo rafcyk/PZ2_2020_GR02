@@ -15,7 +15,7 @@ namespace SpaceShooter
 
         #region Textures
         Texture2D playerTexture, startButtonTexture, startButtonPressedTexture, exitButtonTexture, exitButtonPressedTexture,
-                  pauseBackgroundTexture;
+                  pauseBackgroundTexture, backgroundTexture;
         #endregion
 
         #region Buttons
@@ -23,6 +23,9 @@ namespace SpaceShooter
         Button exitButton;
         Button exitToMainMenuButton;
         #endregion
+
+        Scrolling scroll1;
+        Scrolling scroll2;
         enum GameState
         {
             MainMenu,
@@ -62,13 +65,17 @@ namespace SpaceShooter
             exitButtonTexture = Content.Load<Texture2D>("exitButton");
             exitButtonPressedTexture = Content.Load<Texture2D>("exitButtonPressed");
             pauseBackgroundTexture = Content.Load<Texture2D>("pauseBackground");
+            backgroundTexture = Content.Load<Texture2D>("backgroundTexture1");
 
             startButton = new Button(startButtonTexture, startButtonPressedTexture, new Rectangle(screenCenterX - 122, 300, 244, 72));
             exitButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX - 122, 400, 244, 72));
             exitToMainMenuButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX - 122, 400, 244, 72));
 
+            scroll1 = new Scrolling(backgroundTexture, new Rectangle(0, 0, 600, 4096));
+            scroll2 = new Scrolling(backgroundTexture, new Rectangle(0, -4096, 600, 4096));
+
             player = new Player(playerTexture);
-            player.playerLocation = new Rectangle(screenCenterX - 25, 10, 50, 50);
+            player.playerLocation = new Rectangle(screenCenterX - 25, 800 - player.playerTexture.Height - 10, 50, 50);
         }
 
         protected override void UnloadContent()
@@ -127,6 +134,17 @@ namespace SpaceShooter
 
         }
         void UpdateGameplay(GameTime gameTime) {
+
+            if (scroll1.location.Y + scroll1.location.Height >= 8192) {
+                scroll1.location.Y = scroll2.location.Y - scroll2.backgroundTexture.Height;
+            }
+            if (scroll2.location.Y + scroll2.backgroundTexture.Height >= 8192)
+            {
+                scroll2.location.Y = scroll1.location.Y - scroll1.backgroundTexture.Height;
+            }
+            scroll1.Update();
+            scroll2.Update();
+
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 isPausePressed = true;
@@ -154,6 +172,7 @@ namespace SpaceShooter
                 }
             }
             #endregion
+
         }
         void UpdateEndOfGame(GameTime gameTime) { }
 
@@ -178,6 +197,11 @@ namespace SpaceShooter
             spriteBatch.End();
         }
         void DrawGameplay(GameTime gameTime) {
+            spriteBatch.Begin();
+            scroll1.Draw(spriteBatch);
+            scroll2.Draw(spriteBatch);
+            spriteBatch.End();
+
             spriteBatch.Begin();
             spriteBatch.Draw(player.playerTexture, player.playerLocation, Color.White);
             spriteBatch.End();
