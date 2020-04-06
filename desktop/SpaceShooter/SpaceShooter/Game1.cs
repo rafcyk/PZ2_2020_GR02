@@ -37,7 +37,6 @@ namespace SpaceShooter
         private int screenCenterX;
         private bool isPausePressed = false;
 
-
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -133,8 +132,8 @@ namespace SpaceShooter
             #endregion
 
         }
+        
         void UpdateGameplay(GameTime gameTime) {
-
             if (scroll1.location.Y + scroll1.location.Height >= 8192) {
                 scroll1.location.Y = scroll2.location.Y - scroll2.backgroundTexture.Height;
             }
@@ -144,18 +143,21 @@ namespace SpaceShooter
             }
             scroll1.Update();
             scroll2.Update();
+           
+            player.UpdateMovement();
+
+            #region ButtonFunctionality
 
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 isPausePressed = true;
+                this.IsMouseVisible = true;
+
                 //TODO napisać funkcje pauzująca grę
             }
 
-            this.IsMouseVisible = true;
             var mouseState = Mouse.GetState();
             var mousePoint = new Point(mouseState.X, mouseState.Y);
-
-            #region ButtonFunctionality
 
             if (exitToMainMenuButton.location.Contains(mousePoint)) exitToMainMenuButton.hover(); else exitToMainMenuButton.unhover();
 
@@ -189,7 +191,6 @@ namespace SpaceShooter
 
             base.Draw(gameTime);
         }
-
         void DrawMainMenu(GameTime gameTime) {
             spriteBatch.Begin();
             spriteBatch.Draw(startButton.texture, startButton.location, Color.White);
