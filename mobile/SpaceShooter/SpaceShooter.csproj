@@ -65,9 +65,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity1.cs" />
+    <Compile Include="GameplayBackground.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="MainMenuBackground.cs" />
     <Compile Include="Missile.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -99,13 +101,14 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\background1.png" />
+    <Content Include="Content\background2.png" />
     <Content Include="Content\blankButton.png" />
     <Content Include="Content\enemy1.png" />
     <Content Include="Content\enemy2.png" />
     <Content Include="Content\exitButton.png" />
     <Content Include="Content\exitButtonPressed.png" />
     <Content Include="Content\hearth.png" />
-    <Content Include="Content\hearthHit.png" />
     <Content Include="Content\missile.png" />
     <Content Include="Content\pauseBackground.png" />
     <Content Include="Content\pauseButton.png" />

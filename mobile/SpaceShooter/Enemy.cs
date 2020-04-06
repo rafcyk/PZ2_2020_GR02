@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace SpaceShooter
 {
@@ -10,13 +11,36 @@ namespace SpaceShooter
         public Rectangle location;
         public int speed, health = 25;
         public bool isDestroyed = false;
-        private static Random r = new Random();
-
-        public Enemy(Texture2D texture, int column, int speed)
+        EnemyWave wave;
+        public Enemy(List<Texture2D> textures, int column, int speed, EnemyWave actualWave)
         {
             int x = 0;
             this.speed = speed;
-            this.texture = texture;
+
+            switch (actualWave)
+            {
+                case EnemyWave.First:
+                    health = 25;
+                    texture = textures[0];
+                    break;
+                case EnemyWave.Second:
+                    health = 50;
+                    texture = textures[1];
+                    break;
+                case EnemyWave.Third:
+                    health = 75;
+                    texture = textures[2];
+                    break;
+                case EnemyWave.Fourth:
+                    health = 100;
+                    texture = textures[3];
+                    break;
+                case EnemyWave.Fifth:
+                    health = 125;
+                    texture = textures[4];
+                    break;
+            }
+
             switch (column)
             {
                 case 1:
@@ -31,7 +55,6 @@ namespace SpaceShooter
             }
             location = new Rectangle(x, -270, 270, 270);
         }
-
         public void Update()
         {
             if (location.Y <= 2500) location.Y += speed;

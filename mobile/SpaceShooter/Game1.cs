@@ -8,9 +8,16 @@ using System;
 using Android.Views;
 
 
-
 namespace SpaceShooter
 {
+    enum EnemyWave
+    {
+        First,
+        Second,
+        Third,
+        Fourth,
+        Fifth,
+    }
     public class Game1 : Game
     {
         enum GameState
@@ -36,18 +43,20 @@ namespace SpaceShooter
         #region Textures
         SpriteFont Font;
         Texture2D startButtonTexture, exitButtonTexture, startButtonPressedTexture, exitButtonPressedTexture, blankButtonTexture, spaceShipTexture,
-            enemy1Texture, enemy2Texture, missileTexture, pauseButtonTexture, pauseButtonPressedTexture, resumeButtonTexture, resumeButtonPressedTexture, pauseBackgroundTexture, hearthTexture, hearthHitTexture,
-            restartButtonTexture, restartButtonPressedTexture;
+            enemy1Texture, enemy2Texture, missileTexture, pauseButtonTexture, pauseButtonPressedTexture, resumeButtonTexture, resumeButtonPressedTexture, pauseBackgroundTexture, hearthTexture,
+            restartButtonTexture, restartButtonPressedTexture,
+            background1Texture, background2Texture;
         #endregion
 
         #region player
         Rectangle playerLocation;
         Player player;
-        int fireRate = 150; // lower = faster lowest = 32
-        int missileSpeed = 10; //higher = faster
+        int fireRate = 250; // lower = faster, lowest = 32
+        int missileSpeed = 20; //higher = faster
         int enemySpeed = 2;
         double nextBlinkTime = 0;
         int hearthBlinkLeft = 0;
+        bool shooting = false;
         #endregion
 
         #region Resolution scaling
@@ -75,9 +84,15 @@ namespace SpaceShooter
         int highScore;
         #endregion
 
+        GameplayBackground gameplayBackground1, gameplayBackground2;
+        MainMenuBackground mainMenuBackground;
+        List<Texture2D> enemyTextures = new List<Texture2D>();
+
         private Random r = new Random();
         bool newHighScore = false;
         bool newHighScoreVisible;
+        int startTime = 0;
+        EnemyWave actualWave;
 
         public Game1(Window w1)
         {
@@ -112,13 +127,14 @@ namespace SpaceShooter
             //load content
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            background1Texture = Content.Load<Texture2D>("background1");
+            background2Texture = Content.Load<Texture2D>("background2");
             blankButtonTexture = Content.Load<Texture2D>("blankButton");
             enemy1Texture = Content.Load<Texture2D>("enemy1");
             enemy2Texture = Content.Load<Texture2D>("enemy2");
             exitButtonTexture = Content.Load<Texture2D>("exitButton");
             exitButtonPressedTexture = Content.Load<Texture2D>("exitButtonPressed");
             hearthTexture = Content.Load<Texture2D>("hearth");
-            hearthHitTexture = Content.Load<Texture2D>("hearthHit");
             missileTexture = Content.Load<Texture2D>("missile");
             pauseBackgroundTexture = Content.Load<Texture2D>("pauseBackground");
             pauseButtonTexture = Content.Load<Texture2D>("pauseButton");
@@ -133,12 +149,15 @@ namespace SpaceShooter
 
             Font = Content.Load<SpriteFont>("pixel_f70");
 
-            //declare mainMenuButtons
+            //declare mainMenuButtons and background
             mainMenuButtons.Add(new Button("start", startButtonTexture, startButtonPressedTexture, new Rectangle(100, 1100, 880, 260)));
             mainMenuButtons.Add(new Button("exit", exitButtonTexture, exitButtonPressedTexture, new Rectangle(216, 1400, 648, 192)));
+            mainMenuBackground = new MainMenuBackground(background1Texture);
 
-            //gameplay pause button
+            //gameplay pause button and background
             pauseButton = new Button("pause", pauseButtonTexture, pauseButtonPressedTexture, new Rectangle(870, 18, 192, 192));
+            gameplayBackground1 = new GameplayBackground(background1Texture, new Rectangle(0, 0, 1080, 2340));
+            gameplayBackground2 = new GameplayBackground(background2Texture, new Rectangle(0, -2340, 1080, 2340));
 
             //declare pauseMenuButtons
             pauseMenuButtons.Add(new Button("resume", resumeButtonTexture, resumeButtonPressedTexture, new Rectangle(200, 1070, 680, 201)));
@@ -147,8 +166,15 @@ namespace SpaceShooter
             endOfGameButtons.Add(new Button("restart", restartButtonTexture, restartButtonPressedTexture, new Rectangle(100, 1100, 880, 260)));
             endOfGameButtons.Add(new Button("exit", exitButtonTexture, exitButtonPressedTexture, new Rectangle(216, 1400, 648, 192)));
 
+            //enemyTextures list
+            enemyTextures.Add(enemy1Texture);
+            enemyTextures.Add(enemy2Texture);
+            enemyTextures.Add(enemy1Texture);
+            enemyTextures.Add(enemy2Texture);
+            enemyTextures.Add(enemy1Texture);
+
             //declare player
-            player = new Player(spaceShipTexture, hearthTexture, hearthHitTexture);
+            player = new Player(spaceShipTexture, hearthTexture);
 
             LoadSettings();
         }
@@ -187,6 +213,8 @@ namespace SpaceShooter
 
         private void UpdateMainMenu(GameTime deltaTime)
         {
+            mainMenuBackground.Update();
+
             touchCollection = TouchPanel.GetState();
 
             foreach (TouchLocation tl in touchCollection)
@@ -204,7 +232,7 @@ namespace SpaceShooter
                             {
                                 case "start":
                                     b.unpress();
-                                    ResetGame();
+                                    ResetGame(deltaTime);
                                     _gameState = GameState.GamePlay;
                                     _gameplayState = GameplayState.Unpaused;
                                     break;
@@ -234,18 +262,69 @@ namespace SpaceShooter
 
         private void UpdateGameplay(GameTime deltaTime)
         {
+            //game unpaused
             if (_gameplayState == GameplayState.Unpaused)
             {
-                //creating missiles
-                if (missiles.Count == 0) missiles.Add(new Missile(missileTexture, playerLocation.X, missileSpeed));
-                else if (missiles[missiles.Count - 1].isNextReady(fireRate)) missiles.Add(new Missile(missileTexture, playerLocation.X, missileSpeed));
+                //update actual wave
+                if (actualScore > 145 && actualWave == EnemyWave.First)
+                {
+                    actualWave = EnemyWave.Second;
+                    startTime = (int)deltaTime.TotalGameTime.TotalSeconds + 3;
+                    enemySpeed = 2;
+                    fireRate = 210;
+                }
+                else if (actualScore > 295 && actualWave == EnemyWave.Second)
+                {
+                    actualWave = EnemyWave.Third;
+                    startTime = (int)deltaTime.TotalGameTime.TotalSeconds + 3;
+                    enemySpeed = 2;
+                    fireRate = 180;
+                }
+                else if (actualScore > 445 && actualWave == EnemyWave.Third)
+                {
+                    actualWave = EnemyWave.Fourth;
+                    startTime = (int)deltaTime.TotalGameTime.TotalSeconds + 3;
+                    enemySpeed = 2;
+                    fireRate = 150;
+                }
+                else if (actualScore > 595 && actualWave == EnemyWave.Fourth)
+                {
+                    actualWave = EnemyWave.Fifth;
+                    startTime = (int)deltaTime.TotalGameTime.TotalSeconds + 3;
+                    enemySpeed = 2;
+                    fireRate = 120;
+                }
 
-                foreach (Missile m in missiles) m.Update();
+                if (deltaTime.TotalGameTime.TotalSeconds == startTime)
+                {
+                    missiles.Clear();
+                    enemies.Clear();
+                }
+
+                //update background
+                gameplayBackground1.Update();
+                gameplayBackground2.Update();
+
+                //creating missiles
+                if (shooting)
+                {
+                    if (missiles.Count == 0) missiles.Add(new Missile(missileTexture, playerLocation.X, missileSpeed));
+                    else if (missiles[missiles.Count - 1].isNextReady(fireRate)) missiles.Add(new Missile(missileTexture, playerLocation.X, missileSpeed));
+                    foreach (Missile m in missiles) m.Update();
+                }
+                else
+                {
+                    if (deltaTime.TotalGameTime.TotalSeconds > startTime) shooting = true;
+                }
 
                 //creating enemies
-                if (enemies.Count == 0) enemies.Add(new Enemy(enemy1Texture, r.Next(4), enemySpeed));
-                else if (enemies[enemies.Count - 1].isNextReady()) enemies.Add(new Enemy(enemy1Texture, r.Next(4), enemySpeed));
+                if (deltaTime.TotalGameTime.TotalSeconds > startTime)
+                {
+                    if (enemies.Count == 0) enemies.Add(new Enemy(enemyTextures, r.Next(4), enemySpeed, actualWave));
+                        else if (enemies[enemies.Count - 1].isNextReady()) enemies.Add(new Enemy(enemyTextures, r.Next(4), enemySpeed, actualWave));
+                }
 
+                //updating enemies position and player health
                 foreach (Enemy e in enemies)
                 {
                     if (e.location.Y >= 2340 && !e.isDestroyed)
@@ -276,7 +355,17 @@ namespace SpaceShooter
                         {
                             if (e.Hit(25))
                             {
-                                actualScore++;
+                                if (actualWave == EnemyWave.First)
+                                    actualScore++;
+                                else if (actualWave == EnemyWave.Second)
+                                    actualScore += 2;
+                                else if (actualWave == EnemyWave.Third)
+                                    actualScore += 3;
+                                else if (actualWave == EnemyWave.Fourth)
+                                    actualScore += 4;
+                                else if (actualWave == EnemyWave.Fifth)
+                                    actualScore += 5;
+
                                 if (actualScore % 5 == 0) enemySpeed++;
                             }
                             m.isDestroyed = true;
@@ -334,6 +423,7 @@ namespace SpaceShooter
                     _gameplayState = GameplayState.Paused;
                 }
             }
+            //game paused
             else if (_gameplayState == GameplayState.Paused)
             {
                 touchCollection = TouchPanel.GetState();
@@ -404,7 +494,7 @@ namespace SpaceShooter
                             {
                                 case "restart":
                                     b.unpress();
-                                    ResetGame();
+                                    ResetGame(deltaTime);
                                     _gameplayState = GameplayState.Unpaused;
                                     _gameState = GameState.GamePlay;
                                     break;
@@ -450,6 +540,8 @@ namespace SpaceShooter
         {
             spriteBatch.Begin(transformMatrix: matrix);
 
+            spriteBatch.Draw(mainMenuBackground.texture, mainMenuBackground.location, Color.White);
+
             spriteBatch.DrawString(Font, "HIGHSCORE: " + highScore.ToString(), new Vector2(200, 800), Color.White);
 
             foreach (Button b in mainMenuButtons)
@@ -464,16 +556,23 @@ namespace SpaceShooter
         {
             spriteBatch.Begin(transformMatrix: matrix);
 
+            //drawing background
+            spriteBatch.Draw(gameplayBackground1.texture, gameplayBackground1.location, Color.White);
+            spriteBatch.Draw(gameplayBackground2.texture, gameplayBackground2.location, Color.White);
+
+            //drawing missiles
             foreach (Missile m in missiles)
             {
                 if (!m.isDestroyed) spriteBatch.Draw(m.texture, m.location, Color.White);
             }
 
+            //drawing enemies
             foreach (Enemy e in enemies)
             {
                 if (!e.isDestroyed) spriteBatch.Draw(e.texture, e.location, Color.White);
             }
 
+            //drawing player health
             if (player.hearthVisible)
             {
                 for (int i = 0; i < player.health; i++)
@@ -482,12 +581,16 @@ namespace SpaceShooter
                 }
             }
 
+            //drawing score
             spriteBatch.DrawString(Font, "SCORE: " + actualScore.ToString(), new Vector2(310, 18), Color.White);
 
+            //drawing player's space ship
             spriteBatch.Draw(player.texture, playerLocation, Color.White);
 
+            //drawing pause button when game is unpaused
             if (_gameplayState == GameplayState.Unpaused) spriteBatch.Draw(pauseButton.texture, pauseButton.location, Color.White);
 
+            //drawing pause menu when game is paused
             if (_gameplayState == GameplayState.Paused)
             {
                 spriteBatch.Draw(pauseBackgroundTexture, new Rectangle(100, 730, 880, 880), Color.White);
@@ -517,14 +620,17 @@ namespace SpaceShooter
             spriteBatch.End();
         }
 
-        private void ResetGame()
+        private void ResetGame(GameTime deltaTime)
         {
+            actualWave = EnemyWave.First;
             missiles.Clear();
             enemies.Clear();
             playerLocation.X = 390;
             actualScore = 0;
             player.health = 3;
             enemySpeed = 2;
+            fireRate = 250;
+            startTime = (int)deltaTime.TotalGameTime.TotalSeconds + 3;
         }
 
         private void SaveSettings()
