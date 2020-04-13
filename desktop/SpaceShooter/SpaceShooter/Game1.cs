@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace SpaceShooter
 {
@@ -15,7 +16,7 @@ namespace SpaceShooter
 
         #region Textures
         Texture2D playerTexture, startButtonTexture, startButtonPressedTexture, exitButtonTexture, exitButtonPressedTexture,
-                  pauseBackgroundTexture, backgroundTexture;
+                  pauseBackgroundTexture, backgroundTexture, missileTexture;
         #endregion
 
         #region Buttons
@@ -36,6 +37,9 @@ namespace SpaceShooter
         GameState _currentGameState;
         private int screenCenterX;
         private bool isPausePressed = false;
+        private bool shooting = false;
+
+        List<Missile> missiles = new List<Missile>();
 
         public Game1()
         {
@@ -65,6 +69,7 @@ namespace SpaceShooter
             exitButtonPressedTexture = Content.Load<Texture2D>("exitButtonPressed");
             pauseBackgroundTexture = Content.Load<Texture2D>("pauseBackground");
             backgroundTexture = Content.Load<Texture2D>("backgroundTexture1");
+            missileTexture = Content.Load<Texture2D>("bulletShip1");
 
             startButton = new Button(startButtonTexture, startButtonPressedTexture, new Rectangle(screenCenterX - 122, 300, 244, 72));
             exitButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX - 122, 400, 244, 72));
@@ -152,6 +157,7 @@ namespace SpaceShooter
             {
                 isPausePressed = true;
                 this.IsMouseVisible = true;
+                Pause();
 
                 //TODO napisać funkcje pauzująca grę
             }
@@ -175,6 +181,19 @@ namespace SpaceShooter
             }
             #endregion
 
+            if (shooting)
+            {
+                if (missiles.Count == 0)
+                {
+                    missiles.Add(new Missile(missileTexture, new Rectangle(player.playerLocation.X + player.playerLocation.Width / 2 - 5, player.playerLocation.Y, 10, 32), 10));
+                }
+                else if (missiles[missiles.Count - 1].isNextReady(150))
+                {
+                    missiles.Add(new Missile(missileTexture, new Rectangle(player.playerLocation.X + player.playerLocation.Width / 2 - 5, player.playerLocation.Y, 10, 32), 10));
+                }
+                foreach (Missile m in missiles) m.Update();
+            }
+            else if (isPausePressed == false) shooting = true;
         }
         void UpdateEndOfGame(GameTime gameTime) { }
 
@@ -204,6 +223,7 @@ namespace SpaceShooter
             spriteBatch.End();
 
             spriteBatch.Begin();
+            foreach (Missile m in missiles) spriteBatch.Draw(m.missileTexture, m.missileLocation, Color.White);
             spriteBatch.Draw(player.playerTexture, player.playerLocation, Color.White);
             spriteBatch.End();
 
@@ -216,5 +236,9 @@ namespace SpaceShooter
             }
         }
         void DrawEndOfGame(GameTime gameTime) { }
+
+        void Pause() {
+            shooting = false;
+        }
     }
 }

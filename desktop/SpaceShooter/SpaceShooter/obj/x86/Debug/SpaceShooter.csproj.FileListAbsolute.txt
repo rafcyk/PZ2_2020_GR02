@@ -27,3 +27,4 @@ C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShoot
 C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\startButtonPressed.xnb
 C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\pauseBackground.xnb
 C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\backgroundTexture1.xnb
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\bulletShip1.xnb

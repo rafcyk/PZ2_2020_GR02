@@ -13,6 +13,8 @@ namespace SpaceShooter
     {
         public Texture2D playerTexture;
         public Rectangle playerLocation;
+        private int speed = 1;
+        private bool previousArrowPressed;
 
         public Player(Texture2D texture)
         {
@@ -23,11 +25,19 @@ namespace SpaceShooter
         {
             if(Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                playerLocation.X -= 5;
+                if (playerLocation.X <= 0) speed = 0;
+                playerLocation.X -= speed;
+                if (previousArrowPressed == true) speed = 1;
+                previousArrowPressed = false;
+                speed ++;
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                playerLocation.X += 5;
+                if (playerLocation.X >= 600 - 50) speed = 0;
+                playerLocation.X += speed;
+                if (previousArrowPressed == false) speed = 1;
+                previousArrowPressed = true;
+                speed ++;
             }
         }
     }
