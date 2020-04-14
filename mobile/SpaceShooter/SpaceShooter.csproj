@@ -103,12 +103,15 @@
   <ItemGroup>
     <Content Include="Content\background1.png" />
     <Content Include="Content\background2.png" />
-    <Content Include="Content\blankButton.png" />
     <Content Include="Content\enemy1.png" />
     <Content Include="Content\enemy2.png" />
+    <Content Include="Content\enemy3.png" />
+    <Content Include="Content\enemy4.png" />
     <Content Include="Content\exitButton.png" />
     <Content Include="Content\exitButtonPressed.png" />
     <Content Include="Content\hearth.png" />
+    <Content Include="Content\menuButton.png" />
+    <Content Include="Content\menuButtonPressed.png" />
     <Content Include="Content\missile.png" />
     <Content Include="Content\pauseBackground.png" />
     <Content Include="Content\pauseButton.png" />
@@ -117,9 +120,15 @@
     <Content Include="Content\restartButtonPressed.png" />
     <Content Include="Content\resumeButton.png" />
     <Content Include="Content\resumeButtonPressed.png" />
-    <Content Include="Content\spaceShip.png" />
+    <Content Include="Content\skinsButton.png" />
+    <Content Include="Content\skinsButtonPressed.png" />
+    <Content Include="Content\spaceShip1.png" />
+    <Content Include="Content\spaceShip2.png" />
+    <Content Include="Content\spaceShip3.png" />
     <Content Include="Content\startButton.png" />
     <Content Include="Content\startButtonPressed.png" />
+    <Content Include="Content\upgradesButton.png" />
+    <Content Include="Content\upgradesButtonPressed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

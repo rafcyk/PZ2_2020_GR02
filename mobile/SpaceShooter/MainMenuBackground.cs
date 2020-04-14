@@ -22,5 +22,10 @@ namespace SpaceShooter
             location.Y = (int)Math.Round(Math.Cos(i) * (450)) - 500;
             i += 0.005;
         }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, location, Color.White);
+        }
     }
 }
