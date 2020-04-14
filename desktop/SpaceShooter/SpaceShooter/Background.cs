@@ -12,6 +12,7 @@ namespace SpaceShooter
     {
         public Texture2D backgroundTexture;
         public Rectangle location;
+        public int speed = 1;
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -29,7 +30,7 @@ namespace SpaceShooter
 
         public void Update()
         {
-            location.Y += 1;
+            location.Y += speed;
         }
     }
 }

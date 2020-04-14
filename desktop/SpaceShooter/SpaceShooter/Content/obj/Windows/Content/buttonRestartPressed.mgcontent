@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/pauseBackground.png</SourceFile>
-  <SourceTime>2020-04-14T09:54:17.1070915+02:00</SourceTime>
-  <DestFile>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/bin/Windows/Content/pauseBackground.xnb</DestFile>
-  <DestTime>2020-04-14T09:55:00.8095886+02:00</DestTime>
+  <SourceFile>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonRestartPressed.png</SourceFile>
+  <SourceTime>2020-04-14T09:45:06.6714961+02:00</SourceTime>
+  <DestFile>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/bin/Windows/Content/buttonRestartPressed.xnb</DestFile>
+  <DestTime>2020-04-14T09:49:43.7525363+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

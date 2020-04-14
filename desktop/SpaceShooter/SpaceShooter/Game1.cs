@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace SpaceShooter
@@ -16,13 +17,16 @@ namespace SpaceShooter
 
         #region Textures
         Texture2D playerTexture, startButtonTexture, startButtonPressedTexture, exitButtonTexture, exitButtonPressedTexture,
-                  pauseBackgroundTexture, backgroundTexture, missileTexture;
+                  pauseBackgroundTexture, backgroundTexture, missileTexture, resumeButtonTexture, resumeButtonPressedTexture,
+                  restartButtonTesture, restartButtonPressedTexture;
         #endregion
 
         #region Buttons
         Button startButton;
         Button exitButton;
         Button exitToMainMenuButton;
+        Button resumeButton;
+        Button restartButton;
         #endregion
 
         Scrolling scroll1;
@@ -70,10 +74,16 @@ namespace SpaceShooter
             pauseBackgroundTexture = Content.Load<Texture2D>("pauseBackground");
             backgroundTexture = Content.Load<Texture2D>("backgroundTexture1");
             missileTexture = Content.Load<Texture2D>("bulletShip1");
+            resumeButtonTexture = Content.Load<Texture2D>("buttonResume");
+            resumeButtonPressedTexture = Content.Load<Texture2D>("buttonResumePressed");
+            restartButtonTesture = Content.Load<Texture2D>("buttonRestart");
+            restartButtonPressedTexture = Content.Load<Texture2D>("buttonRestartPressed");
 
             startButton = new Button(startButtonTexture, startButtonPressedTexture, new Rectangle(screenCenterX - 122, 300, 244, 72));
             exitButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX - 122, 400, 244, 72));
-            exitToMainMenuButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX - 122, 400, 244, 72));
+            exitToMainMenuButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX - 122, 460, 244, 72));
+            resumeButton = new Button(resumeButtonTexture, resumeButtonPressedTexture, new Rectangle(screenCenterX - 122, 300, 244, 72));
+            restartButton = new Button(restartButtonTesture, restartButtonPressedTexture, new Rectangle(screenCenterX - 122, 380, 244, 72));
 
             scroll1 = new Scrolling(backgroundTexture, new Rectangle(0, 0, 600, 4096));
             scroll2 = new Scrolling(backgroundTexture, new Rectangle(0, -4096, 600, 4096));
@@ -100,7 +110,7 @@ namespace SpaceShooter
 
             base.Update(gameTime);
         }
-        void UpdateMainMenu(GameTime gameTime) {
+        private void UpdateMainMenu(GameTime gameTime) {
             this.IsMouseVisible = true;
             var mouseState = Mouse.GetState();
             var mousePoint = new Point(mouseState.X, mouseState.Y);
@@ -132,13 +142,14 @@ namespace SpaceShooter
                 {
                     startButton.unpress();
                     _currentGameState = GameState.GamePlay;
+                    RestartGame();
                 }
             }
             #endregion
 
         }
         
-        void UpdateGameplay(GameTime gameTime) {
+        private void UpdateGameplay(GameTime gameTime) {
             if (scroll1.location.Y + scroll1.location.Height >= 8192) {
                 scroll1.location.Y = scroll2.location.Y - scroll2.backgroundTexture.Height;
             }
@@ -166,17 +177,44 @@ namespace SpaceShooter
             var mousePoint = new Point(mouseState.X, mouseState.Y);
 
             if (exitToMainMenuButton.location.Contains(mousePoint)) exitToMainMenuButton.hover(); else exitToMainMenuButton.unhover();
+            if (resumeButton.location.Contains(mousePoint)) resumeButton.hover(); else resumeButton.unhover();
+            if (restartButton.location.Contains(mousePoint)) restartButton.hover(); else restartButton.unhover();
 
             if (exitToMainMenuButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed)
             {
                 exitToMainMenuButton.press();
             }
-            if (exitToMainMenuButton.isPressed) {
+            else if (resumeButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed)
+            {
+                resumeButton.press();
+            }
+            else if (restartButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed) {
+                restartButton.press();
+            }
+
+            if (exitToMainMenuButton.isPressed)
+            {
                 if (exitToMainMenuButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
                 {
                     exitToMainMenuButton.unpress();
                     isPausePressed = false;
                     _currentGameState = GameState.MainMenu;
+                }
+            }
+            else if (resumeButton.isPressed) {
+                if (resumeButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released) {
+                    resumeButton.unpress();
+                    isPausePressed = false;
+                    Resume();
+                }
+            }
+            else if (restartButton.isPressed)
+            {
+                if (restartButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
+                {
+                    restartButton.unpress();
+                    isPausePressed = false;
+                    RestartGame();
                 }
             }
             #endregion
@@ -191,11 +229,19 @@ namespace SpaceShooter
                 {
                     missiles.Add(new Missile(missileTexture, new Rectangle(player.playerLocation.X + player.playerLocation.Width / 2 - 5, player.playerLocation.Y, 10, 32), 10));
                 }
-                foreach (Missile m in missiles) m.Update();
+                foreach (Missile m in missiles) {
+                    //clearing destroyed missiles
+                    if (m.isDestroyed) {
+                        missiles.Remove(m);
+                        break;
+                    } 
+                    else m.Update();
+                }
             }
             else if (isPausePressed == false) shooting = true;
         }
-        void UpdateEndOfGame(GameTime gameTime) { }
+
+        private void UpdateEndOfGame(GameTime gameTime) { }
 
         protected override void Draw(GameTime gameTime)
         {
@@ -210,13 +256,13 @@ namespace SpaceShooter
 
             base.Draw(gameTime);
         }
-        void DrawMainMenu(GameTime gameTime) {
+        private void DrawMainMenu(GameTime gameTime) {
             spriteBatch.Begin();
             spriteBatch.Draw(startButton.texture, startButton.location, Color.White);
             spriteBatch.Draw(exitButton.texture, exitButton.location, Color.White);
             spriteBatch.End();
         }
-        void DrawGameplay(GameTime gameTime) {
+        private void DrawGameplay(GameTime gameTime) {
             spriteBatch.Begin();
             scroll1.Draw(spriteBatch);
             scroll2.Draw(spriteBatch);
@@ -230,15 +276,31 @@ namespace SpaceShooter
             if (isPausePressed == true)
             {
                 spriteBatch.Begin();
-                spriteBatch.Draw(pauseBackgroundTexture, new Rectangle(screenCenterX-150, 200, 300, 300), Color.White);
+                spriteBatch.Draw(pauseBackgroundTexture, new Rectangle(screenCenterX-150, 200, 300, 350), Color.White);
+                spriteBatch.Draw(resumeButton.texture, resumeButton.location, Color.White);
+                spriteBatch.Draw(restartButton.texture, restartButton.location, Color.White);
                 spriteBatch.Draw(exitToMainMenuButton.texture, exitToMainMenuButton.location, Color.White);
                 spriteBatch.End();
             }
         }
-        void DrawEndOfGame(GameTime gameTime) { }
+        private void DrawEndOfGame(GameTime gameTime) { }
 
-        void Pause() {
+        private void Pause() {
             shooting = false;
+            scroll1.speed = 0;
+            scroll2.speed = 0;
+        }
+        private void RestartGame() {
+            player.playerLocation.X = screenCenterX - 25;
+            missiles.Clear();
+            scroll1.speed = 1;
+            scroll2.speed = 1;
+        }
+        private void Resume()
+        {
+            shooting = true;
+            scroll1.speed = 1;
+            scroll2.speed = 1;
         }
     }
 }

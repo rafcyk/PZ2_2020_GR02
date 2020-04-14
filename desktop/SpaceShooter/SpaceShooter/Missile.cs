@@ -23,6 +23,7 @@ namespace SpaceShooter
 
         public void Update() {
             missileLocation.Y -= speed;
+            if (missileLocation.Y < 0 ) isDestroyed = true;
         }
 
         public bool isNextReady(int rate)
