@@ -11,7 +11,6 @@ namespace SpaceShooter
         public Rectangle location;
         public int speed, health = 25;
         public bool isDestroyed = false;
-        EnemyWave wave;
         public Enemy(List<Texture2D> textures, int column, int speed, EnemyWave actualWave)
         {
             int x = 0;
@@ -58,6 +57,7 @@ namespace SpaceShooter
         public void Update()
         {
             if (location.Y <= 2500) location.Y += speed;
+            else isDestroyed = true;
         }
 
         public bool isNextReady()
@@ -68,12 +68,17 @@ namespace SpaceShooter
 
         public bool Hit(int damage)
         {
-            if (location.Y > 100)
+            if (location.Y > 0)
             {
                 health -= damage;
                 if (health <= 0) isDestroyed = true;
             }
             return isDestroyed;
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            if(!isDestroyed) spriteBatch.Draw(texture, location, Color.White);
         }
     }
 }

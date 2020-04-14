@@ -45,5 +45,10 @@ namespace SpaceShooter
             isPressed = false;
             texture = mainTexture;
         }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, location, Color.White);
+        }
     }
 }

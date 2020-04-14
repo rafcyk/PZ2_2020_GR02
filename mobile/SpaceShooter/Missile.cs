@@ -19,13 +19,19 @@ namespace SpaceShooter
 
         public void Update()
         {
-            if(location.Y >= -100) location.Y -= speed;
+            if (location.Y >= -100) location.Y -= speed;
+            else isDestroyed = true;
         }
 
         public bool isNextReady(int rate)
         {
             if (location.Y <= 2240 - rate) return true;
             else return false;
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            if(!isDestroyed) spriteBatch.Draw(texture, location, Color.White);
         }
     }
 }

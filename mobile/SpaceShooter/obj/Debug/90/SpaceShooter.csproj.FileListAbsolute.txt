@@ -127,7 +127,6 @@ C:\Users\Kacper\source\repos\rafcyk\PZ2_2020_GR02\mobile\SpaceShooter\bin\Androi
 C:\Users\Kacper\source\repos\rafcyk\PZ2_2020_GR02\mobile\SpaceShooter\obj\Debug\90\MonoAndroid,Version=v9.0.AssemblyAttributes.cs
 C:\Users\Kacper\source\repos\rafcyk\PZ2_2020_GR02\mobile\SpaceShooter\obj\Debug\90\build.props
 C:\Users\Kacper\source\repos\rafcyk\PZ2_2020_GR02\mobile\SpaceShooter\obj\Debug\90\adb.props
-C:\Users\Kacper\source\repos\rafcyk\PZ2_2020_GR02\mobile\SpaceShooter\obj\Debug\90\SpaceShooter.csprojAssemblyReference.cache
 C:\Users\Kacper\source\repos\rafcyk\PZ2_2020_GR02\mobile\SpaceShooter\obj\Debug\90\stamp\_BuildLibraryImportsCache.stamp
 C:\Users\Kacper\source\repos\rafcyk\PZ2_2020_GR02\mobile\SpaceShooter\obj\Debug\90\resourcepaths.cache
 C:\Users\Kacper\source\repos\rafcyk\PZ2_2020_GR02\mobile\SpaceShooter\obj\Debug\90\resourcecache.stamp
@@ -234,3 +233,4 @@ C:\Users\Kacper\source\repos\rafcyk\PZ2_2020_GR02\mobile\SpaceShooter\obj\Debug\
 C:\Users\Kacper\source\repos\rafcyk\PZ2_2020_GR02\mobile\SpaceShooter\obj\Debug\90\stamp\_GenerateJavaStubs.stamp
 C:\Users\Kacper\source\repos\rafcyk\PZ2_2020_GR02\mobile\SpaceShooter\obj\Debug\90\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\Kacper\source\repos\rafcyk\PZ2_2020_GR02\mobile\SpaceShooter\obj\Debug\90\stamp\_ResolveLibraryProjectImports.stamp
+C:\Users\Kacper\source\repos\rafcyk\PZ2_2020_GR02\mobile\SpaceShooter\obj\Debug\90\SpaceShooter.csprojAssemblyReference.cache
