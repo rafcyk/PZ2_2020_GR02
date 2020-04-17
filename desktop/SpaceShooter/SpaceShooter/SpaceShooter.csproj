@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Background.cs" />
     <Compile Include="Button.cs" />
+    <Compile Include="Enemy.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Missile.cs" />
     <Compile Include="Player.cs" />

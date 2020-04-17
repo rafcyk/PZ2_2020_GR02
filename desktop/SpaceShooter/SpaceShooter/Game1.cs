@@ -18,7 +18,7 @@ namespace SpaceShooter
         #region Textures
         Texture2D playerTexture, startButtonTexture, startButtonPressedTexture, exitButtonTexture, exitButtonPressedTexture,
                   pauseBackgroundTexture, backgroundTexture, missileTexture, resumeButtonTexture, resumeButtonPressedTexture,
-                  restartButtonTesture, restartButtonPressedTexture;
+                  restartButtonTesture, restartButtonPressedTexture,enemyTexture;
         #endregion
 
         #region Buttons
@@ -44,6 +44,8 @@ namespace SpaceShooter
         private bool shooting = false;
 
         List<Missile> missiles = new List<Missile>();
+        List<Enemy> enemies = new List<Enemy>();
+        Random rnd = new Random();
 
         public Game1()
         {
@@ -78,6 +80,7 @@ namespace SpaceShooter
             resumeButtonPressedTexture = Content.Load<Texture2D>("buttonResumePressed");
             restartButtonTesture = Content.Load<Texture2D>("buttonRestart");
             restartButtonPressedTexture = Content.Load<Texture2D>("buttonRestartPressed");
+            enemyTexture = Content.Load<Texture2D>("AlienShips2");
 
             startButton = new Button(startButtonTexture, startButtonPressedTexture, new Rectangle(screenCenterX - 122, 300, 244, 72));
             exitButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX - 122, 400, 244, 72));
@@ -221,13 +224,14 @@ namespace SpaceShooter
 
             if (shooting)
             {
+                //drawing missiles
                 if (missiles.Count == 0)
                 {
-                    missiles.Add(new Missile(missileTexture, new Rectangle(player.playerLocation.X + player.playerLocation.Width / 2 - 5, player.playerLocation.Y, 10, 32), 10));
+                    missiles.Add(new Missile(missileTexture, new Rectangle(player.playerLocation.X + player.playerLocation.Width / 2 - 5, player.playerLocation.Y, 10, 32), 5));
                 }
                 else if (missiles[missiles.Count - 1].isNextReady(150))
                 {
-                    missiles.Add(new Missile(missileTexture, new Rectangle(player.playerLocation.X + player.playerLocation.Width / 2 - 5, player.playerLocation.Y, 10, 32), 10));
+                    missiles.Add(new Missile(missileTexture, new Rectangle(player.playerLocation.X + player.playerLocation.Width / 2 - 5, player.playerLocation.Y, 10, 32), 5));
                 }
                 foreach (Missile m in missiles) {
                     //clearing destroyed missiles
@@ -236,6 +240,39 @@ namespace SpaceShooter
                         break;
                     } 
                     else m.Update();
+                }
+                
+                //drawing enemies
+                if (enemies.Count == 0)
+                {
+                    enemies.Add(new Enemy(enemyTexture, new Rectangle(rnd.Next(500), -100, 100, 100), 2));
+                }
+                else if (enemies[enemies.Count - 1].isNextReady(300))
+                {
+                    enemies.Add(new Enemy(enemyTexture, new Rectangle(rnd.Next(500), -100, 100, 100), 2));
+                }
+                foreach (Enemy e in enemies)
+                {
+                    //clearing destroyed missiles
+                    if (e.isDestroyed)
+                    {
+                        enemies.Remove(e);
+                        break;
+                    }
+                    else e.Update();
+                }
+
+                //collision detection
+                foreach (Missile m in missiles)
+                {
+                    foreach (Enemy e in enemies)
+                    {
+                        if (e.enemyLocation.Contains(m.missileLocation))
+                        {
+                            e.isDestroyed = true;
+                            m.isDestroyed = true;
+                        }
+                    }
                 }
             }
             else if (isPausePressed == false) shooting = true;
@@ -269,6 +306,7 @@ namespace SpaceShooter
             spriteBatch.End();
 
             spriteBatch.Begin();
+            foreach (Enemy m in enemies) spriteBatch.Draw(m.enemyTexture, m.enemyLocation, Color.White);
             foreach (Missile m in missiles) spriteBatch.Draw(m.missileTexture, m.missileLocation, Color.White);
             spriteBatch.Draw(player.playerTexture, player.playerLocation, Color.White);
             spriteBatch.End();
@@ -293,6 +331,7 @@ namespace SpaceShooter
         private void RestartGame() {
             player.playerLocation.X = screenCenterX - 25;
             missiles.Clear();
+            enemies.Clear();
             scroll1.speed = 1;
             scroll2.speed = 1;
         }
