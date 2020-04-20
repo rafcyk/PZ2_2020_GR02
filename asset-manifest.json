@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/PZ2_2020_GR02/web/static/css/main.5a78c7fb.chunk.css",
-    "main.js": "/PZ2_2020_GR02/web/static/js/main.ae67fc57.chunk.js",
-    "main.js.map": "/PZ2_2020_GR02/web/static/js/main.ae67fc57.chunk.js.map",
-    "runtime-main.js": "/PZ2_2020_GR02/web/static/js/runtime-main.20e41cb9.js",
-    "runtime-main.js.map": "/PZ2_2020_GR02/web/static/js/runtime-main.20e41cb9.js.map",
-    "static/js/2.a2dc2f5a.chunk.js": "/PZ2_2020_GR02/web/static/js/2.a2dc2f5a.chunk.js",
-    "static/js/2.a2dc2f5a.chunk.js.map": "/PZ2_2020_GR02/web/static/js/2.a2dc2f5a.chunk.js.map",
-    "index.html": "/PZ2_2020_GR02/web/index.html",
-    "precache-manifest.00859fd97bcf505b27f682c7ea23ad24.js": "/PZ2_2020_GR02/web/precache-manifest.00859fd97bcf505b27f682c7ea23ad24.js",
-    "service-worker.js": "/PZ2_2020_GR02/web/service-worker.js",
-    "static/css/main.5a78c7fb.chunk.css.map": "/PZ2_2020_GR02/web/static/css/main.5a78c7fb.chunk.css.map",
-    "static/js/2.a2dc2f5a.chunk.js.LICENSE.txt": "/PZ2_2020_GR02/web/static/js/2.a2dc2f5a.chunk.js.LICENSE.txt",
-    "static/media/author.png": "/PZ2_2020_GR02/web/static/media/author.16f0f6df.png",
-    "static/media/authorSecond.png": "/PZ2_2020_GR02/web/static/media/authorSecond.371fcdc7.png"
+    "main.css": "/PZ2_2020_GR02/static/css/main.5a78c7fb.chunk.css",
+    "main.js": "/PZ2_2020_GR02/static/js/main.9e797fcd.chunk.js",
+    "main.js.map": "/PZ2_2020_GR02/static/js/main.9e797fcd.chunk.js.map",
+    "runtime-main.js": "/PZ2_2020_GR02/static/js/runtime-main.58ad2a14.js",
+    "runtime-main.js.map": "/PZ2_2020_GR02/static/js/runtime-main.58ad2a14.js.map",
+    "static/js/2.a2dc2f5a.chunk.js": "/PZ2_2020_GR02/static/js/2.a2dc2f5a.chunk.js",
+    "static/js/2.a2dc2f5a.chunk.js.map": "/PZ2_2020_GR02/static/js/2.a2dc2f5a.chunk.js.map",
+    "index.html": "/PZ2_2020_GR02/index.html",
+    "precache-manifest.699d2a2fa3316cf475c55fb7613fffde.js": "/PZ2_2020_GR02/precache-manifest.699d2a2fa3316cf475c55fb7613fffde.js",
+    "service-worker.js": "/PZ2_2020_GR02/service-worker.js",
+    "static/css/main.5a78c7fb.chunk.css.map": "/PZ2_2020_GR02/static/css/main.5a78c7fb.chunk.css.map",
+    "static/js/2.a2dc2f5a.chunk.js.LICENSE.txt": "/PZ2_2020_GR02/static/js/2.a2dc2f5a.chunk.js.LICENSE.txt",
+    "static/media/author.png": "/PZ2_2020_GR02/static/media/author.16f0f6df.png",
+    "static/media/authorSecond.png": "/PZ2_2020_GR02/static/media/authorSecond.371fcdc7.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.20e41cb9.js",
+    "static/js/runtime-main.58ad2a14.js",
     "static/js/2.a2dc2f5a.chunk.js",
     "static/css/main.5a78c7fb.chunk.css",
-    "static/js/main.ae67fc57.chunk.js"
+    "static/js/main.9e797fcd.chunk.js"
   ]
 }
