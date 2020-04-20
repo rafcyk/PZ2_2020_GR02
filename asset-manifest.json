@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/PZ2_2020_GR02/web/static/css/main.5a78c7fb.chunk.css",
+    "main.js": "/PZ2_2020_GR02/web/static/js/main.8fd44a08.chunk.js",
+    "main.js.map": "/PZ2_2020_GR02/web/static/js/main.8fd44a08.chunk.js.map",
+    "runtime-main.js": "/PZ2_2020_GR02/web/static/js/runtime-main.20e41cb9.js",
+    "runtime-main.js.map": "/PZ2_2020_GR02/web/static/js/runtime-main.20e41cb9.js.map",
+    "static/js/2.a2dc2f5a.chunk.js": "/PZ2_2020_GR02/web/static/js/2.a2dc2f5a.chunk.js",
+    "static/js/2.a2dc2f5a.chunk.js.map": "/PZ2_2020_GR02/web/static/js/2.a2dc2f5a.chunk.js.map",
+    "index.html": "/PZ2_2020_GR02/web/index.html",
+    "precache-manifest.9f4d594cbc791fad52d764c08ffbda5f.js": "/PZ2_2020_GR02/web/precache-manifest.9f4d594cbc791fad52d764c08ffbda5f.js",
+    "service-worker.js": "/PZ2_2020_GR02/web/service-worker.js",
+    "static/css/main.5a78c7fb.chunk.css.map": "/PZ2_2020_GR02/web/static/css/main.5a78c7fb.chunk.css.map",
+    "static/js/2.a2dc2f5a.chunk.js.LICENSE.txt": "/PZ2_2020_GR02/web/static/js/2.a2dc2f5a.chunk.js.LICENSE.txt",
+    "static/media/author.png": "/PZ2_2020_GR02/web/static/media/author.16f0f6df.png",
+    "static/media/authorSecond.png": "/PZ2_2020_GR02/web/static/media/authorSecond.371fcdc7.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.20e41cb9.js",
+    "static/js/2.a2dc2f5a.chunk.js",
+    "static/css/main.5a78c7fb.chunk.css",
+    "static/js/main.8fd44a08.chunk.js"
+  ]
+}
