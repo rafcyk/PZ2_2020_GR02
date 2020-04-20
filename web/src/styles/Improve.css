@@ -1,0 +1,25 @@
+.improve .wrapImprove{
+    width: 70%;
+    height: 60vh;
+    margin:0 auto;
+    border:2px solid black;
+    box-shadow: 10px 10px 5px black;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .3);
+}
+
+.improve .wrapImprove img{
+    width: 350px;
+    padding: 20px;
+}
+
+.improve .wrapImprove p {
+    padding: 30px;
+    color: #fff;
+    font-size:3rem;
+    line-height: 5rem;
+    text-align: center;
+}

@@ -1,0 +1,70 @@
+.starTop{
+    background-color: rgb(101, 17, 117);
+    position: fixed;
+    top:0;
+    left: 0;
+    animation: rain 3s infinite ease;
+}
+
+.starBottom{
+    background-color: rgb(101, 17, 117);
+    position: fixed;
+    bottom:0;
+    right: 0;
+    animation: rainBottom 3s infinite ease;
+}
+
+.spaceShip{
+    width: 70px;
+    position: fixed;
+    bottom: -200px;
+    left:50%;
+    animation: flyShip 4s 1s infinite linear;
+}
+
+@keyframes rain{
+    0%{
+        top:0;
+    }
+
+    100%{
+        top:100%;
+    }
+}
+
+@keyframes rainBottom{
+    0%{
+        bottom:0;
+    }
+
+    100%{
+        bottom:100%;
+    }
+}
+
+@keyframes flyShip{
+    20%{
+        bottom:0;
+        left:50%;
+    }
+
+    30%{
+        bottom:25%;
+    }
+
+    60%{
+        bottom: 50%;
+        left:25%;
+    }
+
+    80%{
+        bottom: 50%;
+        left:25%;
+    }
+
+    100%{
+        bottom: 100%;
+        left:75%;
+    }
+
+}

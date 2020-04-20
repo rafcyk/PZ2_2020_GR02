@@ -1,0 +1,16 @@
+div.wrapLanguage{
+    position: fixed;
+    top:5%;
+    left: 5%;
+    z-index: 5;
+}
+
+div.wrapLanguage img{
+    width:40px;
+    margin-left: 20px;
+    transition: .2s;
+}
+
+div.wrapLanguage img:hover{
+    opacity: .5;
+}
