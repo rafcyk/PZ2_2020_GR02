@@ -1,0 +1,50 @@
+.download .wrapDownload{
+    width: 70%;
+    height: 60vh;
+    margin:0 auto;
+    border:2px solid black;
+    box-shadow: 10px 10px 5px black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .3);
+}
+
+.download .wrapButtons button{
+    width:300px;
+    height: 100px;
+    font-size: 4.5rem;
+    padding: 20px;
+    border:2px solid black;
+    color:white;
+    box-shadow: 10px 10px 5px black;
+    border-radius: 10px;
+    transition: .2s;
+    text-transform: uppercase;
+}
+
+.wrapButtons{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.download .wrapDownload p{
+    color:white;
+    font-size: 5rem;
+}
+
+.download .mobile{
+    background-color: rgb(17, 170, 17);
+}
+
+.download .windows{
+    background-color: rgb(29, 68, 197);
+}
+
+.download button:hover{
+    font-size: 3.5rem;
+    opacity: .8;
+}

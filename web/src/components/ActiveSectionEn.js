@@ -1,0 +1,82 @@
+import React, { useEffect } from 'react';
+import '../styles/ActiveSection.css';
+
+function getElement() {
+    const sections = document.getElementsByTagName('section');
+
+    const { scrollY } = window;
+    for (const section of sections) {
+        if (scrollY + 500 >= section.offsetTop && scrollY < section.offsetTop + section.offsetHeight - 500) {
+            return section.className;
+        }
+    }
+}
+
+
+const ActiveSection = () => {
+
+
+    function onScroll() {
+
+        let listEl = document.querySelectorAll('li');
+
+        const element = getElement();
+
+        listEl.forEach(element => {
+            element.removeAttribute('id');
+        });
+
+        console.log(listEl);
+
+        switch (element) {
+            case 'headerEn':
+                listEl[0].id = 'activeEl';
+                break;
+
+            case 'aboutEn':
+                listEl[1].id = 'activeEl';
+                break;
+
+            case 'improveEn':
+                listEl[2].id = 'activeEl';
+                break;
+
+            case 'promoEn':
+                listEl[3].id = 'activeEl';
+                break;
+
+            case 'downloadEn':
+                listEl[4].id = 'activeEl';
+                break;
+
+            case 'authorsEn':
+                listEl[5].id = 'activeEl';
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    useEffect(() => {
+        onScroll();
+        window.addEventListener('scroll', onScroll);
+        return (() => {
+            window.removeEventListener('scroll', onScroll);
+        })
+    }, []);
+
+
+    return (
+        <ul className='activeSection'>
+            <li>Home</li>
+            <li>About</li>
+            <li>Technics</li>
+            <li>Trailer</li>
+            <li>Download</li>
+            <li>Authors</li>
+        </ul>
+    )
+}
+
+export default ActiveSection;
