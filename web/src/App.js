@@ -42,7 +42,7 @@ class App extends React.Component {
 
 
     return (
-      <Router>
+      <Router basename = {process.env.PUBLIC_URL}>
         <Language />
 
         <Stars star={this.state.star} />
