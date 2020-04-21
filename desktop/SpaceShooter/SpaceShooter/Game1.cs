@@ -16,9 +16,10 @@ namespace SpaceShooter
         #endregion
 
         #region Textures
+        SpriteFont Font;
         Texture2D playerTexture, startButtonTexture, startButtonPressedTexture, exitButtonTexture, exitButtonPressedTexture,
                   pauseBackgroundTexture, backgroundTexture, missileTexture, resumeButtonTexture, resumeButtonPressedTexture,
-                  restartButtonTesture, restartButtonPressedTexture,enemyTexture;
+                  restartButtonTesture, restartButtonPressedTexture,enemyTexture,hearthTexture;
         #endregion
 
         #region Buttons
@@ -46,6 +47,7 @@ namespace SpaceShooter
         List<Missile> missiles = new List<Missile>();
         List<Enemy> enemies = new List<Enemy>();
         Random rnd = new Random();
+        private int actualScore = 0;
 
         public Game1()
         {
@@ -81,6 +83,9 @@ namespace SpaceShooter
             restartButtonTesture = Content.Load<Texture2D>("buttonRestart");
             restartButtonPressedTexture = Content.Load<Texture2D>("buttonRestartPressed");
             enemyTexture = Content.Load<Texture2D>("AlienShips2");
+            hearthTexture = Content.Load<Texture2D>("Serducho");
+
+            Font = Content.Load<SpriteFont>("font");
 
             startButton = new Button(startButtonTexture, startButtonPressedTexture, new Rectangle(screenCenterX - 122, 300, 244, 72));
             exitButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX - 122, 400, 244, 72));
@@ -91,7 +96,7 @@ namespace SpaceShooter
             scroll1 = new Scrolling(backgroundTexture, new Rectangle(0, 0, 600, 4096));
             scroll2 = new Scrolling(backgroundTexture, new Rectangle(0, -4096, 600, 4096));
 
-            player = new Player(playerTexture);
+            player = new Player(playerTexture,hearthTexture);
             player.playerLocation = new Rectangle(screenCenterX - 25, 800 - player.playerTexture.Height - 10, 50, 50);
         }
 
@@ -253,13 +258,24 @@ namespace SpaceShooter
                 }
                 foreach (Enemy e in enemies)
                 {
-                    //clearing destroyed missiles
+                    //clearing destroyed enemies
                     if (e.isDestroyed)
                     {
                         enemies.Remove(e);
                         break;
                     }
                     else e.Update();
+                    
+                    if (e.enemyLocation.Y > 800)
+                    {
+                        player.Hit();
+                        e.isDestroyed = true;
+                    }
+
+                    if (player.health == 0)
+                    {
+                        _currentGameState = GameState.EndOfGame;
+                    }
                 }
 
                 //collision detection
@@ -271,9 +287,11 @@ namespace SpaceShooter
                         {
                             e.isDestroyed = true;
                             m.isDestroyed = true;
+                            actualScore++;
                         }
                     }
                 }
+                
             }
             else if (isPausePressed == false) shooting = true;
         }
@@ -303,12 +321,11 @@ namespace SpaceShooter
             spriteBatch.Begin();
             scroll1.Draw(spriteBatch);
             scroll2.Draw(spriteBatch);
-            spriteBatch.End();
-
-            spriteBatch.Begin();
             foreach (Enemy m in enemies) spriteBatch.Draw(m.enemyTexture, m.enemyLocation, Color.White);
             foreach (Missile m in missiles) spriteBatch.Draw(m.missileTexture, m.missileLocation, Color.White);
             spriteBatch.Draw(player.playerTexture, player.playerLocation, Color.White);
+            player.DrawHearths(spriteBatch);
+            spriteBatch.DrawString(Font, "SCORE: " + actualScore.ToString(), new Vector2(250, 45), Color.White);
             spriteBatch.End();
 
             if (isPausePressed == true)
@@ -321,7 +338,11 @@ namespace SpaceShooter
                 spriteBatch.End();
             }
         }
-        private void DrawEndOfGame(GameTime gameTime) { }
+        private void DrawEndOfGame(GameTime gameTime) {
+            spriteBatch.Begin();
+            spriteBatch.DrawString(Font, "YOU DIED", new Vector2(250, 45), Color.White);
+            spriteBatch.End();
+        }
 
         private void Pause() {
             shooting = false;
@@ -334,6 +355,8 @@ namespace SpaceShooter
             enemies.Clear();
             scroll1.speed = 1;
             scroll2.speed = 1;
+            player.health = 3;
+            actualScore = 0;
         }
         private void Resume()
         {

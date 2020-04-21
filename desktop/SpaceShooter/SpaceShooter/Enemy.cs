@@ -25,7 +25,6 @@ namespace SpaceShooter
         public void Update()
         {
             enemyLocation.Y += speed;
-            if (enemyLocation.Y > 850) isDestroyed = true;
         }
 
         public bool isNextReady(int rate)
