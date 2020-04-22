@@ -35,3 +35,9 @@ C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShoot
 C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\AlienShips2.xnb
 C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\Serducho.xnb
 C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\font.xnb
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\buttonMainMenu.xnb
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\buttonMainMenuPressed.xnb
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\buttonUpgrades.xnb
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\buttonUpgradesPressed.xnb
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\buttonSkins.xnb
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\buttonSkinsPressed.xnb

@@ -19,7 +19,8 @@ namespace SpaceShooter
         SpriteFont Font;
         Texture2D playerTexture, startButtonTexture, startButtonPressedTexture, exitButtonTexture, exitButtonPressedTexture,
                   pauseBackgroundTexture, backgroundTexture, missileTexture, resumeButtonTexture, resumeButtonPressedTexture,
-                  restartButtonTesture, restartButtonPressedTexture,enemyTexture,hearthTexture;
+                  restartButtonTesture, restartButtonPressedTexture,enemyTexture,hearthTexture,mainMenuButtonTexture,mainMenuButtonPressedTexture,
+                  upgradesButtonTexture,upgradesButtonPressedTexture,skinsButtonTexture,skinsButtonPressedTexture;
         #endregion
 
         #region Buttons
@@ -28,10 +29,15 @@ namespace SpaceShooter
         Button exitToMainMenuButton;
         Button resumeButton;
         Button restartButton;
+        Button returnToMainMenuButton;
+        Button restartEndOfGameButton;
+        Button upgradeButton;
+        Button skinsButton;
         #endregion
 
         Scrolling scroll1;
         Scrolling scroll2;
+
         enum GameState
         {
             MainMenu,
@@ -64,7 +70,6 @@ namespace SpaceShooter
             _currentGameState = GameState.MainMenu;
             base.Initialize();
         }
-
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -84,14 +89,24 @@ namespace SpaceShooter
             restartButtonPressedTexture = Content.Load<Texture2D>("buttonRestartPressed");
             enemyTexture = Content.Load<Texture2D>("AlienShips2");
             hearthTexture = Content.Load<Texture2D>("Serducho");
+            mainMenuButtonTexture = Content.Load<Texture2D>("buttonMainMenu");
+            mainMenuButtonPressedTexture = Content.Load<Texture2D>("buttonMainMenuPressed");
+            upgradesButtonTexture = Content.Load<Texture2D>("buttonUpgrades");
+            upgradesButtonPressedTexture = Content.Load<Texture2D>("buttonUpgradesPressed");
+            skinsButtonTexture = Content.Load<Texture2D>("buttonSkins");
+            skinsButtonPressedTexture = Content.Load<Texture2D>("buttonSkinsPressed");
 
             Font = Content.Load<SpriteFont>("font");
 
-            startButton = new Button(startButtonTexture, startButtonPressedTexture, new Rectangle(screenCenterX - 122, 300, 244, 72));
-            exitButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX - 122, 400, 244, 72));
-            exitToMainMenuButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX - 122, 460, 244, 72));
+            startButton = new Button(startButtonTexture, startButtonPressedTexture, new Rectangle(screenCenterX - 134, 250, 268, 79));
+            skinsButton = new Button(skinsButtonTexture, skinsButtonPressedTexture, new Rectangle(screenCenterX - 122, 340, 244, 72));
+            exitButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX - 122, 430, 244, 72));
+            exitToMainMenuButton = new Button(exitButtonTexture, exitButtonPressedTexture, new Rectangle(screenCenterX - 122, 540, 244, 72));
             resumeButton = new Button(resumeButtonTexture, resumeButtonPressedTexture, new Rectangle(screenCenterX - 122, 300, 244, 72));
             restartButton = new Button(restartButtonTesture, restartButtonPressedTexture, new Rectangle(screenCenterX - 122, 380, 244, 72));
+            returnToMainMenuButton = new Button(mainMenuButtonTexture, mainMenuButtonPressedTexture, new Rectangle(screenCenterX - 122, 380, 244, 72));
+            restartEndOfGameButton = new Button(restartButtonTesture, restartButtonPressedTexture, new Rectangle(screenCenterX - 122, 300, 244, 72));
+            upgradeButton = new Button(upgradesButtonTexture, upgradesButtonPressedTexture, new Rectangle(screenCenterX - 122, 460, 244, 72));
 
             scroll1 = new Scrolling(backgroundTexture, new Rectangle(0, 0, 600, 4096));
             scroll2 = new Scrolling(backgroundTexture, new Rectangle(0, -4096, 600, 4096));
@@ -99,7 +114,6 @@ namespace SpaceShooter
             player = new Player(playerTexture,hearthTexture);
             player.playerLocation = new Rectangle(screenCenterX - 25, 800 - player.playerTexture.Height - 10, 50, 50);
         }
-
         protected override void UnloadContent()
         {
 
@@ -127,6 +141,7 @@ namespace SpaceShooter
 
             if (startButton.location.Contains(mousePoint)) startButton.hover(); else startButton.unhover();
             if (exitButton.location.Contains(mousePoint)) exitButton.hover(); else exitButton.unhover();
+            if (skinsButton.location.Contains(mousePoint)) skinsButton.hover(); else skinsButton.unhover();
 
             if (startButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed)
             {
@@ -155,8 +170,7 @@ namespace SpaceShooter
             }
             #endregion
 
-        }
-        
+        }        
         private void UpdateGameplay(GameTime gameTime) {
             if (scroll1.location.Y + scroll1.location.Height >= 8192) {
                 scroll1.location.Y = scroll2.location.Y - scroll2.backgroundTexture.Height;
@@ -187,6 +201,7 @@ namespace SpaceShooter
             if (exitToMainMenuButton.location.Contains(mousePoint)) exitToMainMenuButton.hover(); else exitToMainMenuButton.unhover();
             if (resumeButton.location.Contains(mousePoint)) resumeButton.hover(); else resumeButton.unhover();
             if (restartButton.location.Contains(mousePoint)) restartButton.hover(); else restartButton.unhover();
+            if (upgradeButton.location.Contains(mousePoint)) upgradeButton.hover(); else upgradeButton.unhover();
 
             if (exitToMainMenuButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed)
             {
@@ -274,6 +289,7 @@ namespace SpaceShooter
 
                     if (player.health == 0)
                     {
+                        Pause();
                         _currentGameState = GameState.EndOfGame;
                     }
                 }
@@ -295,8 +311,43 @@ namespace SpaceShooter
             }
             else if (isPausePressed == false) shooting = true;
         }
+        private void UpdateEndOfGame(GameTime gameTime) {
+            var mouseState = Mouse.GetState();
+            var mousePoint = new Point(mouseState.X, mouseState.Y);
 
-        private void UpdateEndOfGame(GameTime gameTime) { }
+            if (returnToMainMenuButton.location.Contains(mousePoint)) returnToMainMenuButton.hover(); else returnToMainMenuButton.unhover();
+            if (restartEndOfGameButton.location.Contains(mousePoint)) restartEndOfGameButton.hover(); else restartEndOfGameButton.unhover();
+
+            if (returnToMainMenuButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed)
+            {
+                returnToMainMenuButton.press();
+            }
+            else if (restartEndOfGameButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed)
+            {
+                restartEndOfGameButton.press();
+            }
+
+            if (returnToMainMenuButton.isPressed)
+            {
+                if (returnToMainMenuButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
+                {
+                    returnToMainMenuButton.unpress();
+                    isPausePressed = false;
+                    _currentGameState = GameState.MainMenu;
+                }
+            }
+            else if (restartEndOfGameButton.isPressed)
+            {
+                if (restartEndOfGameButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
+                {
+                    restartEndOfGameButton.unpress();
+                    isPausePressed = false;
+                    RestartGame();
+                    _currentGameState = GameState.GamePlay;
+                }
+            }
+
+        }
 
         protected override void Draw(GameTime gameTime)
         {
@@ -314,6 +365,7 @@ namespace SpaceShooter
         private void DrawMainMenu(GameTime gameTime) {
             spriteBatch.Begin();
             spriteBatch.Draw(startButton.texture, startButton.location, Color.White);
+            spriteBatch.Draw(skinsButton.texture, skinsButton.location, Color.White);
             spriteBatch.Draw(exitButton.texture, exitButton.location, Color.White);
             spriteBatch.End();
         }
@@ -331,16 +383,20 @@ namespace SpaceShooter
             if (isPausePressed == true)
             {
                 spriteBatch.Begin();
-                spriteBatch.Draw(pauseBackgroundTexture, new Rectangle(screenCenterX-150, 200, 300, 350), Color.White);
+                spriteBatch.Draw(pauseBackgroundTexture, new Rectangle(screenCenterX-150, 200, 300, 430), Color.White);
                 spriteBatch.Draw(resumeButton.texture, resumeButton.location, Color.White);
                 spriteBatch.Draw(restartButton.texture, restartButton.location, Color.White);
+                spriteBatch.Draw(upgradeButton.texture, upgradeButton.location, Color.White);
                 spriteBatch.Draw(exitToMainMenuButton.texture, exitToMainMenuButton.location, Color.White);
                 spriteBatch.End();
             }
         }
         private void DrawEndOfGame(GameTime gameTime) {
+            GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
-            spriteBatch.DrawString(Font, "YOU DIED", new Vector2(250, 45), Color.White);
+            spriteBatch.DrawString(Font, "HIGHSCORE: " + actualScore.ToString(), new Vector2(200, 250), Color.White);
+            spriteBatch.Draw(returnToMainMenuButton.texture, returnToMainMenuButton.location, Color.White);
+            spriteBatch.Draw(restartEndOfGameButton.texture, restartEndOfGameButton.location, Color.White);
             spriteBatch.End();
         }
 

@@ -7,10 +7,16 @@
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/AlienShips2.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/backgroundTexture1.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/bulletShip1.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonMainMenu.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonMainMenuPressed.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonRestart.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonRestartPressed.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonResume.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonResumePressed.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonSkins.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonSkinsPressed.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonUpgrades.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonUpgradesPressed.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/exitButton.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/exitButtonPressed.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/font.spritefont</File>
@@ -21,6 +27,12 @@
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/startButtonPressed.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
