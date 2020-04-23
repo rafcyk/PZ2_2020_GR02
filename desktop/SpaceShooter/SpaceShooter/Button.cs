@@ -44,5 +44,14 @@ namespace SpaceShooter
         {
             texture = mainTexture;
         }
+
+        public void showHiddenButton()
+        {
+            if(this.location.X != 0) this.location.X += 30;
+        }
+
+        public void hideButton() {
+            if (this.location.X != -600) this.location.X -= 30;
+        }
     }
 }

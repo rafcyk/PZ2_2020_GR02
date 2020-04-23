@@ -19,8 +19,11 @@ namespace SpaceShooter
         SpriteFont Font;
         Texture2D playerTexture, startButtonTexture, startButtonPressedTexture, exitButtonTexture, exitButtonPressedTexture,
                   pauseBackgroundTexture, backgroundTexture, missileTexture, resumeButtonTexture, resumeButtonPressedTexture,
-                  restartButtonTesture, restartButtonPressedTexture,enemyTexture,hearthTexture,mainMenuButtonTexture,mainMenuButtonPressedTexture,
-                  upgradesButtonTexture,upgradesButtonPressedTexture,skinsButtonTexture,skinsButtonPressedTexture;
+                  restartButtonTesture, restartButtonPressedTexture, enemyTexture, hearthTexture, mainMenuButtonTexture, mainMenuButtonPressedTexture,
+                  upgradesButtonTexture, upgradesButtonPressedTexture, skinsButtonTexture, skinsButtonPressedTexture, skin1ButtonTexture, skin2ButtonTexture,
+                  skin3ButtonTexture, skin4ButtonTexture, skin5ButtonTexture, skin1ButtonPressedTexture, skin2ButtonPressedTexture, skin3ButtonPressedTexture,
+                  skin4ButtonPressedTexture, skin5ButtonPressedTexture, spaceShipSkin2, spaceShipSkin3, spaceShipSkin4, spaceShipSkin5, bulletSkin1, bulletSkin2, bulletSkin3,
+                  bulletSkin4, bulletSkin5;
         #endregion
 
         #region Buttons
@@ -33,6 +36,11 @@ namespace SpaceShooter
         Button restartEndOfGameButton;
         Button upgradeButton;
         Button skinsButton;
+        Button skin1Button;
+        Button skin2Button;
+        Button skin3Button;
+        Button skin4Button;
+        Button skin5Button;
         #endregion
 
         Scrolling scroll1;
@@ -54,6 +62,7 @@ namespace SpaceShooter
         List<Enemy> enemies = new List<Enemy>();
         Random rnd = new Random();
         private int actualScore = 0;
+        private bool showSkinsWindow = false;
 
         public Game1()
         {
@@ -75,6 +84,16 @@ namespace SpaceShooter
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             playerTexture = Content.Load<Texture2D>("SpaceShipSmall");
+            spaceShipSkin2 = Content.Load<Texture2D>("SpaceShip2");
+            spaceShipSkin3 = Content.Load<Texture2D>("SpaceShip3");
+            spaceShipSkin4 = Content.Load<Texture2D>("SpaceShip4");
+            spaceShipSkin5 = Content.Load<Texture2D>("SpaceShip5");
+
+            bulletSkin1 = Content.Load<Texture2D>("bulletShip1");
+            bulletSkin2 = Content.Load<Texture2D>("bulletShip2");
+            bulletSkin3 = Content.Load<Texture2D>("bulletShip3");
+            bulletSkin4 = Content.Load<Texture2D>("bulletShip4");
+            bulletSkin5 = Content.Load<Texture2D>("bulletShip5");
 
             startButtonTexture = Content.Load<Texture2D>("startButton");
             startButtonPressedTexture = Content.Load<Texture2D>("startButtonPressed");
@@ -82,7 +101,6 @@ namespace SpaceShooter
             exitButtonPressedTexture = Content.Load<Texture2D>("exitButtonPressed");
             pauseBackgroundTexture = Content.Load<Texture2D>("pauseBackground");
             backgroundTexture = Content.Load<Texture2D>("backgroundTexture1");
-            missileTexture = Content.Load<Texture2D>("bulletShip1");
             resumeButtonTexture = Content.Load<Texture2D>("buttonResume");
             resumeButtonPressedTexture = Content.Load<Texture2D>("buttonResumePressed");
             restartButtonTesture = Content.Load<Texture2D>("buttonRestart");
@@ -96,6 +114,17 @@ namespace SpaceShooter
             skinsButtonTexture = Content.Load<Texture2D>("buttonSkins");
             skinsButtonPressedTexture = Content.Load<Texture2D>("buttonSkinsPressed");
 
+            skin1ButtonTexture = Content.Load<Texture2D>("skin1");
+            skin2ButtonTexture = Content.Load<Texture2D>("skin2");
+            skin3ButtonTexture = Content.Load<Texture2D>("skin3");
+            skin4ButtonTexture = Content.Load<Texture2D>("skin4");
+            skin5ButtonTexture = Content.Load<Texture2D>("skin5");
+            skin1ButtonPressedTexture = Content.Load<Texture2D>("skin1Pressed");
+            skin2ButtonPressedTexture = Content.Load<Texture2D>("skin2Pressed");
+            skin3ButtonPressedTexture = Content.Load<Texture2D>("skin3Pressed");
+            skin4ButtonPressedTexture = Content.Load<Texture2D>("skin4Pressed");
+            skin5ButtonPressedTexture = Content.Load<Texture2D>("skin5Pressed");
+
             Font = Content.Load<SpriteFont>("font");
 
             startButton = new Button(startButtonTexture, startButtonPressedTexture, new Rectangle(screenCenterX - 134, 250, 268, 79));
@@ -108,10 +137,18 @@ namespace SpaceShooter
             restartEndOfGameButton = new Button(restartButtonTesture, restartButtonPressedTexture, new Rectangle(screenCenterX - 122, 300, 244, 72));
             upgradeButton = new Button(upgradesButtonTexture, upgradesButtonPressedTexture, new Rectangle(screenCenterX - 122, 460, 244, 72));
 
+            skin1Button = new Button(skin1ButtonTexture, skin1ButtonPressedTexture, new Rectangle(-600, 0, 600, 160));
+            skin2Button = new Button(skin2ButtonTexture, skin2ButtonPressedTexture, new Rectangle(-600, 160, 600, 160));
+            skin3Button = new Button(skin3ButtonTexture, skin3ButtonPressedTexture, new Rectangle(-600, 320, 600, 160));
+            skin4Button = new Button(skin4ButtonTexture, skin4ButtonPressedTexture, new Rectangle(-600, 480, 600, 160));
+            skin5Button = new Button(skin5ButtonTexture, skin5ButtonPressedTexture, new Rectangle(-600, 640, 600, 160));
+
+
             scroll1 = new Scrolling(backgroundTexture, new Rectangle(0, 0, 600, 4096));
             scroll2 = new Scrolling(backgroundTexture, new Rectangle(0, -4096, 600, 4096));
 
             player = new Player(playerTexture,hearthTexture);
+            missileTexture = bulletSkin1;
             player.playerLocation = new Rectangle(screenCenterX - 25, 800 - player.playerTexture.Height - 10, 50, 50);
         }
         protected override void UnloadContent()
@@ -139,19 +176,43 @@ namespace SpaceShooter
 
             #region ButtonsFunctionality
 
-            if (startButton.location.Contains(mousePoint)) startButton.hover(); else startButton.unhover();
-            if (exitButton.location.Contains(mousePoint)) exitButton.hover(); else exitButton.unhover();
-            if (skinsButton.location.Contains(mousePoint)) skinsButton.hover(); else skinsButton.unhover();
+            if (!showSkinsWindow) {
+                if (startButton.location.Contains(mousePoint)) startButton.hover(); else startButton.unhover();
+                if (exitButton.location.Contains(mousePoint)) exitButton.hover(); else exitButton.unhover();
+                if (skinsButton.location.Contains(mousePoint)) skinsButton.hover(); else skinsButton.unhover();
 
-            if (startButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed)
-            {
-                startButton.press();
-            }
-            else if (exitButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed)
-            {
-                exitButton.press();
-            }
+                if (startButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed) startButton.press();
+                else if (exitButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed) exitButton.press();
+                else if (skinsButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed) skinsButton.press();
 
+                skin1Button.hideButton();
+                skin2Button.hideButton();
+                skin3Button.hideButton();
+                skin4Button.hideButton();
+                skin5Button.hideButton();
+            }
+            if (showSkinsWindow) {
+                if (skin1Button.location.Contains(mousePoint)) skin1Button.hover(); else skin1Button.unhover();
+                if (skin2Button.location.Contains(mousePoint)) skin2Button.hover(); else skin2Button.unhover();
+                if (skin3Button.location.Contains(mousePoint)) skin3Button.hover(); else skin3Button.unhover();
+                if (skin4Button.location.Contains(mousePoint)) skin4Button.hover(); else skin4Button.unhover();
+                if (skin5Button.location.Contains(mousePoint)) skin5Button.hover(); else skin5Button.unhover();
+
+                if (skin1Button.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed) skin1Button.press();
+                else if (skin2Button.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed) skin2Button.press();
+                else if (skin3Button.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed) skin3Button.press();
+                else if (skin4Button.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed) skin4Button.press();
+                else if (skin5Button.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed) skin5Button.press();
+
+                skin1Button.showHiddenButton();
+                skin2Button.showHiddenButton();
+                skin3Button.showHiddenButton();
+                skin4Button.showHiddenButton();
+                skin5Button.showHiddenButton();
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape)) showSkinsWindow = false;
+            }
+            
             if (exitButton.isPressed)
             {
                 if (exitButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released) {
@@ -168,8 +229,62 @@ namespace SpaceShooter
                     RestartGame();
                 }
             }
-            #endregion
+            else if (skinsButton.isPressed)
+            {
+                if (skinsButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
+                {
+                    skinsButton.unpress();
+                    showSkinsWindow = true;
+                }
+            }
+            else if (skin1Button.isPressed)
+            {
+                if (skin1Button.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
+                {
+                    skin1Button.unpress();
+                    player.playerTexture = playerTexture;
+                    missileTexture = bulletSkin1;
+                }
+            }
+            else if (skin2Button.isPressed)
+            {
+                if (skin2Button.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
+                {
+                    skin2Button.unpress();
+                    player.playerTexture = spaceShipSkin2;
+                    missileTexture = bulletSkin2;
+                }
+            }
+            else if (skin3Button.isPressed)
+            {
+                if (skin3Button.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
+                {
+                    skin3Button.unpress();
+                    player.playerTexture = spaceShipSkin3;
+                    missileTexture = bulletSkin3;
+                }
+            }
+            else if (skin4Button.isPressed)
+            {
+                if (skin4Button.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
+                {
+                    skin4Button.unpress();
+                    player.playerTexture = spaceShipSkin4;
+                    missileTexture = bulletSkin4;
+                }
+            }
+            else if (skin5Button.isPressed)
+            {
+                if (skin5Button.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
+                {
+                    skin5Button.unpress();
+                    player.playerTexture = spaceShipSkin5;
+                    missileTexture = bulletSkin5;
 
+                }
+            }
+
+            #endregion
         }        
         private void UpdateGameplay(GameTime gameTime) {
             if (scroll1.location.Y + scroll1.location.Height >= 8192) {
@@ -203,17 +318,9 @@ namespace SpaceShooter
             if (restartButton.location.Contains(mousePoint)) restartButton.hover(); else restartButton.unhover();
             if (upgradeButton.location.Contains(mousePoint)) upgradeButton.hover(); else upgradeButton.unhover();
 
-            if (exitToMainMenuButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed)
-            {
-                exitToMainMenuButton.press();
-            }
-            else if (resumeButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed)
-            {
-                resumeButton.press();
-            }
-            else if (restartButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed) {
-                restartButton.press();
-            }
+            if (exitToMainMenuButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed) exitToMainMenuButton.press();
+            else if (resumeButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed) resumeButton.press();
+            else if (restartButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed) restartButton.press();
 
             if (exitToMainMenuButton.isPressed)
             {
@@ -367,6 +474,11 @@ namespace SpaceShooter
             spriteBatch.Draw(startButton.texture, startButton.location, Color.White);
             spriteBatch.Draw(skinsButton.texture, skinsButton.location, Color.White);
             spriteBatch.Draw(exitButton.texture, exitButton.location, Color.White);
+            spriteBatch.Draw(skin1Button.texture, skin1Button.location, Color.White);
+            spriteBatch.Draw(skin2Button.texture, skin2Button.location, Color.White);
+            spriteBatch.Draw(skin3Button.texture, skin3Button.location, Color.White);
+            spriteBatch.Draw(skin4Button.texture, skin4Button.location, Color.White);
+            spriteBatch.Draw(skin5Button.texture, skin5Button.location, Color.White);
             spriteBatch.End();
         }
         private void DrawGameplay(GameTime gameTime) {
