@@ -23,7 +23,7 @@ namespace SpaceShooter
                   upgradesButtonTexture, upgradesButtonPressedTexture, skinsButtonTexture, skinsButtonPressedTexture, skin1ButtonTexture, skin2ButtonTexture,
                   skin3ButtonTexture, skin4ButtonTexture, skin5ButtonTexture, skin1ButtonPressedTexture, skin2ButtonPressedTexture, skin3ButtonPressedTexture,
                   skin4ButtonPressedTexture, skin5ButtonPressedTexture, spaceShipSkin2, spaceShipSkin3, spaceShipSkin4, spaceShipSkin5, bulletSkin1, bulletSkin2, bulletSkin3,
-                  bulletSkin4, bulletSkin5;
+                  bulletSkin4, bulletSkin5, selectedShipCoverTexture;
         #endregion
 
         #region Buttons
@@ -41,6 +41,7 @@ namespace SpaceShooter
         Button skin3Button;
         Button skin4Button;
         Button skin5Button;
+        Button selectedSkinCoverButton;
         #endregion
 
         Scrolling scroll1;
@@ -88,6 +89,7 @@ namespace SpaceShooter
             spaceShipSkin3 = Content.Load<Texture2D>("SpaceShip3");
             spaceShipSkin4 = Content.Load<Texture2D>("SpaceShip4");
             spaceShipSkin5 = Content.Load<Texture2D>("SpaceShip5");
+            selectedShipCoverTexture = Content.Load<Texture2D>("selectedShipCover");
 
             bulletSkin1 = Content.Load<Texture2D>("bulletShip1");
             bulletSkin2 = Content.Load<Texture2D>("bulletShip2");
@@ -142,6 +144,7 @@ namespace SpaceShooter
             skin3Button = new Button(skin3ButtonTexture, skin3ButtonPressedTexture, new Rectangle(-600, 320, 600, 160));
             skin4Button = new Button(skin4ButtonTexture, skin4ButtonPressedTexture, new Rectangle(-600, 480, 600, 160));
             skin5Button = new Button(skin5ButtonTexture, skin5ButtonPressedTexture, new Rectangle(-600, 640, 600, 160));
+            selectedSkinCoverButton = new Button(selectedShipCoverTexture, selectedShipCoverTexture, new Rectangle(-600, 0, 600, 160));
 
 
             scroll1 = new Scrolling(backgroundTexture, new Rectangle(0, 0, 600, 4096));
@@ -149,7 +152,7 @@ namespace SpaceShooter
 
             player = new Player(playerTexture,hearthTexture);
             missileTexture = bulletSkin1;
-            player.playerLocation = new Rectangle(screenCenterX - 25, 800 - player.playerTexture.Height - 10, 50, 50);
+            player.playerLocation = new Rectangle(screenCenterX - 35, 800 - player.playerTexture.Height - 25, 70, 70);
         }
         protected override void UnloadContent()
         {
@@ -175,7 +178,6 @@ namespace SpaceShooter
             var mousePoint = new Point(mouseState.X, mouseState.Y);
 
             #region ButtonsFunctionality
-
             if (!showSkinsWindow) {
                 if (startButton.location.Contains(mousePoint)) startButton.hover(); else startButton.unhover();
                 if (exitButton.location.Contains(mousePoint)) exitButton.hover(); else exitButton.unhover();
@@ -190,6 +192,7 @@ namespace SpaceShooter
                 skin3Button.hideButton();
                 skin4Button.hideButton();
                 skin5Button.hideButton();
+                selectedSkinCoverButton.hideButton();
             }
             if (showSkinsWindow) {
                 if (skin1Button.location.Contains(mousePoint)) skin1Button.hover(); else skin1Button.unhover();
@@ -209,6 +212,7 @@ namespace SpaceShooter
                 skin3Button.showHiddenButton();
                 skin4Button.showHiddenButton();
                 skin5Button.showHiddenButton();
+                selectedSkinCoverButton.showHiddenButton();
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape)) showSkinsWindow = false;
             }
@@ -244,6 +248,7 @@ namespace SpaceShooter
                     skin1Button.unpress();
                     player.playerTexture = playerTexture;
                     missileTexture = bulletSkin1;
+                    selectedSkinCoverButton.location.Y = 0;
                 }
             }
             else if (skin2Button.isPressed)
@@ -253,6 +258,7 @@ namespace SpaceShooter
                     skin2Button.unpress();
                     player.playerTexture = spaceShipSkin2;
                     missileTexture = bulletSkin2;
+                    selectedSkinCoverButton.location.Y = 160;
                 }
             }
             else if (skin3Button.isPressed)
@@ -262,6 +268,7 @@ namespace SpaceShooter
                     skin3Button.unpress();
                     player.playerTexture = spaceShipSkin3;
                     missileTexture = bulletSkin3;
+                    selectedSkinCoverButton.location.Y = 320;
                 }
             }
             else if (skin4Button.isPressed)
@@ -271,6 +278,7 @@ namespace SpaceShooter
                     skin4Button.unpress();
                     player.playerTexture = spaceShipSkin4;
                     missileTexture = bulletSkin4;
+                    selectedSkinCoverButton.location.Y = 480;
                 }
             }
             else if (skin5Button.isPressed)
@@ -280,10 +288,9 @@ namespace SpaceShooter
                     skin5Button.unpress();
                     player.playerTexture = spaceShipSkin5;
                     missileTexture = bulletSkin5;
-
+                    selectedSkinCoverButton.location.Y = 640;
                 }
             }
-
             #endregion
         }        
         private void UpdateGameplay(GameTime gameTime) {
@@ -479,6 +486,7 @@ namespace SpaceShooter
             spriteBatch.Draw(skin3Button.texture, skin3Button.location, Color.White);
             spriteBatch.Draw(skin4Button.texture, skin4Button.location, Color.White);
             spriteBatch.Draw(skin5Button.texture, skin5Button.location, Color.White);
+            spriteBatch.Draw(selectedSkinCoverButton.texture, selectedSkinCoverButton.location, Color.White);
             spriteBatch.End();
         }
         private void DrawGameplay(GameTime gameTime) {

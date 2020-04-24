@@ -59,3 +59,4 @@ C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShoot
 C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\bulletShip3.xnb
 C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\bulletShip4.xnb
 C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\bulletShip5.xnb
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\selectedShipCover.xnb
