@@ -32,6 +32,7 @@
 }
 
 .download .wrapDownload p{
+    text-align: center;
     color:white;
     font-size: 5rem;
 }
@@ -47,4 +48,135 @@
 .download button:hover{
     font-size: 3.5rem;
     opacity: .8;
+}
+
+@media screen and (max-width:1200px){
+    .download .wrapDownload{
+        width: 80%;
+    }
+    
+    .download .wrapButtons button{
+        width:280px;
+        height: 90px;
+        font-size: 4.2rem;
+    }
+    
+    
+    .download .wrapDownload p{
+        color:white;
+        font-size: 4.5rem;
+    }
+    
+    .download button:hover{
+        font-size: 3.2rem;
+        opacity: .8;
+    }
+}
+
+@media screen and (max-width:900px){
+    .download .wrapDownload{
+        width: 90%;
+    }
+
+
+    
+    .download .wrapButtons button{
+        width:250px;
+        height: 80px;
+        font-size: 3.6rem;
+    }
+    
+    
+    .download .wrapDownload p{
+        color:white;
+        font-size: 4.5rem;
+    }
+    
+    .download button:hover{
+        font-size: 2.3rem;
+        opacity: .8;
+    }
+}
+
+@media screen and (max-width:700px){
+
+    .download .wrapButtons button{
+        margin-top: 20px;
+    }
+    
+    .wrapButtons{
+        flex-direction: column;
+    }
+    
+    .download .wrapDownload p{
+        margin-bottom: -20px;
+    }
+    
+}
+
+@media screen and (max-width:500px){
+    .download .wrapButtons button{
+        width:280px;
+        height: 80px;
+        font-size: 3.6rem;
+        margin-top: 20px;
+    }
+    
+    
+    .download .wrapDownload p{
+        color:white;
+        font-size: 4.5rem;
+    }
+    
+    .download button:hover{
+        font-size: 2.3rem;
+        opacity: .8;
+    }
+}
+
+@media screen and (max-width:370px){
+    .download .wrapButtons button{
+        width:280px;
+        height: 80px;
+        font-size: 3.6rem;
+        margin-top: 20px;
+    }
+    
+    .download .wrapDownload p{
+        color:white;
+        font-size: 4.5rem;
+    }
+    
+    .download button:hover{
+        font-size: 2.3rem;
+        opacity: .8;
+    }
+}
+
+@media screen and (max-width:330px){
+
+    .download .wrapButtons button{
+        width:260px;
+        height: 60px;
+        font-size: 3rem;
+        margin-top: 20px;
+    }
+    
+    .download .wrapDownload p{
+        color:white;
+        font-size: 4rem;
+    }
+    
+    .download button:hover{
+        font-size: 2.3rem;
+        opacity: .8;
+    }
+}
+
+
+
+@media screen and (max-height:400px){
+    .wrapDownload .wrapButtons{
+        flex-direction: row;
+    }
 }

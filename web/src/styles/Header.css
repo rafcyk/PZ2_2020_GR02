@@ -16,3 +16,31 @@
     box-shadow: 5px 5px 10px black;
     text-align: center;
 }
+
+@media screen and (max-width:1200px){
+    .header h2{
+        font-size: 5rem;
+        width: 70%;
+    }
+}
+
+@media screen and (max-width:900px){
+    .header h2{
+        font-size: 5rem;
+        width: 80%;
+    }
+}
+
+@media screen and (max-width:700px){
+    .header h2{
+        font-size: 4rem;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:500px){
+    .header h2{
+        font-size: 3rem;
+        width: 100%;
+    }
+}

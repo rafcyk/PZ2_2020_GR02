@@ -29,12 +29,6 @@ import ButtonDownloadEn from './components/ButtonDownloadEn';
 
 class App extends React.Component {
 
-  state = {
-    star: {
-      width: 50,
-      height: 50
-    }
-  }
 
 
   render() {
@@ -45,7 +39,7 @@ class App extends React.Component {
       <Router basename = {process.env.PUBLIC_URL}>
         <Language />
 
-        <Stars star={this.state.star} />
+        <Stars/>
 
         <Switch>
 

@@ -21,3 +21,55 @@ ul.activeSection li {
     opacity: 1;
     font-size: 1.6rem;
 }
+
+@media screen and (max-width:1200px){
+    ul.activeSection {
+        right: 2%;
+    }
+    
+    ul.activeSection li {
+        font-size: 0.9rem;
+        padding: 5px 0;
+    }
+
+    #activeEl {
+        opacity: 1;
+        font-size: 1.3rem;
+    }
+}
+
+@media screen and (max-width:900px){
+    .header h2{
+        font-size: 5rem;
+        width: 80%;
+    }
+}
+
+@media screen and (max-width:700px){
+    ul.activeSection {
+        right: 1%;
+    }
+    
+    ul.activeSection li {
+        font-size: 0.7rem;
+        padding: 5px 0;
+    }
+
+    #activeEl {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width:500px){
+    ul.activeSection {
+        right: 1%;
+    }
+    
+    ul.activeSection li {
+        font-size: 0.5rem;
+    }
+
+    #activeEl {
+        font-size: 0.7rem;
+    }
+}

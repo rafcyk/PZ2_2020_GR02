@@ -3,7 +3,7 @@ import {Link} from "react-scroll";
 import '../styles/Stars.css';
 import SpaceShip from '../images/SpaceShip.png';
 
-const Stars = (props) => {
+const Stars = () => {
 
     const starsTop = [];
     const starsBottom = [];
@@ -11,8 +11,6 @@ const Stars = (props) => {
 
     for(let i = 0; i < 10;i ++){
         starsTop.push(<div style = {{
-            width: props.star.width,
-            height: props.star.height,
             left: Math.floor(Math.random() * 100) + '%',
             animationDelay: Math.random() + 's',
         }}
@@ -23,8 +21,6 @@ const Stars = (props) => {
 
     for(let i = 0; i < 10;i ++){
         starsBottom.push(<div style = {{
-            width: props.star.width,
-            height: props.star.height,
             right: Math.floor(Math.random() * 100) + '%',
             animationDelay: Math.random() + 's',
         }}
