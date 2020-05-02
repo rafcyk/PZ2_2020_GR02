@@ -6,6 +6,14 @@ using System.Collections.Generic;
 
 namespace SpaceShooter
 {
+    enum EnemyWave
+    {
+        First,
+        Second,
+        Third,
+        Fourth,
+        Fifth,
+    }
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
@@ -19,7 +27,7 @@ namespace SpaceShooter
         SpriteFont Font;
         Texture2D playerTexture, startButtonTexture, startButtonPressedTexture, exitButtonTexture, exitButtonPressedTexture,
                   pauseBackgroundTexture, backgroundTexture, missileTexture, resumeButtonTexture, resumeButtonPressedTexture,
-                  restartButtonTesture, restartButtonPressedTexture, enemyTexture, hearthTexture, mainMenuButtonTexture, mainMenuButtonPressedTexture,
+                  restartButtonTesture, restartButtonPressedTexture, enemyTexture1, enemyTexture2, enemyTexture3, enemyTexture4, enemyTexture5, hearthTexture, mainMenuButtonTexture, mainMenuButtonPressedTexture,
                   upgradesButtonTexture, upgradesButtonPressedTexture, skinsButtonTexture, skinsButtonPressedTexture, skin1ButtonTexture, skin2ButtonTexture,
                   skin3ButtonTexture, skin4ButtonTexture, skin5ButtonTexture, skin1ButtonPressedTexture, skin2ButtonPressedTexture, skin3ButtonPressedTexture,
                   skin4ButtonPressedTexture, skin5ButtonPressedTexture, spaceShipSkin2, spaceShipSkin3, spaceShipSkin4, spaceShipSkin5, bulletSkin1, bulletSkin2, bulletSkin3,
@@ -53,11 +61,15 @@ namespace SpaceShooter
             GamePlay,
             EndOfGame,
         }
-
         GameState _currentGameState;
+        
+        EnemyWave _currentEnemyWave;
+
         private int screenCenterX;
         private bool isPausePressed = false;
         private bool shooting = false;
+        private int shootingSpeed = 4;
+        private int enemySpeed = 2;
 
         List<Missile> missiles = new List<Missile>();
         List<Enemy> enemies = new List<Enemy>();
@@ -97,6 +109,12 @@ namespace SpaceShooter
             bulletSkin4 = Content.Load<Texture2D>("bulletShip4");
             bulletSkin5 = Content.Load<Texture2D>("bulletShip5");
 
+            enemyTexture1 = Content.Load<Texture2D>("AlienShips2");
+            enemyTexture2 = Content.Load<Texture2D>("AlienShips1");
+            enemyTexture3 = Content.Load<Texture2D>("AlienShips3");
+            enemyTexture4 = Content.Load<Texture2D>("AlienShips4");
+            enemyTexture5 = Content.Load<Texture2D>("AlienShips5");
+
             startButtonTexture = Content.Load<Texture2D>("startButton");
             startButtonPressedTexture = Content.Load<Texture2D>("startButtonPressed");
             exitButtonTexture = Content.Load<Texture2D>("exitButton");
@@ -107,7 +125,6 @@ namespace SpaceShooter
             resumeButtonPressedTexture = Content.Load<Texture2D>("buttonResumePressed");
             restartButtonTesture = Content.Load<Texture2D>("buttonRestart");
             restartButtonPressedTexture = Content.Load<Texture2D>("buttonRestartPressed");
-            enemyTexture = Content.Load<Texture2D>("AlienShips2");
             hearthTexture = Content.Load<Texture2D>("Serducho");
             mainMenuButtonTexture = Content.Load<Texture2D>("buttonMainMenu");
             mainMenuButtonPressedTexture = Content.Load<Texture2D>("buttonMainMenuPressed");
@@ -358,14 +375,34 @@ namespace SpaceShooter
 
             if (shooting)
             {
+                if (actualScore > 100 && _currentEnemyWave == EnemyWave.First)
+                {
+                    _currentEnemyWave = EnemyWave.Second;
+                    enemySpeed = 2;
+                }
+                else if (actualScore > 200 && _currentEnemyWave == EnemyWave.Second)
+                {
+                    _currentEnemyWave = EnemyWave.Third;
+                    enemySpeed = 2;
+                }
+                else if (actualScore > 300 && _currentEnemyWave == EnemyWave.Third)
+                {
+                    _currentEnemyWave = EnemyWave.Fourth;
+                    enemySpeed = 2;
+                }
+                else if (actualScore > 400 && _currentEnemyWave == EnemyWave.Fourth)
+                {
+                    _currentEnemyWave = EnemyWave.Fifth;
+                    enemySpeed = 2;
+                }
                 //drawing missiles
                 if (missiles.Count == 0)
                 {
-                    missiles.Add(new Missile(missileTexture, new Rectangle(player.playerLocation.X + player.playerLocation.Width / 2 - 5, player.playerLocation.Y, 10, 32), 5));
+                    missiles.Add(new Missile(missileTexture, new Rectangle(player.playerLocation.X + player.playerLocation.Width / 2 - 5, player.playerLocation.Y, 10, 32), shootingSpeed));
                 }
                 else if (missiles[missiles.Count - 1].isNextReady(150))
                 {
-                    missiles.Add(new Missile(missileTexture, new Rectangle(player.playerLocation.X + player.playerLocation.Width / 2 - 5, player.playerLocation.Y, 10, 32), 5));
+                    missiles.Add(new Missile(missileTexture, new Rectangle(player.playerLocation.X + player.playerLocation.Width / 2 - 5, player.playerLocation.Y, 10, 32), shootingSpeed));
                 }
                 foreach (Missile m in missiles) {
                     //clearing destroyed missiles
@@ -379,11 +416,11 @@ namespace SpaceShooter
                 //drawing enemies
                 if (enemies.Count == 0)
                 {
-                    enemies.Add(new Enemy(enemyTexture, new Rectangle(rnd.Next(500), -100, 100, 100), 2));
+                    enemies.Add(new Enemy(enemyTexture1, enemyTexture2, enemyTexture3, enemyTexture4, enemyTexture5, new Rectangle(rnd.Next(500), -100, 100, 100), enemySpeed, _currentEnemyWave));
                 }
-                else if (enemies[enemies.Count - 1].isNextReady(300))
+                else if (enemies[enemies.Count - 1].isNextReady())
                 {
-                    enemies.Add(new Enemy(enemyTexture, new Rectangle(rnd.Next(500), -100, 100, 100), 2));
+                    enemies.Add(new Enemy(enemyTexture1, enemyTexture2, enemyTexture3, enemyTexture4, enemyTexture5, new Rectangle(rnd.Next(500), -100, 100, 100), enemySpeed, _currentEnemyWave));
                 }
                 foreach (Enemy e in enemies)
                 {
@@ -415,9 +452,10 @@ namespace SpaceShooter
                     {
                         if (e.enemyLocation.Contains(m.missileLocation))
                         {
-                            e.isDestroyed = true;
+                            e.Hit(25);
                             m.isDestroyed = true;
                             actualScore++;
+                            if (actualScore % 10 == 0 && enemySpeed != 5) enemySpeed++;
                         }
                     }
                 }
@@ -533,6 +571,8 @@ namespace SpaceShooter
             scroll2.speed = 1;
             player.health = 3;
             actualScore = 0;
+            _currentEnemyWave = EnemyWave.First;
+            enemySpeed = 2;
         }
         private void Resume()
         {
