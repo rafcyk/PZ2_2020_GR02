@@ -81,10 +81,13 @@ namespace SpaceShooter
 
         List<Missile> missiles = new List<Missile>();
         List<Enemy> enemies = new List<Enemy>();
+        List<TossACoin> coins = new List<TossACoin>();
+
         Random rnd = new Random();
         private int actualScore = 0;
         private bool showSkinsWindow = false;
         private bool showUpgradeWindow = false;
+        private bool throwSomeCoins = false;
         #endregion
         public Game1()
         {
@@ -430,23 +433,28 @@ namespace SpaceShooter
 
             if (shooting)
             {
-                if (actualScore > 100 && _currentEnemyWave == EnemyWave.First)
+                //waves config
+                if (actualScore > 2 && _currentEnemyWave == EnemyWave.First)
                 {
+                    throwSomeCoins = true;
                     _currentEnemyWave = EnemyWave.Second;
                     enemySpeed = 2;
                 }
                 else if (actualScore > 200 && _currentEnemyWave == EnemyWave.Second)
                 {
+                    throwSomeCoins = true;
                     _currentEnemyWave = EnemyWave.Third;
                     enemySpeed = 2;
                 }
                 else if (actualScore > 300 && _currentEnemyWave == EnemyWave.Third)
                 {
+                    throwSomeCoins = true;
                     _currentEnemyWave = EnemyWave.Fourth;
                     enemySpeed = 2;
                 }
                 else if (actualScore > 400 && _currentEnemyWave == EnemyWave.Fourth)
                 {
+                    throwSomeCoins = true;
                     _currentEnemyWave = EnemyWave.Fifth;
                     enemySpeed = 2;
                 }
@@ -500,7 +508,7 @@ namespace SpaceShooter
                     }
                 }
 
-                //collision detection
+                //missiles collision detection
                 foreach (Missile m in missiles)
                 {
                     foreach (Enemy e in enemies)
@@ -513,8 +521,32 @@ namespace SpaceShooter
                             if (actualScore % 10 == 0 && enemySpeed != 5) enemySpeed++;
                         }
                     }
+
+                    foreach (TossACoin c in coins) {
+                        if (c.coinLocation.Contains(m.missileLocation)) {
+                            c.isDestroyed = true;
+                            coinCount++;
+                        }
+                    }
                 }
-                
+                //update coins, check if out of screen
+                foreach (TossACoin c in coins)
+                {
+                    if (c.isDestroyed)
+                    {
+                        coins.Remove(c);
+                        break;
+                    } 
+                    else c.Update();
+                }
+                //drawing coins
+                if (throwSomeCoins) {
+                    coins.Add(new TossACoin(coinTexture, new Rectangle(rnd.Next(500), -90, 45, 55)));
+                    coins.Add(new TossACoin(coinTexture, new Rectangle(rnd.Next(500), -150, 45, 55)));
+                    coins.Add(new TossACoin(coinTexture, new Rectangle(rnd.Next(500), -210, 45, 55)));
+
+                    throwSomeCoins = false;
+                }
             }
             else if (isPausePressed == false) shooting = true;
         }
@@ -591,34 +623,25 @@ namespace SpaceShooter
             spriteBatch.Draw(player.playerTexture, player.playerLocation, Color.White);
             player.DrawHearths(spriteBatch);
             spriteBatch.DrawString(Font, "SCORE: " + actualScore.ToString(), new Vector2(250, 45), Color.White);
-            spriteBatch.End();
-
-            spriteBatch.Begin();
-            spriteBatch.Draw(coinBackgroundButton.texture, coinBackgroundButton.location, Color.White);
-            spriteBatch.Draw(oneShotButton.texture, oneShotButton.location, Color.White);
-            spriteBatch.Draw(piercingButton.texture, piercingButton.location, Color.White);
-            spriteBatch.Draw(movementSpeedButton.texture, movementSpeedButton.location, Color.White);
-            spriteBatch.Draw(fireRateButton.texture, fireRateButton.location, Color.White);
-            spriteBatch.End();
+            spriteBatch.Draw(coinTexture, new Rectangle(500, 30, 45, 55), Color.White);
+            spriteBatch.DrawString(Font, "x " + coinCount.ToString(), new Vector2(560, 40), Color.White);
 
             if (isPausePressed)
             {
-                spriteBatch.Begin();
                 spriteBatch.Draw(pauseBackgroundTexture, new Rectangle(screenCenterX-150, 200, 300, 430), Color.White);
                 spriteBatch.Draw(resumeButton.texture, resumeButton.location, Color.White);
                 spriteBatch.Draw(restartButton.texture, restartButton.location, Color.White);
                 spriteBatch.Draw(upgradeButton.texture, upgradeButton.location, Color.White);
                 spriteBatch.Draw(exitToMainMenuButton.texture, exitToMainMenuButton.location, Color.White);
-                spriteBatch.End();
             }
-            
-            if (showUpgradeWindow)
-            {
-                spriteBatch.Begin();
-                spriteBatch.Draw(coinTexture, new Rectangle(screenCenterX - 45, 30, 90, 110), Color.White);
-                spriteBatch.DrawString(Font, "x " + coinCount.ToString(), new Vector2(360, 70), Color.White);
-                spriteBatch.End();
-            }
+
+            spriteBatch.Draw(oneShotButton.texture, oneShotButton.location, Color.White);
+            spriteBatch.Draw(piercingButton.texture, piercingButton.location, Color.White);
+            spriteBatch.Draw(movementSpeedButton.texture, movementSpeedButton.location, Color.White);
+            spriteBatch.Draw(fireRateButton.texture, fireRateButton.location, Color.White);
+
+            foreach (TossACoin coin in coins) spriteBatch.Draw(coin.coinTexture, coin.coinLocation, Color.White);
+            spriteBatch.End();
         }
         private void DrawEndOfGame(GameTime gameTime) {
             GraphicsDevice.Clear(Color.Black);
@@ -638,12 +661,14 @@ namespace SpaceShooter
             player.playerLocation.X = screenCenterX - 25;
             missiles.Clear();
             enemies.Clear();
+            coins.Clear();
             scroll1.speed = 1;
             scroll2.speed = 1;
             player.health = 3;
             actualScore = 0;
             _currentEnemyWave = EnemyWave.First;
             enemySpeed = 2;
+            coinCount = 0;
         }
         private void Resume()
         {
