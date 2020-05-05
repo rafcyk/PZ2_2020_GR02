@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/piercing2.png</SourceFile>
-  <SourceTime>2020-05-05T11:04:15.2312029+02:00</SourceTime>
-  <DestFile>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/bin/Windows/Content/piercing2.xnb</DestFile>
-  <DestTime>2020-05-05T11:04:18.2697287+02:00</DestTime>
+  <SourceFile>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/piercingMissile.png</SourceFile>
+  <SourceTime>2020-04-08T09:08:50.4300625+02:00</SourceTime>
+  <DestFile>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/bin/Windows/Content/piercingMissile.xnb</DestFile>
+  <DestTime>2020-05-05T09:27:55.6943925+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

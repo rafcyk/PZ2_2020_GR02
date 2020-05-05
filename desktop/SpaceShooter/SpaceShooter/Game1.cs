@@ -32,7 +32,7 @@ namespace SpaceShooter
                   skin3ButtonTexture, skin4ButtonTexture, skin5ButtonTexture, skin1ButtonPressedTexture, skin2ButtonPressedTexture, skin3ButtonPressedTexture,
                   skin4ButtonPressedTexture, skin5ButtonPressedTexture, spaceShipSkin2, spaceShipSkin3, spaceShipSkin4, spaceShipSkin5, bulletSkin1, bulletSkin2, bulletSkin3,
                   bulletSkin4, bulletSkin5, selectedShipCoverTexture, coinTexture, coinBackgroundTexture, oneShotTexture,oneShotPressedTexture,piercingTexture,piercingPressedTexture,
-                  movementSpeedTexture,movementspeedPressedTexture,fireRateTexture, fireRatePressedTexture;
+                  movementSpeedTexture,movementspeedPressedTexture,fireRateTexture, fireRatePressedTexture,oneShotMissileTexture,piercingMissileTexture,currentBulletTexture;
         #endregion
 
         #region Buttons
@@ -78,6 +78,7 @@ namespace SpaceShooter
         private int shootingSpeed = 4;
         private int enemySpeed = 2;
         private int coinCount = 0;
+        private int fireRate = 150;
 
         List<Missile> missiles = new List<Missile>();
         List<Enemy> enemies = new List<Enemy>();
@@ -88,6 +89,8 @@ namespace SpaceShooter
         private bool showSkinsWindow = false;
         private bool showUpgradeWindow = false;
         private bool throwSomeCoins = false;
+        private bool isOneShotBought = false;
+        private bool isPiercingBought = false;
         #endregion
         public Game1()
         {
@@ -131,6 +134,9 @@ namespace SpaceShooter
             bulletSkin3 = Content.Load<Texture2D>("bulletShip3");
             bulletSkin4 = Content.Load<Texture2D>("bulletShip4");
             bulletSkin5 = Content.Load<Texture2D>("bulletShip5");
+            currentBulletTexture = bulletSkin1;
+            oneShotMissileTexture = Content.Load<Texture2D>("oneShotMissile");
+            piercingMissileTexture = Content.Load<Texture2D>("piercingMissile");
 
             enemyTexture1 = Content.Load<Texture2D>("AlienShips2");
             enemyTexture2 = Content.Load<Texture2D>("AlienShips1");
@@ -293,6 +299,7 @@ namespace SpaceShooter
                     skin1Button.unpress();
                     player.playerTexture = playerTexture;
                     missileTexture = bulletSkin1;
+                    currentBulletTexture = bulletSkin1;
                     selectedSkinCoverButton.location.Y = 0;
                 }
             }
@@ -302,6 +309,7 @@ namespace SpaceShooter
                 {
                     skin2Button.unpress();
                     player.playerTexture = spaceShipSkin2;
+                    currentBulletTexture = bulletSkin2;
                     missileTexture = bulletSkin2;
                     selectedSkinCoverButton.location.Y = 160;
                 }
@@ -312,6 +320,7 @@ namespace SpaceShooter
                 {
                     skin3Button.unpress();
                     player.playerTexture = spaceShipSkin3;
+                    currentBulletTexture = bulletSkin3;
                     missileTexture = bulletSkin3;
                     selectedSkinCoverButton.location.Y = 320;
                 }
@@ -322,6 +331,7 @@ namespace SpaceShooter
                 {
                     skin4Button.unpress();
                     player.playerTexture = spaceShipSkin4;
+                    currentBulletTexture = bulletSkin4;
                     missileTexture = bulletSkin4;
                     selectedSkinCoverButton.location.Y = 480;
                 }
@@ -333,6 +343,7 @@ namespace SpaceShooter
                     skin5Button.unpress();
                     player.playerTexture = spaceShipSkin5;
                     missileTexture = bulletSkin5;
+                    currentBulletTexture = bulletSkin5;
                     selectedSkinCoverButton.location.Y = 640;
                 }
             }
@@ -387,6 +398,11 @@ namespace SpaceShooter
                 if (movementSpeedButton.location.Contains(mousePoint)) movementSpeedButton.hover(); else movementSpeedButton.unhover();
                 if (fireRateButton.location.Contains(mousePoint)) fireRateButton.hover(); else fireRateButton.unhover();
 
+                if (oneShotButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed) oneShotButton.press();
+                else if (piercingButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed) piercingButton.press();
+                else if (movementSpeedButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed) movementSpeedButton.press();
+                else if (fireRateButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Pressed) fireRateButton.press();
+
                 coinBackgroundButton.showHiddenButton();
                 oneShotButton.showHiddenButton();
                 piercingButton.showHiddenButton();
@@ -429,12 +445,59 @@ namespace SpaceShooter
                     showUpgradeWindow = true;
                 }
             }
+            else if (oneShotButton.isPressed)
+            {
+                if (oneShotButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
+                {
+                    oneShotButton.unpress();
+                    if (coinCount >= 5 && !isOneShotBought)
+                    {
+                        missileTexture = oneShotMissileTexture;
+                        coinCount -= 5;
+                    }
+                }
+            }
+            else if (piercingButton.isPressed)
+            {
+                if (piercingButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
+                {
+                    piercingButton.unpress();
+                    if (coinCount >= 3 && !isPiercingBought) {
+                        missileTexture = piercingMissileTexture;
+                        coinCount -= 3;
+                    } 
+                }
+            }
+            else if (movementSpeedButton.isPressed)
+            {
+                if (movementSpeedButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
+                {
+                    movementSpeedButton.unpress();
+                    if(coinCount >= 1)
+                    {
+                        player.speed++;
+                        coinCount--;
+                    }
+                }
+            }
+            else if (fireRateButton.isPressed)
+            {
+                if (fireRateButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
+                {
+                    fireRateButton.unpress();
+                    if (coinCount >= 1)
+                    {
+                        shootingSpeed++;
+                        coinCount--;
+                    }
+                }
+            }
             #endregion
 
             if (shooting)
             {
                 //waves config
-                if (actualScore > 2 && _currentEnemyWave == EnemyWave.First)
+                if (actualScore > 100 && _currentEnemyWave == EnemyWave.First)
                 {
                     throwSomeCoins = true;
                     _currentEnemyWave = EnemyWave.Second;
@@ -463,7 +526,7 @@ namespace SpaceShooter
                 {
                     missiles.Add(new Missile(missileTexture, new Rectangle(player.playerLocation.X + player.playerLocation.Width / 2 - 5, player.playerLocation.Y, 10, 32), shootingSpeed));
                 }
-                else if (missiles[missiles.Count - 1].isNextReady(150))
+                else if (missiles[missiles.Count - 1].isNextReady(fireRate))
                 {
                     missiles.Add(new Missile(missileTexture, new Rectangle(player.playerLocation.X + player.playerLocation.Width / 2 - 5, player.playerLocation.Y, 10, 32), shootingSpeed));
                 }
@@ -491,6 +554,7 @@ namespace SpaceShooter
                     if (e.isDestroyed)
                     {
                         enemies.Remove(e);
+                        actualScore++;
                         break;
                     }
                     else e.Update();
@@ -515,9 +579,11 @@ namespace SpaceShooter
                     {
                         if (e.enemyLocation.Contains(m.missileLocation))
                         {
-                            e.Hit(25);
+                            if (missileTexture == oneShotMissileTexture) e.Hit(500);
+                            else if (missileTexture == piercingMissileTexture) e.Hit(50);
+                            else e.Hit(25);
+
                             m.isDestroyed = true;
-                            actualScore++;
                             if (actualScore % 10 == 0 && enemySpeed != 5) enemySpeed++;
                         }
                     }
@@ -665,10 +731,13 @@ namespace SpaceShooter
             scroll1.speed = 1;
             scroll2.speed = 1;
             player.health = 3;
+            player.speed = 5;
+            shootingSpeed = 4;
             actualScore = 0;
             _currentEnemyWave = EnemyWave.First;
             enemySpeed = 2;
             coinCount = 0;
+            missileTexture = currentBulletTexture;
         }
         private void Resume()
         {
