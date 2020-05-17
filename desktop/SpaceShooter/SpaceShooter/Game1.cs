@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 
@@ -62,6 +63,8 @@ namespace SpaceShooter
         Scrolling scroll1;
         Scrolling scroll2;
 
+        private Song menuSong,gameplaySong;
+
         enum GameState
         {
             MainMenu,
@@ -110,6 +113,11 @@ namespace SpaceShooter
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            menuSong = Content.Load<Song>("menuSong");
+            gameplaySong = Content.Load<Song>("gameplayMusic");
+
+            MediaPlayer.Play(menuSong);
 
             playerTexture = Content.Load<Texture2D>("SpaceShipSmall");
             spaceShipSkin2 = Content.Load<Texture2D>("SpaceShip2");
@@ -280,6 +288,9 @@ namespace SpaceShooter
                 if(startButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
                 {
                     startButton.unpress();
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(gameplaySong);
+                    MediaPlayer.IsRepeating = true;
                     _currentGameState = GameState.GamePlay;
                     RestartGame();
                 }
@@ -415,6 +426,8 @@ namespace SpaceShooter
             {
                 if (exitToMainMenuButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
                 {
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(menuSong);
                     exitToMainMenuButton.unpress();
                     isPausePressed = false;
                     _currentGameState = GameState.MainMenu;
@@ -636,6 +649,8 @@ namespace SpaceShooter
             {
                 if (returnToMainMenuButton.location.Contains(mousePoint) && mouseState.LeftButton == ButtonState.Released)
                 {
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(menuSong);
                     returnToMainMenuButton.unpress();
                     isPausePressed = false;
                     _currentGameState = GameState.MainMenu;
@@ -669,6 +684,8 @@ namespace SpaceShooter
         }
         private void DrawMainMenu(GameTime gameTime) {
             spriteBatch.Begin();
+            scroll1.Draw(spriteBatch);
+            scroll2.Draw(spriteBatch);
             spriteBatch.Draw(startButton.texture, startButton.location, Color.White);
             spriteBatch.Draw(skinsButton.texture, skinsButton.location, Color.White);
             spriteBatch.Draw(exitButton.texture, exitButton.location, Color.White);
@@ -710,8 +727,9 @@ namespace SpaceShooter
             spriteBatch.End();
         }
         private void DrawEndOfGame(GameTime gameTime) {
-            GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
+            scroll1.Draw(spriteBatch);
+            scroll2.Draw(spriteBatch);
             spriteBatch.DrawString(Font, "HIGHSCORE: " + actualScore.ToString(), new Vector2(200, 250), Color.White);
             spriteBatch.Draw(returnToMainMenuButton.texture, returnToMainMenuButton.location, Color.White);
             spriteBatch.Draw(restartEndOfGameButton.texture, restartEndOfGameButton.location, Color.White);
@@ -724,6 +742,8 @@ namespace SpaceShooter
             scroll2.speed = 0;
         }
         private void RestartGame() {
+            MediaPlayer.Stop();
+            MediaPlayer.Play(gameplaySong);
             player.playerLocation.X = screenCenterX - 25;
             missiles.Clear();
             enemies.Clear();

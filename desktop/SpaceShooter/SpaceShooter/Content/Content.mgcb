@@ -241,6 +241,12 @@
 /processorParam:TextureFormat=Color
 /build:buttonSkinsPressed.png
 
+#begin buttonSound.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:buttonSound.mp3
+
 #begin buttonUpgrades.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -343,6 +349,18 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:font.spritefont
+
+#begin gameplayMusic.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:gameplayMusic.mp3
+
+#begin menuSong.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:menuSong.mp3
 
 #begin movementSpeed.png
 /importer:TextureImporter

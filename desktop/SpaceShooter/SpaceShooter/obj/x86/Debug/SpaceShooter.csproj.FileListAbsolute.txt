@@ -76,3 +76,9 @@ C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShoot
 C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\piercing2.xnb
 C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\oneShotMissile.xnb
 C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\piercingMissile.xnb
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\menuSong.wma
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\menuSong.xnb
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\gameplayMusic.wma
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\gameplayMusic.xnb
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\buttonSound.wma
+C:\Users\Ryzen\source\repos\rafcyk\PZ2_2020_GR02\desktop\SpaceShooter\SpaceShooter\bin\Windows\x86\Debug\Content\buttonSound.xnb

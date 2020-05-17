@@ -23,6 +23,7 @@
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonResumePressed.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonSkins.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonSkinsPressed.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonSound.mp3</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonUpgrades.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonUpgradesPressed.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/Coin.png</File>
@@ -32,6 +33,8 @@
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/fireRate.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/fireRate2.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/font.spritefont</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/gameplayMusic.mp3</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/menuSong.mp3</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/movementSpeed.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/movementSpeed2.png</File>
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/oneShot.png</File>
@@ -62,6 +65,9 @@
     <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/startButtonPressed.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

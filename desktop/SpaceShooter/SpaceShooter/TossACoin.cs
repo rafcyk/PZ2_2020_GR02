@@ -22,13 +22,13 @@ namespace SpaceShooter
 
         public bool isNextReady()
         {
-            if (coinLocation.Y >= 20) return true;
+            if (coinLocation.Y >= 40) return true;
             else return false;
         }
 
         public void Update()
         {
-            coinLocation.Y += 2;
+            coinLocation.Y += 3;
             if (coinLocation.Y > 800) isDestroyed = true;
         }
     }  
