@@ -30,7 +30,6 @@ namespace SpaceShooter
         enum MenuState
         {
             Main,
-            Upgrades,
             Skins,
         }
 
@@ -49,20 +48,22 @@ namespace SpaceShooter
 
         #region Textures
         SpriteFont Font;
-        Texture2D startButtonTexture, startButtonPressedTexture, exitButtonTexture, exitButtonPressedTexture, upgradesButtonTexture, upgradesButtonPressedTexture, skinsButtonTexture, skinsButtonPressedTexture,
-            spaceShip1Texture, spaceShip2Texture, spaceShip3Texture, enemy1Texture, enemy2Texture, enemy3Texture, enemy4Texture, missileTexture, hearthTexture,
+        Texture2D startButtonTexture, startButtonPressedTexture, exitButtonTexture, exitButtonPressedTexture, skinsButtonTexture, skinsButtonPressedTexture,
+            spaceShip1Texture, spaceShip2Texture, spaceShip3Texture, spaceShip4Texture, spaceShip5Texture, enemy1Texture, enemy2Texture, enemy3Texture, enemy4Texture, selectedShipCover,
+            missile1Texture, missile2Texture, missile3Texture, missile4Texture, missile5Texture, heartTexture,
             pauseButtonTexture, pauseButtonPressedTexture, resumeButtonTexture, resumeButtonPressedTexture, pauseBackgroundTexture,
             restartButtonTexture, restartButtonPressedTexture, menuButtonTexture, menuButtonPressedTexture,
-            background1Texture, background2Texture;
+            background1Texture, background2Texture,
+            skillCheckBackgroundTexture, skillCheckPointerTexture,
+            skin1Texture, skin2Texture, skin3Texture, skin4Texture, skin5Texture, skin1PressedTexture, skin2PressedTexture, skin3PressedTexture, skin4PressedTexture, skin5PressedTexture, backButtonTexture, backButtonPressedTexture;
         #endregion
 
         #region player
         Player player;
         int fireRate = 250; // lower = faster, lowest = 32
-        int missileSpeed = 45; //higher = faster default = 20
         int enemySpeed = 2;
         double nextBlinkTime = 0;
-        int hearthBlinkLeft = 0;
+        int heartBlinkLeft = 0;
         #endregion
 
         #region Resolution scaling
@@ -73,7 +74,6 @@ namespace SpaceShooter
 
         #region controls
         List<Button> mainMenuButtons = new List<Button>();
-        List<Button> upgradesMenuButtons = new List<Button>();
         List<Button> skinsMenuButtons = new List<Button>();
         List<Missile> missiles = new List<Missile>();
         List<Enemy> enemies = new List<Enemy>();
@@ -93,15 +93,20 @@ namespace SpaceShooter
         int highScore;
         #endregion
 
+
         GameplayBackground gameplayBackground;
         MainMenuBackground mainMenuBackground;
         List<Texture2D> enemyTextures = new List<Texture2D>();
         List<Texture2D> shipTextures = new List<Texture2D>();
+        List<Texture2D> missileTextures = new List<Texture2D>();
 
+        SkillCheck skillCheck;
+        long nextSkilCheck;
         private Random r = new Random();
         bool newHighScore = false;
         bool newHighScoreVisible;
         int startTime = 0;
+        int selectedShip = 0;
         EnemyWave actualWave;
 
         public Game1(Window w1)
@@ -134,6 +139,8 @@ namespace SpaceShooter
             //load content
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            backButtonTexture = Content.Load<Texture2D>("backButton");
+            backButtonPressedTexture = Content.Load<Texture2D>("backButtonPressed");
             background1Texture = Content.Load<Texture2D>("background1");
             background2Texture = Content.Load<Texture2D>("background2");
             enemy1Texture = Content.Load<Texture2D>("enemy1");
@@ -142,10 +149,14 @@ namespace SpaceShooter
             enemy4Texture = Content.Load<Texture2D>("enemy4");
             exitButtonTexture = Content.Load<Texture2D>("exitButton");
             exitButtonPressedTexture = Content.Load<Texture2D>("exitButtonPressed");
-            hearthTexture = Content.Load<Texture2D>("hearth");
+            heartTexture = Content.Load<Texture2D>("heart");
             menuButtonTexture = Content.Load<Texture2D>("menuButton");
             menuButtonPressedTexture = Content.Load<Texture2D>("menuButtonPressed");
-            missileTexture = Content.Load<Texture2D>("missile");
+            missile1Texture = Content.Load<Texture2D>("missile1");
+            missile2Texture = Content.Load<Texture2D>("missile2");
+            missile3Texture = Content.Load<Texture2D>("missile3");
+            missile4Texture = Content.Load<Texture2D>("missile4");
+            missile5Texture = Content.Load<Texture2D>("missile5");
             pauseBackgroundTexture = Content.Load<Texture2D>("pauseBackground");
             pauseButtonTexture = Content.Load<Texture2D>("pauseButton");
             pauseButtonPressedTexture = Content.Load<Texture2D>("pauseButtonPressed");
@@ -153,33 +164,56 @@ namespace SpaceShooter
             restartButtonPressedTexture = Content.Load<Texture2D>("restartButtonPressed");
             resumeButtonTexture = Content.Load<Texture2D>("resumeButton");
             resumeButtonPressedTexture = Content.Load<Texture2D>("resumeButtonPressed");
+            selectedShipCover = Content.Load<Texture2D>("selectedShipCover");
+            skillCheckBackgroundTexture = Content.Load<Texture2D>("skillCheckBackground");
+            skillCheckPointerTexture = Content.Load<Texture2D>("skillCheckPointer");
+            skin1Texture = Content.Load<Texture2D>("skin1");
+            skin1PressedTexture = Content.Load<Texture2D>("skin1Pressed");
+            skin2Texture = Content.Load<Texture2D>("skin2");
+            skin2PressedTexture = Content.Load<Texture2D>("skin2Pressed");
+            skin3Texture = Content.Load<Texture2D>("skin3");
+            skin3PressedTexture = Content.Load<Texture2D>("skin3Pressed");
+            skin4Texture = Content.Load<Texture2D>("skin4");
+            skin4PressedTexture = Content.Load<Texture2D>("skin4Pressed");
+            skin5Texture = Content.Load<Texture2D>("skin5");
+            skin5PressedTexture = Content.Load<Texture2D>("skin5Pressed");
             skinsButtonTexture = Content.Load<Texture2D>("skinsButton");
             skinsButtonPressedTexture = Content.Load<Texture2D>("skinsButtonPressed");
             spaceShip1Texture = Content.Load<Texture2D>("spaceShip1");
             spaceShip2Texture = Content.Load<Texture2D>("spaceShip2");
             spaceShip3Texture = Content.Load<Texture2D>("spaceShip3");
+            spaceShip4Texture = Content.Load<Texture2D>("spaceShip4");
+            spaceShip5Texture = Content.Load<Texture2D>("spaceShip5");
             startButtonTexture = Content.Load<Texture2D>("startButton");
             startButtonPressedTexture = Content.Load<Texture2D>("startButtonPressed");
-            upgradesButtonTexture = Content.Load<Texture2D>("upgradesButton");
-            upgradesButtonPressedTexture = Content.Load<Texture2D>("upgradesButtonPressed");
 
             Font = Content.Load<SpriteFont>("pixel_f70");
 
-            //declare mainMenuButtons and background
-            mainMenuButtons.Add(new Button("start", startButtonTexture, startButtonPressedTexture, new Rectangle(100, 1000, 880, 260)));
-            mainMenuButtons.Add(new Button("upgrades", upgradesButtonTexture, upgradesButtonPressedTexture, new Rectangle(188, 1300, 704, 208)));
-            mainMenuButtons.Add(new Button("skins", skinsButtonTexture, skinsButtonPressedTexture, new Rectangle(188, 1548, 704, 208)));
-            mainMenuButtons.Add(new Button("exit", exitButtonTexture, exitButtonPressedTexture, new Rectangle(232, 1796, 616, 182)));
+            //declare main menu background
             mainMenuBackground = new MainMenuBackground(background1Texture);
+
+            //declare mainMenuButtons
+            mainMenuButtons.Add(new Button("start", startButtonTexture, startButtonPressedTexture, new Rectangle(100, 1000, 880, 260)));
+            mainMenuButtons.Add(new Button("skins", skinsButtonTexture, skinsButtonPressedTexture, new Rectangle(188, 1300, 704, 208)));
+            mainMenuButtons.Add(new Button("exit", exitButtonTexture, exitButtonPressedTexture, new Rectangle(232, 1548, 616, 182)));
+
+            //skins menu buttons
+            skinsMenuButtons.Add(new Button("back", backButtonTexture, backButtonPressedTexture, new Rectangle(100, 30, 270, 260)));
+            skinsMenuButtons.Add(new Button("skin1", skin1Texture, skin1PressedTexture, new Rectangle(0, 390, 1080, 290)));
+            skinsMenuButtons.Add(new Button("skin2", skin2Texture, skin2PressedTexture, new Rectangle(0, 780, 1080, 290)));
+            skinsMenuButtons.Add(new Button("skin3", skin3Texture, skin3PressedTexture, new Rectangle(0, 1170, 1080, 290)));
+            skinsMenuButtons.Add(new Button("skin4", skin4Texture, skin4PressedTexture, new Rectangle(0, 1560, 1080, 290)));
+            skinsMenuButtons.Add(new Button("skin5", skin5Texture, skin5PressedTexture, new Rectangle(0, 1950, 1080, 290)));
 
             //gameplay pause button and background
             pauseButton = new Button("pause", pauseButtonTexture, pauseButtonPressedTexture, new Rectangle(870, 18, 192, 192));
             gameplayBackground = new GameplayBackground(background1Texture, background2Texture);
 
-            //declare pauseMenuButtons
+            //pause menu buttons
             pauseMenuButtons.Add(new Button("resume", resumeButtonTexture, resumeButtonPressedTexture, new Rectangle(200, 1070, 680, 201)));
             pauseMenuButtons.Add(new Button("exit", exitButtonTexture, exitButtonPressedTexture, new Rectangle(200, 1321, 680, 201)));
 
+            //end of game screen buttons
             endOfGameButtons.Add(new Button("restart", restartButtonTexture, restartButtonPressedTexture, new Rectangle(100, 1100, 880, 260)));
             endOfGameButtons.Add(new Button("menu", menuButtonTexture, menuButtonPressedTexture, new Rectangle(216, 1400, 648, 192)));
 
@@ -187,6 +221,15 @@ namespace SpaceShooter
             shipTextures.Add(spaceShip1Texture);
             shipTextures.Add(spaceShip2Texture);
             shipTextures.Add(spaceShip3Texture);
+            shipTextures.Add(spaceShip4Texture);
+            shipTextures.Add(spaceShip5Texture);
+
+            //missiles textures list
+            missileTextures.Add(missile1Texture);
+            missileTextures.Add(missile2Texture);
+            missileTextures.Add(missile3Texture);
+            missileTextures.Add(missile4Texture);
+            missileTextures.Add(missile5Texture);
 
             //enemyTextures list
             enemyTextures.Add(enemy1Texture);
@@ -195,10 +238,14 @@ namespace SpaceShooter
             enemyTextures.Add(enemy4Texture);
             enemyTextures.Add(enemy2Texture);
 
-            //declare player
-            player = new Player(shipTextures[2], new Rectangle(390, 2040, 300, 300), hearthTexture);
+            //declare skillcheck
+            skillCheck = new SkillCheck(skillCheckBackgroundTexture, skillCheckPointerTexture);
 
+            //LoadSettings and highest score
             LoadSettings();
+
+            //declare player
+            player = new Player(shipTextures[selectedShip], new Rectangle(390, 2040, 300, 300), heartTexture, missileTextures[selectedShip]);
         }
 
         protected override void UnloadContent()
@@ -210,6 +257,7 @@ namespace SpaceShooter
         {
             base.Update(gameTime);
 
+            //hide navigation bar
             int uiOptions = (int)w1.DecorView.SystemUiVisibility;
 
             uiOptions |= (int)SystemUiFlags.LowProfile;
@@ -242,9 +290,6 @@ namespace SpaceShooter
                 case MenuState.Main:
                     UpdateMainMenu(deltaTime);
                     break;
-                case MenuState.Upgrades:
-                    UpdateUpgradesMenu(deltaTime);
-                    break;
                 case MenuState.Skins:
                     UpdateSkinsMenu(deltaTime);
                     break;
@@ -272,10 +317,6 @@ namespace SpaceShooter
                                     b.unpress();
                                     ResetGame(deltaTime);
                                     _gameState = GameState.GamePlay;
-                                    break;
-                                case "upgrades":
-                                    b.unpress();
-                                    _menuState = MenuState.Upgrades;
                                     break;
                                 case "skins":
                                     b.unpress();
@@ -305,58 +346,6 @@ namespace SpaceShooter
             }
         }
 
-        private void UpdateUpgradesMenu(GameTime deltaTime)
-        {
-            touchCollection = TouchPanel.GetState();
-
-            foreach (TouchLocation tl in touchCollection)
-            {
-                Vector2 position = new Vector2((int)tl.Position.X, (int)tl.Position.Y);
-                Vector2 touchPosition = Vector2.Transform(position, Matrix.Invert(matrix));
-
-                foreach (Button b in upgradesMenuButtons)
-                {
-                    if (b.isPressed)
-                    {
-                        if (tl.State == TouchLocationState.Released && b.location.Contains(touchPosition))
-                        {
-                            switch (b.Name)
-                            {
-                                case "start":
-                                    b.unpress();
-                                    ResetGame(deltaTime);
-                                    _gameState = GameState.GamePlay;
-                                    break;
-                                case "upgrades":
-                                    _menuState = MenuState.Upgrades;
-                                    break;
-                                case "skins":
-                                    _menuState = MenuState.Skins;
-                                    break;
-                                case "exit":
-                                    b.unpress();
-                                    Game.Activity.MoveTaskToBack(true);
-                                    break;
-                            }
-                        }
-                        else if (tl.State == TouchLocationState.Released) b.unpress();
-                    }
-                    else
-                    {
-                        if (b.location.Contains(touchPosition) && tl.State == TouchLocationState.Pressed)
-                        {
-                            b.press();
-                        }
-                    }
-                }
-            }
-
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-            {
-                _menuState = MenuState.Main;
-            }
-        }
-
         private void UpdateSkinsMenu(GameTime deltaTime)
         {
             touchCollection = TouchPanel.GetState();
@@ -374,22 +363,34 @@ namespace SpaceShooter
                         {
                             switch (b.Name)
                             {
-                                case "start":
+                                case "back":
                                     b.unpress();
-                                    ResetGame(deltaTime);
-                                    _gameState = GameState.GamePlay;
+                                    _menuState = MenuState.Main;
                                     break;
-                                case "upgrades":
-                                    _menuState = MenuState.Upgrades;
-                                    break;
-                                case "skins":
-                                    _menuState = MenuState.Skins;
-                                    break;
-                                case "exit":
+                                case "skin1":
                                     b.unpress();
-                                    Game.Activity.MoveTaskToBack(true);
+                                    selectedShip = 0;
+                                    break;
+                                case "skin2":
+                                    b.unpress();
+                                    selectedShip = 1;
+                                    break;
+                                case "skin3":
+                                    b.unpress();
+                                    selectedShip = 2;
+                                    break;
+                                case "skin4":
+                                    b.unpress();
+                                    selectedShip = 3;
+                                    break;
+                                case "skin5":
+                                    b.unpress();
+                                    selectedShip = 4;
                                     break;
                             }
+                            SaveSettings();
+                            player.texture = shipTextures[selectedShip];
+                            player.missileTexture = missileTextures[selectedShip];
                         }
                         else if (tl.State == TouchLocationState.Released) b.unpress();
                     }
@@ -456,13 +457,9 @@ namespace SpaceShooter
                     if (enemies[i].isDestroyed) enemies.RemoveAt(i);
                 }
 
-                //update background
-                gameplayBackground.Update();
-
                 //creating missiles
-                if (missiles.Count == 0) missiles.Add(new Missile(missileTexture, player.location.X, missileSpeed));
-                else if (missiles[missiles.Count - 1].isNextReady(fireRate)) missiles.Add(new Missile(missileTexture, player.location.X, missileSpeed));
-                foreach (Missile m in missiles) m.Update();
+                if (missiles.Count == 0) missiles.Add(new Missile(player.missileTexture, player.location.X, (int)(player.missileSpeed * skillCheck.multiplier)));
+                else if (missiles[missiles.Count - 1].isNextReady(fireRate)) missiles.Add(new Missile(player.missileTexture, player.location.X, (int)(player.missileSpeed * skillCheck.multiplier)));
 
                 //creating enemies
                 if (deltaTime.TotalGameTime.TotalSeconds > startTime)
@@ -471,13 +468,19 @@ namespace SpaceShooter
                     else if (enemies[enemies.Count - 1].isNextReady()) enemies.Add(new Enemy(enemyTextures, r.Next(4), enemySpeed, actualWave));
                 }
 
-                //updating enemies position and player health
+                if (deltaTime.TotalGameTime.TotalSeconds > nextSkilCheck)
+                {
+                    skillCheck.Run();
+                    nextSkilCheck = r.Next((int)deltaTime.TotalGameTime.TotalSeconds + 20, (int)deltaTime.TotalGameTime.TotalSeconds + 40);
+                }
+
+                //updateplayer health
                 foreach (Enemy e in enemies)
                 {
                     if (e.location.Y >= 2340 && !e.isDestroyed)
                     {
                         e.isDestroyed = true;
-                        hearthBlinkLeft += 10;
+                        heartBlinkLeft += 10;
                         if (player.Hit())
                         {
                             if (actualScore > highScore)
@@ -490,7 +493,6 @@ namespace SpaceShooter
                             _gameState = GameState.EndOfGame;
                         }
                     }
-                    e.Update();
                 }
 
                 //enemy-missile collision handling
@@ -510,54 +512,81 @@ namespace SpaceShooter
                     }
                 }
 
-                //hearths blinking
-                if (hearthBlinkLeft > 0)
+                //hearts blinking
+                if (heartBlinkLeft > 0)
                 {
                     if (deltaTime.TotalGameTime.TotalMilliseconds >= nextBlinkTime)
                     {
-                        player.hearthVisible = !player.hearthVisible;
+                        player.heartVisible = !player.heartVisible;
 
                         nextBlinkTime = deltaTime.TotalGameTime.TotalMilliseconds + 100;
-                        hearthBlinkLeft--;
+                        heartBlinkLeft--;
                     }
                 }
 
-                //controls / touch handling
-                touchCollection = TouchPanel.GetState();
-
-                foreach (TouchLocation tl in touchCollection)
+                if (skillCheck.isActive)
                 {
-                    Vector2 position = new Vector2((int)tl.Position.X, (int)tl.Position.Y);
-                    Vector2 touchPosition = Vector2.Transform(position, Matrix.Invert(matrix));
+                    //updating enemies, missiles and background position
+                    foreach (Enemy e in enemies) e.UpdateSlow();
+                    foreach (Missile m in missiles) m.UpdateSlow();
+                    gameplayBackground.UpdateSlow();
+                    skillCheck.Update(deltaTime);
 
-                    if (pauseButton.isPressed)
+                    if (!skillCheck.isPressed)
                     {
-                        if (tl.State == TouchLocationState.Released && pauseButton.location.Contains(touchPosition))
+                        touchCollection = TouchPanel.GetState();
+                        foreach (TouchLocation tl in touchCollection)
                         {
-                            pauseButton.unpress();
-                            _gameplayState = GameplayState.Paused;
+                            if (tl.State == TouchLocationState.Pressed) skillCheck.Press(deltaTime);
                         }
-                        else if (tl.State == TouchLocationState.Released) pauseButton.unpress();
                     }
-                    else
+                }
+                else
+                {
+                    //updating enemies, missiles and background position
+                    foreach (Enemy e in enemies) e.Update();
+                    foreach (Missile m in missiles) m.Update();
+                    gameplayBackground.Update();
+
+                    //controls / touch handling
+                    touchCollection = TouchPanel.GetState();
+
+                    foreach (TouchLocation tl in touchCollection)
                     {
-                        if (pauseButton.location.Contains(touchPosition) && tl.State == TouchLocationState.Pressed)
+                        Vector2 position = new Vector2((int)tl.Position.X, (int)tl.Position.Y);
+                        Vector2 touchPosition = Vector2.Transform(position, Matrix.Invert(matrix));
+
+                        if (pauseButton.isPressed)
                         {
-                            pauseButton.press();
+                            if (tl.State == TouchLocationState.Released && pauseButton.location.Contains(touchPosition))
+                            {
+                                pauseButton.unpress();
+                                _gameplayState = GameplayState.Paused;
+                            }
+                            else if (tl.State == TouchLocationState.Released) pauseButton.unpress();
                         }
                         else
                         {
-                            if (touchPosition.X < 150) player.location.X = 0;
-                            else if (touchPosition.X > 930) player.location.X = 780;
-                            else player.location.X = (int)touchPosition.X - 150;
+                            if (pauseButton.location.Contains(touchPosition) && tl.State == TouchLocationState.Pressed)
+                            {
+                                pauseButton.press();
+                            }
+                            else
+                            {
+                                //player ship controls
+                                if (touchPosition.X < 150) player.location.X = 0;
+                                else if (touchPosition.X > 930) player.location.X = 780;
+                                else player.location.X = (int)touchPosition.X - 150;
+                            }
                         }
+
                     }
 
-                }
-
-                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                {
-                    _gameplayState = GameplayState.Paused;
+                    //pressing Android back button
+                    if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+                    {
+                        _gameplayState = GameplayState.Paused;
+                    }
                 }
             }
             //game paused
@@ -687,9 +716,6 @@ namespace SpaceShooter
                 case MenuState.Main:
                     DrawMainMenu(gameTime);
                     break;
-                case MenuState.Upgrades:
-                    DrawUpgradesMenu(gameTime);
-                    break;
                 case MenuState.Skins:
                     DrawSkinsMenu(gameTime);
                     break;
@@ -710,14 +736,19 @@ namespace SpaceShooter
             }
         }
 
-        private void DrawUpgradesMenu(GameTime gameTime)
-        {
-
-        }
-
         private void DrawSkinsMenu(GameTime gameTime)
         {
+            //drawing top skins texture
+            spriteBatch.Draw(skinsButtonTexture, new Rectangle(100, 30, 880, 260), Color.White);
 
+            //drawing buttons
+            foreach (Button b in skinsMenuButtons)
+            {
+                b.Draw(spriteBatch);
+            }
+
+            //drawing selected ship cover
+            spriteBatch.Draw(selectedShipCover, new Rectangle(0, 390 + (390 * selectedShip), 1080, 290), Color.White);
         }
 
         private void DrawGameplay(GameTime gametime)
@@ -740,7 +771,7 @@ namespace SpaceShooter
             }
 
             //drawing player health
-            player.DrawHearths(spriteBatch);
+            player.DrawHearts(spriteBatch);
 
             //drawing score
             spriteBatch.DrawString(Font, "SCORE: " + actualScore.ToString(), new Vector2(310, 18), Color.White);
@@ -748,11 +779,9 @@ namespace SpaceShooter
             //drawing player's space ship
             player.Draw(spriteBatch);
 
-            //drawing pause button when game is unpaused
+            //drawing pause button if unpaused / pause menu if paused
             if (_gameplayState == GameplayState.Unpaused) pauseButton.Draw(spriteBatch);
-
-            //drawing pause menu when game is paused
-            if (_gameplayState == GameplayState.Paused)
+            else if (_gameplayState == GameplayState.Paused)
             {
                 spriteBatch.Draw(pauseBackgroundTexture, new Rectangle(100, 730, 880, 880), Color.White);
 
@@ -761,6 +790,8 @@ namespace SpaceShooter
                     b.Draw(spriteBatch);
                 }
             }
+
+            if (skillCheck.isActive) skillCheck.Draw(spriteBatch, Font);
 
             spriteBatch.End();
         }
@@ -799,6 +830,10 @@ namespace SpaceShooter
             enemySpeed = 2;
             fireRate = 250;
             startTime = (int)deltaTime.TotalGameTime.TotalSeconds + 3;
+            skillCheck.isActive = false;
+            skillCheck.isPressed = false;
+            skillCheck.multiplier = 1;
+            nextSkilCheck = r.Next((int)deltaTime.TotalGameTime.TotalSeconds + 20, (int)deltaTime.TotalGameTime.TotalSeconds + 40);
         }
 
         private void SaveSettings()
@@ -810,7 +845,7 @@ namespace SpaceShooter
             {
                 using (var streamWriter = new StreamWriter(filename, false))
                 {
-                    streamWriter.Write(highScore.ToString());
+                    streamWriter.Write(highScore.ToString() + ";" + selectedShip.ToString());
                 }
             }
             catch { }
@@ -825,12 +860,15 @@ namespace SpaceShooter
                 using (var streamReader = new StreamReader(filename))
                 {
                     string content = streamReader.ReadToEnd();
-                    highScore = Int32.Parse(content);
+                    string[] parm = content.Split(';');
+                    highScore = Int32.Parse(parm[0]);
+                    selectedShip = Int32.Parse(parm[1]);
                 }
             }
             catch
             {
                 highScore = 0;
+                selectedShip = 0;
             }
         }
     }

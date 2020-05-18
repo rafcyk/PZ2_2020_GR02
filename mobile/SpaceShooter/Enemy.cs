@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
@@ -59,7 +58,11 @@ namespace SpaceShooter
             if (location.Y <= 2500) location.Y += speed;
             else isDestroyed = true;
         }
-
+        public void UpdateSlow()
+        {
+            if (location.Y <= 2500) location.Y += 1;
+            else isDestroyed = true;
+        }
         public bool isNextReady()
         {
             if (location.Y >= 50) return true;

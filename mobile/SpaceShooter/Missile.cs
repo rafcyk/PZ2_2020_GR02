@@ -22,7 +22,11 @@ namespace SpaceShooter
             if (location.Y >= -100) location.Y -= speed;
             else isDestroyed = true;
         }
-
+        public void UpdateSlow()
+        {
+            if (location.Y >= -100) location.Y -= 1;
+            else isDestroyed = true;
+        }
         public bool isNextReady(int rate)
         {
             if (location.Y <= 2240 - rate) return true;
