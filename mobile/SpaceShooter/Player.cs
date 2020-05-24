@@ -9,7 +9,7 @@ namespace SpaceShooter
         public Texture2D texture;
         public Texture2D heartTexture;
         public Texture2D missileTexture;
-        public int health = 3, coins, missileSpeed = 10;
+        public int health = 3, missileSpeed = 10;
         public bool heartVisible = true;
         public Rectangle location;
 

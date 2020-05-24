@@ -133,6 +133,12 @@
 /processorParam:TextureFormat=Color
 /build:exitButtonPressed.png
 
+#begin gameplayMusic.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:gameplayMusic.mp3
+
 #begin heart.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -168,6 +174,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:menuButtonPressed.png
+
+#begin menuSong.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:menuSong.mp3
 
 #begin missile1.png
 /importer:TextureImporter
@@ -499,6 +511,54 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:skinsButtonPressed.png
+
+#begin soundOffButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:soundOffButton.png
+
+#begin soundOffButtonPressed.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:soundOffButtonPressed.png
+
+#begin soundOnButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:soundOnButton.png
+
+#begin soundOnButtonPressed.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:soundOnButtonPressed.png
 
 #begin spaceShip1.png
 /importer:TextureImporter

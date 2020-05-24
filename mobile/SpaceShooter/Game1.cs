@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System;
 using Android.Views;
+using Microsoft.Xna.Framework.Media;
 
 
 namespace SpaceShooter
@@ -24,13 +25,13 @@ namespace SpaceShooter
         {
             Menu,
             GamePlay,
-            EndOfGame,
         }
 
         enum MenuState
         {
             Main,
             Skins,
+            EndOfGame,
         }
 
         enum GameplayState
@@ -93,12 +94,14 @@ namespace SpaceShooter
         int highScore;
         #endregion
 
-
+        #region songs, backgrounds, list of textures
+        Song menuSong, gamePlayMusic;
         GameplayBackground gameplayBackground;
         MainMenuBackground mainMenuBackground;
         List<Texture2D> enemyTextures = new List<Texture2D>();
         List<Texture2D> shipTextures = new List<Texture2D>();
         List<Texture2D> missileTextures = new List<Texture2D>();
+        #endregion
 
         SkillCheck skillCheck;
         long nextSkilCheck;
@@ -108,6 +111,7 @@ namespace SpaceShooter
         int startTime = 0;
         int selectedShip = 0;
         EnemyWave actualWave;
+        bool songOn = true;
 
         public Game1(Window w1)
         {
@@ -132,6 +136,7 @@ namespace SpaceShooter
         protected override void Initialize()
         {
             base.Initialize();
+            MediaPlayer.IsRepeating = true;
         }
 
         protected override void LoadContent()
@@ -188,6 +193,9 @@ namespace SpaceShooter
             startButtonPressedTexture = Content.Load<Texture2D>("startButtonPressed");
 
             Font = Content.Load<SpriteFont>("pixel_f70");
+
+            menuSong = Content.Load<Song>("menuSong");
+            gamePlayMusic = Content.Load<Song>("gameplayMusic");
 
             //declare main menu background
             mainMenuBackground = new MainMenuBackground(background1Texture);
@@ -246,6 +254,8 @@ namespace SpaceShooter
 
             //declare player
             player = new Player(shipTextures[selectedShip], new Rectangle(390, 2040, 300, 300), heartTexture, missileTextures[selectedShip]);
+
+            PlaySong();
         }
 
         protected override void UnloadContent()
@@ -275,9 +285,6 @@ namespace SpaceShooter
                 case GameState.GamePlay:
                     UpdateGameplay(gameTime);
                     break;
-                case GameState.EndOfGame:
-                    UpdateEndOfGame(gameTime);
-                    break;
             }
         }
 
@@ -292,6 +299,9 @@ namespace SpaceShooter
                     break;
                 case MenuState.Skins:
                     UpdateSkinsMenu(deltaTime);
+                    break;
+                case MenuState.EndOfGame:
+                    UpdateEndOfGame(deltaTime);
                     break;
             }
         }
@@ -317,6 +327,7 @@ namespace SpaceShooter
                                     b.unpress();
                                     ResetGame(deltaTime);
                                     _gameState = GameState.GamePlay;
+                                    PlaySong();
                                     break;
                                 case "skins":
                                     b.unpress();
@@ -490,7 +501,10 @@ namespace SpaceShooter
                                 SaveSettings();
                             }
                             else newHighScore = false;
-                            _gameState = GameState.EndOfGame;
+                            _gameState = GameState.Menu;
+                            _menuState = MenuState.EndOfGame;
+
+                            PlaySong();
                         }
                     }
                 }
@@ -614,6 +628,7 @@ namespace SpaceShooter
                                     case "exit":
                                         b.unpress();
                                         _gameState = GameState.Menu;
+                                        PlaySong();
                                         break;
                                 }
                             }
@@ -665,10 +680,11 @@ namespace SpaceShooter
                                     ResetGame(deltaTime);
                                     _gameplayState = GameplayState.Unpaused;
                                     _gameState = GameState.GamePlay;
+                                    PlaySong();
                                     break;
                                 case "menu":
                                     b.unpress();
-                                    _gameState = GameState.Menu;
+                                    _menuState = MenuState.Main;
                                     break;
                             }
                         }
@@ -699,9 +715,6 @@ namespace SpaceShooter
                 case GameState.GamePlay:
                     DrawGameplay(gameTime);
                     break;
-                case GameState.EndOfGame:
-                    DrawEndOfGame(gameTime);
-                    break;
             }
         }
         private void DrawMenu(GameTime gameTime)
@@ -718,6 +731,9 @@ namespace SpaceShooter
                     break;
                 case MenuState.Skins:
                     DrawSkinsMenu(gameTime);
+                    break;
+                case MenuState.EndOfGame:
+                    DrawEndOfGame(gameTime);
                     break;
             }
 
@@ -798,8 +814,6 @@ namespace SpaceShooter
 
         private void DrawEndOfGame(GameTime gameTime)
         {
-            spriteBatch.Begin(transformMatrix: matrix);
-
             //drawing background
             mainMenuBackground.Draw(spriteBatch);
 
@@ -814,8 +828,6 @@ namespace SpaceShooter
             {
                 b.Draw(spriteBatch);
             }
-
-            spriteBatch.End();
         }
 
         private void ResetGame(GameTime deltaTime)
@@ -869,6 +881,27 @@ namespace SpaceShooter
             {
                 highScore = 0;
                 selectedShip = 0;
+            }
+        }
+        private void PlaySong()
+        {
+            if (songOn)
+            {
+                switch (_gameState)
+                {
+                    case GameState.Menu:
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(menuSong);
+                        break;
+                    case GameState.GamePlay:
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(gamePlayMusic);
+                        break;
+                }
+            }
+            else
+            {
+                if (MediaPlayer.State == MediaState.Playing) MediaPlayer.Stop();
             }
         }
     }

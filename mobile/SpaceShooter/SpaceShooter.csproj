@@ -144,6 +144,10 @@
     <Content Include="Content\skin5Pressed.png" />
     <Content Include="Content\skinsButton.png" />
     <Content Include="Content\skinsButtonPressed.png" />
+    <Content Include="Content\soundOffButton.png" />
+    <Content Include="Content\soundOffButtonPressed.png" />
+    <Content Include="Content\soundOnButton.png" />
+    <Content Include="Content\soundOnButtonPressed.png" />
     <Content Include="Content\spaceShip1.png" />
     <Content Include="Content\spaceShip2.png" />
     <Content Include="Content\spaceShip3.png" />
