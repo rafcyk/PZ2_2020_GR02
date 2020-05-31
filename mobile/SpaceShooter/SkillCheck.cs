@@ -11,6 +11,7 @@ namespace SpaceShooter
         public bool isActive = false, isPressed = false;
         private double i, difficulty = 0.05;
         public double multiplier = 1;
+        public int damage = 25;
         long finishTime;
         string result;
 
@@ -44,11 +45,12 @@ namespace SpaceShooter
                     i += difficulty;
                     if (i > 3 * Math.PI)
                     {
-                        multiplier -= 0.1;
+                        multiplier -= 0.05;
                         isPressed = true;
                         finishTime = (int)deltaTime.TotalGameTime.TotalSeconds + 1;
                         result = "TOO SLOW!";
-                        difficulty += 0.01;
+                        difficulty += 0.0075;
+                        damage -= 2;
                     }
                 }
             }
@@ -59,6 +61,8 @@ namespace SpaceShooter
         {
             if (isPressed)
             {
+                spriteBatch.Draw(backgroundTexture, location, Color.White);
+                spriteBatch.Draw(pointerTexture, pointerLocation, Color.White);
                 spriteBatch.DrawString(font, result, new Vector2(location.X, location.Y), Color.White);
             }
             else
@@ -71,7 +75,7 @@ namespace SpaceShooter
         {
             if (i > 2 * Math.PI)
             {
-                difficulty += 0.01;
+                difficulty += 0.0075;
                 isPressed = true;
                 finishTime = (int)deltaTime.TotalGameTime.TotalSeconds + 1;
 
@@ -82,17 +86,19 @@ namespace SpaceShooter
                 else if (i < 2.75 * Math.PI)
                 {
                     result = "NOT BAD!";
-                    multiplier += 0.1;
+                    multiplier += 0.05;
                 }
-                else if (i < 2.9 * Math.PI)
+                else if (i < 2.93 * Math.PI)
                 {
                     result = "GOOD!";
-                    multiplier += 0.15;
+                    multiplier += 0.1;
+                    damage += 5;
                 }
                 else if (i < 3 * Math.PI)
                 {
                     result = "PERFECT!";
-                    multiplier += 0.3;
+                    multiplier += 0.2;
+                    damage += 10;
                 }
             }
         }

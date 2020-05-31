@@ -49,7 +49,7 @@ namespace SpaceShooter
 
         #region Textures
         SpriteFont Font;
-        Texture2D startButtonTexture, startButtonPressedTexture, exitButtonTexture, exitButtonPressedTexture, skinsButtonTexture, skinsButtonPressedTexture,
+        Texture2D startButtonTexture, startButtonPressedTexture, exitButtonTexture, exitButtonPressedTexture, skinsButtonTexture, skinsButtonPressedTexture, soundOnButtonTexture, soundOnButtonPressedTexture, soundOffButtonTexture, soundOffButtonPressedTexture,
             spaceShip1Texture, spaceShip2Texture, spaceShip3Texture, spaceShip4Texture, spaceShip5Texture, enemy1Texture, enemy2Texture, enemy3Texture, enemy4Texture, selectedShipCover,
             missile1Texture, missile2Texture, missile3Texture, missile4Texture, missile5Texture, heartTexture,
             pauseButtonTexture, pauseButtonPressedTexture, resumeButtonTexture, resumeButtonPressedTexture, pauseBackgroundTexture,
@@ -111,7 +111,7 @@ namespace SpaceShooter
         int startTime = 0;
         int selectedShip = 0;
         EnemyWave actualWave;
-        bool songOn = true;
+        bool soundOn = true;
 
         public Game1(Window w1)
         {
@@ -184,6 +184,10 @@ namespace SpaceShooter
             skin5PressedTexture = Content.Load<Texture2D>("skin5Pressed");
             skinsButtonTexture = Content.Load<Texture2D>("skinsButton");
             skinsButtonPressedTexture = Content.Load<Texture2D>("skinsButtonPressed");
+            soundOffButtonTexture = Content.Load<Texture2D>("soundOffButton");
+            soundOffButtonPressedTexture = Content.Load<Texture2D>("soundOffButtonPressed");
+            soundOnButtonTexture = Content.Load<Texture2D>("soundOnButton");
+            soundOnButtonPressedTexture = Content.Load<Texture2D>("soundOnButtonPressed");
             spaceShip1Texture = Content.Load<Texture2D>("spaceShip1");
             spaceShip2Texture = Content.Load<Texture2D>("spaceShip2");
             spaceShip3Texture = Content.Load<Texture2D>("spaceShip3");
@@ -204,6 +208,7 @@ namespace SpaceShooter
             mainMenuButtons.Add(new Button("start", startButtonTexture, startButtonPressedTexture, new Rectangle(100, 1000, 880, 260)));
             mainMenuButtons.Add(new Button("skins", skinsButtonTexture, skinsButtonPressedTexture, new Rectangle(188, 1300, 704, 208)));
             mainMenuButtons.Add(new Button("exit", exitButtonTexture, exitButtonPressedTexture, new Rectangle(232, 1548, 616, 182)));
+            mainMenuButtons.Add(new Button("sound", soundOnButtonTexture, soundOnButtonPressedTexture, new Rectangle(870, 18, 192, 192)));
 
             //skins menu buttons
             skinsMenuButtons.Add(new Button("back", backButtonTexture, backButtonPressedTexture, new Rectangle(100, 30, 270, 260)));
@@ -244,7 +249,7 @@ namespace SpaceShooter
             enemyTextures.Add(enemy2Texture);
             enemyTextures.Add(enemy3Texture);
             enemyTextures.Add(enemy4Texture);
-            enemyTextures.Add(enemy2Texture);
+            enemyTextures.Add(enemy4Texture);
 
             //declare skillcheck
             skillCheck = new SkillCheck(skillCheckBackgroundTexture, skillCheckPointerTexture);
@@ -336,6 +341,22 @@ namespace SpaceShooter
                                 case "exit":
                                     b.unpress();
                                     Game.Activity.MoveTaskToBack(true);
+                                    break;
+                                case "sound":
+                                    soundOn = !soundOn;
+                                    if (soundOn)
+                                    {
+                                        mainMenuButtons[3].mainTexture = soundOnButtonTexture;
+                                        mainMenuButtons[3].pressedTexture = soundOnButtonPressedTexture;
+                                    }
+                                    else
+                                    {
+                                        mainMenuButtons[3].mainTexture = soundOffButtonTexture;
+                                        mainMenuButtons[3].pressedTexture = soundOffButtonPressedTexture;
+                                    }
+                                    b.unpress();
+                                    SaveSettings();
+                                    PlaySong();
                                     break;
                             }
                         }
@@ -516,7 +537,7 @@ namespace SpaceShooter
                     {
                         if (e.location.Contains(new Point(m.location.X + 8, m.location.Y + 135)) && !(e.isDestroyed || m.isDestroyed))
                         {
-                            if (e.Hit(25))
+                            if (e.Hit(skillCheck.damage))
                             {
                                 actualScore++;
                                 if (actualScore % 5 == 0) enemySpeed++;
@@ -845,6 +866,7 @@ namespace SpaceShooter
             skillCheck.isActive = false;
             skillCheck.isPressed = false;
             skillCheck.multiplier = 1;
+            skillCheck.damage = 25;
             nextSkilCheck = r.Next((int)deltaTime.TotalGameTime.TotalSeconds + 20, (int)deltaTime.TotalGameTime.TotalSeconds + 40);
         }
 
@@ -852,12 +874,16 @@ namespace SpaceShooter
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             string filename = Path.Combine(path, "settings.bin");
+            int song;
+
+            if (soundOn) song = 1;
+            else song = 0;
 
             try
             {
                 using (var streamWriter = new StreamWriter(filename, false))
                 {
-                    streamWriter.Write(highScore.ToString() + ";" + selectedShip.ToString());
+                    streamWriter.Write(highScore.ToString() + ";" + selectedShip.ToString() + ";" + song.ToString()); ;
                 }
             }
             catch { }
@@ -875,6 +901,14 @@ namespace SpaceShooter
                     string[] parm = content.Split(';');
                     highScore = Int32.Parse(parm[0]);
                     selectedShip = Int32.Parse(parm[1]);
+                    if (Int32.Parse(parm[2]) == 1) soundOn = true;
+                    else if (Int32.Parse(parm[2]) == 0)
+                    {
+                        soundOn = false;
+                        mainMenuButtons[3].texture = soundOffButtonTexture;
+                        mainMenuButtons[3].mainTexture = soundOffButtonTexture;
+                        mainMenuButtons[3].pressedTexture = soundOffButtonPressedTexture;
+                    }
                 }
             }
             catch
@@ -885,7 +919,7 @@ namespace SpaceShooter
         }
         private void PlaySong()
         {
-            if (songOn)
+            if (soundOn)
             {
                 switch (_gameState)
                 {
