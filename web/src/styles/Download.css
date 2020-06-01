@@ -11,7 +11,7 @@
     background-color: rgba(0, 0, 0, .3);
 }
 
-.download .wrapButtons button{
+.download .wrapButtons a{
     width:300px;
     height: 100px;
     font-size: 4.5rem;
@@ -22,6 +22,10 @@
     border-radius: 10px;
     transition: .2s;
     text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 
 .wrapButtons{
@@ -45,7 +49,7 @@
     background-color: rgb(29, 68, 197);
 }
 
-.download button:hover{
+.download a:hover{
     font-size: 3.5rem;
     opacity: .8;
 }
@@ -55,7 +59,7 @@
         width: 80%;
     }
     
-    .download .wrapButtons button{
+    .download .wrapButtons a{
         width:280px;
         height: 90px;
         font-size: 4.2rem;
@@ -67,7 +71,7 @@
         font-size: 4.5rem;
     }
     
-    .download button:hover{
+    .download a:hover{
         font-size: 3.2rem;
         opacity: .8;
     }
@@ -80,7 +84,7 @@
 
 
     
-    .download .wrapButtons button{
+    .download .wrapButtons a{
         width:250px;
         height: 80px;
         font-size: 3.6rem;
@@ -92,7 +96,7 @@
         font-size: 4.5rem;
     }
     
-    .download button:hover{
+    .download a:hover{
         font-size: 2.3rem;
         opacity: .8;
     }
@@ -100,7 +104,7 @@
 
 @media screen and (max-width:700px){
 
-    .download .wrapButtons button{
+    .download .wrapButtons a{
         margin-top: 20px;
     }
     
@@ -115,7 +119,7 @@
 }
 
 @media screen and (max-width:500px){
-    .download .wrapButtons button{
+    .download .wrapButtons a{
         width:280px;
         height: 80px;
         font-size: 3.6rem;
@@ -128,14 +132,14 @@
         font-size: 4.5rem;
     }
     
-    .download button:hover{
+    .download a:hover{
         font-size: 2.3rem;
         opacity: .8;
     }
 }
 
 @media screen and (max-width:370px){
-    .download .wrapButtons button{
+    .download .wrapButtons a{
         width:280px;
         height: 80px;
         font-size: 3.6rem;
@@ -147,7 +151,7 @@
         font-size: 4.5rem;
     }
     
-    .download button:hover{
+    .download a:hover{
         font-size: 2.3rem;
         opacity: .8;
     }
@@ -155,7 +159,7 @@
 
 @media screen and (max-width:330px){
 
-    .download .wrapButtons button{
+    .download .wrapButtons a{
         width:260px;
         height: 60px;
         font-size: 3rem;
