@@ -5,7 +5,7 @@ const Promo = () => {
     return(
         <section className = 'promo'>
             <div className="wrapPromo">
-                <h2>Tu będzie film promocyjny</h2>
+            <iframe width="80%" height="80%" src="https://www.youtube.com/embed/CPtQGRv7ySo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </section>
     )
