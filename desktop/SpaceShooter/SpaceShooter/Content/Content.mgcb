@@ -241,12 +241,6 @@
 /processorParam:TextureFormat=Color
 /build:buttonSkinsPressed.png
 
-#begin buttonSound.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:buttonSound.mp3
-
 #begin buttonUpgrades.png
 /importer:TextureImporter
 /processor:TextureProcessor

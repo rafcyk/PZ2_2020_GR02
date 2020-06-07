@@ -82,6 +82,7 @@ namespace SpaceShooter
         private int enemySpeed = 2;
         private int coinCount = 0;
         private int fireRate = 150;
+        private bool isSpeedUpReady = true;
 
         List<Missile> missiles = new List<Missile>();
         List<Enemy> enemies = new List<Enemy>();
@@ -534,6 +535,15 @@ namespace SpaceShooter
                     _currentEnemyWave = EnemyWave.Fifth;
                     enemySpeed = 2;
                 }
+                else if (actualScore > 500 && actualScore % 40 == 0 && isSpeedUpReady == true) {
+                    enemySpeed++;
+                    isSpeedUpReady = false;
+                }
+                else if (actualScore > 500 && actualScore % 40 != 0 )
+                {
+                    isSpeedUpReady = true;
+                }
+
                 //drawing missiles
                 if (missiles.Count == 0)
                 {
@@ -744,6 +754,7 @@ namespace SpaceShooter
         private void RestartGame() {
             MediaPlayer.Stop();
             MediaPlayer.Play(gameplaySong);
+            MediaPlayer.IsRepeating = true;
             player.playerLocation.X = screenCenterX - 25;
             missiles.Clear();
             enemies.Clear();
