@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/PZ2_2020_GR02/static/css/main.e556b6da.chunk.css",
-    "main.js": "/PZ2_2020_GR02/static/js/main.8d274fc2.chunk.js",
-    "main.js.map": "/PZ2_2020_GR02/static/js/main.8d274fc2.chunk.js.map",
+    "main.js": "/PZ2_2020_GR02/static/js/main.3709e843.chunk.js",
+    "main.js.map": "/PZ2_2020_GR02/static/js/main.3709e843.chunk.js.map",
     "runtime-main.js": "/PZ2_2020_GR02/static/js/runtime-main.58ad2a14.js",
     "runtime-main.js.map": "/PZ2_2020_GR02/static/js/runtime-main.58ad2a14.js.map",
     "static/js/2.a2dc2f5a.chunk.js": "/PZ2_2020_GR02/static/js/2.a2dc2f5a.chunk.js",
     "static/js/2.a2dc2f5a.chunk.js.map": "/PZ2_2020_GR02/static/js/2.a2dc2f5a.chunk.js.map",
     "index.html": "/PZ2_2020_GR02/index.html",
-    "precache-manifest.165292bda50cdb32276a1c93052c596b.js": "/PZ2_2020_GR02/precache-manifest.165292bda50cdb32276a1c93052c596b.js",
+    "precache-manifest.fd1e55af5d30cd28df46a30419090f0a.js": "/PZ2_2020_GR02/precache-manifest.fd1e55af5d30cd28df46a30419090f0a.js",
     "service-worker.js": "/PZ2_2020_GR02/service-worker.js",
     "static/css/main.e556b6da.chunk.css.map": "/PZ2_2020_GR02/static/css/main.e556b6da.chunk.css.map",
     "static/js/2.a2dc2f5a.chunk.js.LICENSE.txt": "/PZ2_2020_GR02/static/js/2.a2dc2f5a.chunk.js.LICENSE.txt",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.58ad2a14.js",
     "static/js/2.a2dc2f5a.chunk.js",
     "static/css/main.e556b6da.chunk.css",
-    "static/js/main.8d274fc2.chunk.js"
+    "static/js/main.3709e843.chunk.js"
   ]
 }
