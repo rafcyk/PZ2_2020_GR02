@@ -25,6 +25,14 @@ namespace SpaceShooter
             if (location2.Y + 5 < 2340) location2.Y += 5;
             else location2.Y = -2340;
         }
+        public void UpdateSlow()
+        {
+            if (location1.Y + 5 < 2340) location1.Y += 1;
+            else location1.Y = -2340;
+
+            if (location2.Y + 5 < 2340) location2.Y += 1;
+            else location2.Y = -2340;
+        }
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture1, location1, Color.White);

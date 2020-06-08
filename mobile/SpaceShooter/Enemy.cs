@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using System;
 
 namespace SpaceShooter
 {
@@ -13,32 +13,34 @@ namespace SpaceShooter
         public bool isDestroyed = false;
         public Enemy(List<Texture2D> textures, int column, int speed, EnemyWave actualWave)
         {
-            int x = 0;
+            int x = 0, i = 0;
             this.speed = speed;
-
+            Random r = new Random();
             switch (actualWave)
             {
                 case EnemyWave.First:
                     health = 25;
-                    texture = textures[0];
+                    i = 0;
                     break;
                 case EnemyWave.Second:
                     health = 50;
-                    texture = textures[1];
+                    i = r.Next(0, 2);
                     break;
                 case EnemyWave.Third:
                     health = 75;
-                    texture = textures[2];
+                    i = r.Next(0, 3);
                     break;
                 case EnemyWave.Fourth:
                     health = 100;
-                    texture = textures[3];
+                    i = r.Next(0, 4);
                     break;
                 case EnemyWave.Fifth:
                     health = 125;
-                    texture = textures[4];
+                    i = r.Next(0, 5);
                     break;
             }
+
+            texture = textures[i];
 
             switch (column)
             {
@@ -59,7 +61,11 @@ namespace SpaceShooter
             if (location.Y <= 2500) location.Y += speed;
             else isDestroyed = true;
         }
-
+        public void UpdateSlow()
+        {
+            if (location.Y <= 2500) location.Y += 1;
+            else isDestroyed = true;
+        }
         public bool isNextReady()
         {
             if (location.Y >= 50) return true;

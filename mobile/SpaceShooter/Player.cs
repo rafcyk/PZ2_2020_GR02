@@ -7,16 +7,17 @@ namespace SpaceShooter
     class Player
     {
         public Texture2D texture;
-        public Texture2D hearthTexture;
-        public int health = 3;
-        public bool hearthVisible = true;
+        public Texture2D heartTexture;
+        public Texture2D missileTexture;
+        public int health = 3, missileSpeed = 10;
+        public bool heartVisible = true;
         public Rectangle location;
-        public int coins;
 
-        public Player(Texture2D texture, Rectangle location, Texture2D hearthTexture)
+        public Player(Texture2D texture, Rectangle location, Texture2D heartTexture, Texture2D missileTexture)
         {
-            this.hearthTexture = hearthTexture;
+            this.heartTexture = heartTexture;
             this.texture = texture;
+            this.missileTexture = missileTexture;
             this.location = location;
         }
 
@@ -32,13 +33,13 @@ namespace SpaceShooter
             spriteBatch.Draw(texture, location, Color.White);
         }
 
-        public void DrawHearths(SpriteBatch spriteBatch)
+        public void DrawHearts(SpriteBatch spriteBatch)
         {
-            if (hearthVisible)
+            if (heartVisible)
             {
                 for (int i = 0; i < health; i++)
                 {
-                    spriteBatch.Draw(hearthTexture, new Rectangle(18 + i * 50, 50, 150, 128), Color.White);
+                    spriteBatch.Draw(heartTexture, new Rectangle(18 + i * 50, 50, 150, 128), Color.White);
                 }
             }
         }
