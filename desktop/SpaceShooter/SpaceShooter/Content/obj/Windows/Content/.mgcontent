@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/AlienShips1.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/AlienShips2.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/AlienShips3.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/AlienShips4.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/AlienShips5.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/backgroundTexture1.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/bulletShip1.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/bulletShip2.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/bulletShip3.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/bulletShip4.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/bulletShip5.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonMainMenu.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonMainMenuPressed.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonRestart.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonRestartPressed.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonResume.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonResumePressed.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonSkins.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonSkinsPressed.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonUpgrades.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/buttonUpgradesPressed.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/Coin.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/coinBackground.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/exitButton.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/exitButtonPressed.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/fireRate.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/fireRate2.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/font.spritefont</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/gameplayMusic.mp3</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/menuSong.mp3</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/movementSpeed.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/movementSpeed2.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/oneShot.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/oneShot2.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/oneShotMissile.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/pauseBackground.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/piercing.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/piercing2.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/piercingMissile.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/selectedShipCover.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/Serducho.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/skin1.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/skin1Pressed.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/skin2.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/skin2Pressed.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/skin3.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/skin3Pressed.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/skin4.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/skin4Pressed.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/skin5.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/skin5Pressed.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/SpaceShip2.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/SpaceShip3.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/SpaceShip4.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/SpaceShip5.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/SpaceShipSmall.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/startButton.png</File>
+    <File>C:/Users/Ryzen/source/repos/rafcyk/PZ2_2020_GR02/desktop/SpaceShooter/SpaceShooter/Content/startButtonPressed.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
