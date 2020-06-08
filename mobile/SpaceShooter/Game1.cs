@@ -32,6 +32,7 @@ namespace SpaceShooter
             Main,
             Skins,
             EndOfGame,
+            Instructions,
         }
 
         enum GameplayState
@@ -56,7 +57,8 @@ namespace SpaceShooter
             restartButtonTexture, restartButtonPressedTexture, menuButtonTexture, menuButtonPressedTexture,
             background1Texture, background2Texture,
             skillCheckBackgroundTexture, skillCheckPointerTexture,
-            skin1Texture, skin2Texture, skin3Texture, skin4Texture, skin5Texture, skin1PressedTexture, skin2PressedTexture, skin3PressedTexture, skin4PressedTexture, skin5PressedTexture, backButtonTexture, backButtonPressedTexture;
+            skin1Texture, skin2Texture, skin3Texture, skin4Texture, skin5Texture, skin1PressedTexture, skin2PressedTexture, skin3PressedTexture, skin4PressedTexture, skin5PressedTexture, backButtonTexture, backButtonPressedTexture,
+            instructionsTexture, instructionsButtonTexture, instructionsButtonPressedTexture;
         #endregion
 
         #region player
@@ -81,6 +83,7 @@ namespace SpaceShooter
         Button pauseButton;
         List<Button> pauseMenuButtons = new List<Button>();
         List<Button> endOfGameButtons = new List<Button>();
+        List<Button> instructionsButtons = new List<Button>();
         #endregion
 
         #region states
@@ -112,7 +115,6 @@ namespace SpaceShooter
         int selectedShip = 0;
         EnemyWave actualWave;
         bool soundOn = true;
-
         public Game1(Window w1)
         {
             this.w1 = w1;
@@ -138,7 +140,6 @@ namespace SpaceShooter
             base.Initialize();
             MediaPlayer.IsRepeating = true;
         }
-
         protected override void LoadContent()
         {
             //load content
@@ -155,6 +156,9 @@ namespace SpaceShooter
             exitButtonTexture = Content.Load<Texture2D>("exitButton");
             exitButtonPressedTexture = Content.Load<Texture2D>("exitButtonPressed");
             heartTexture = Content.Load<Texture2D>("heart");
+            instructionsTexture = Content.Load<Texture2D>("instructions");
+            instructionsButtonPressedTexture = Content.Load<Texture2D>("instructionsButtonPressed");
+            instructionsButtonTexture = Content.Load<Texture2D>("instructionsButton");
             menuButtonTexture = Content.Load<Texture2D>("menuButton");
             menuButtonPressedTexture = Content.Load<Texture2D>("menuButtonPressed");
             missile1Texture = Content.Load<Texture2D>("missile1");
@@ -207,7 +211,8 @@ namespace SpaceShooter
             //declare mainMenuButtons
             mainMenuButtons.Add(new Button("start", startButtonTexture, startButtonPressedTexture, new Rectangle(100, 1000, 880, 260)));
             mainMenuButtons.Add(new Button("skins", skinsButtonTexture, skinsButtonPressedTexture, new Rectangle(188, 1300, 704, 208)));
-            mainMenuButtons.Add(new Button("exit", exitButtonTexture, exitButtonPressedTexture, new Rectangle(232, 1548, 616, 182)));
+            mainMenuButtons.Add(new Button("instructions", instructionsButtonTexture, instructionsButtonPressedTexture, new Rectangle(188, 1548, 704, 208)));
+            mainMenuButtons.Add(new Button("exit", exitButtonTexture, exitButtonPressedTexture, new Rectangle(232, 1796, 616, 182)));
             mainMenuButtons.Add(new Button("sound", soundOnButtonTexture, soundOnButtonPressedTexture, new Rectangle(870, 18, 192, 192)));
 
             //skins menu buttons
@@ -229,6 +234,9 @@ namespace SpaceShooter
             //end of game screen buttons
             endOfGameButtons.Add(new Button("restart", restartButtonTexture, restartButtonPressedTexture, new Rectangle(100, 1100, 880, 260)));
             endOfGameButtons.Add(new Button("menu", menuButtonTexture, menuButtonPressedTexture, new Rectangle(216, 1400, 648, 192)));
+
+            //instructions button
+            instructionsButtons.Add(new Button("back", backButtonTexture, backButtonPressedTexture, new Rectangle(100, 30, 270, 260)));
 
             //player ship textures list
             shipTextures.Add(spaceShip1Texture);
@@ -262,12 +270,10 @@ namespace SpaceShooter
 
             PlaySong();
         }
-
         protected override void UnloadContent()
         {
 
         }
-
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -292,7 +298,6 @@ namespace SpaceShooter
                     break;
             }
         }
-
         private void UpdateMenu(GameTime deltaTime)
         {
             mainMenuBackground.Update();
@@ -308,9 +313,11 @@ namespace SpaceShooter
                 case MenuState.EndOfGame:
                     UpdateEndOfGame(deltaTime);
                     break;
+                case MenuState.Instructions:
+                    UpdateInstructions(deltaTime);
+                    break;
             }
         }
-
         private void UpdateMainMenu(GameTime deltaTime)
         {
             touchCollection = TouchPanel.GetState();
@@ -338,6 +345,10 @@ namespace SpaceShooter
                                     b.unpress();
                                     _menuState = MenuState.Skins;
                                     break;
+                                case "instructions":
+                                    b.unpress();
+                                    _menuState = MenuState.Instructions;
+                                    break;
                                 case "exit":
                                     b.unpress();
                                     Game.Activity.MoveTaskToBack(true);
@@ -346,13 +357,13 @@ namespace SpaceShooter
                                     soundOn = !soundOn;
                                     if (soundOn)
                                     {
-                                        mainMenuButtons[3].mainTexture = soundOnButtonTexture;
-                                        mainMenuButtons[3].pressedTexture = soundOnButtonPressedTexture;
+                                        //mainMenuButtons[4].mainTexture = soundOnButtonTexture;
+                                        //mainMenuButtons[4].pressedTexture = soundOnButtonPressedTexture;
                                     }
                                     else
                                     {
-                                        mainMenuButtons[3].mainTexture = soundOffButtonTexture;
-                                        mainMenuButtons[3].pressedTexture = soundOffButtonPressedTexture;
+                                        //mainMenuButtons[4].mainTexture = soundOffButtonTexture;
+                                        //mainMenuButtons[4].pressedTexture = soundOffButtonPressedTexture;
                                     }
                                     b.unpress();
                                     SaveSettings();
@@ -377,7 +388,6 @@ namespace SpaceShooter
                 Game.Activity.MoveTaskToBack(true);
             }
         }
-
         private void UpdateSkinsMenu(GameTime deltaTime)
         {
             touchCollection = TouchPanel.GetState();
@@ -441,7 +451,6 @@ namespace SpaceShooter
                 _menuState = MenuState.Main;
             }
         }
-
         private void UpdateGameplay(GameTime deltaTime)
         {
             //game unpaused
@@ -666,11 +675,8 @@ namespace SpaceShooter
                 }
             }
         }
-
         private void UpdateEndOfGame(GameTime deltaTime)
         {
-            mainMenuBackground.Update();
-
             if (newHighScore)
             {
                 if (deltaTime.TotalGameTime.TotalMilliseconds >= nextBlinkTime)
@@ -721,7 +727,46 @@ namespace SpaceShooter
                 }
             }
         }
+        private void UpdateInstructions(GameTime deltaTime)
+        {
+            touchCollection = TouchPanel.GetState();
 
+            foreach (TouchLocation tl in touchCollection)
+            {
+                Vector2 position = new Vector2((int)tl.Position.X, (int)tl.Position.Y);
+                Vector2 touchPosition = Vector2.Transform(position, Matrix.Invert(matrix));
+
+                foreach (Button b in instructionsButtons)
+                {
+                    if (b.isPressed)
+                    {
+                        if (tl.State == TouchLocationState.Released && b.location.Contains(touchPosition))
+                        {
+                            switch (b.Name)
+                            {
+                                case "back":
+                                    b.unpress();
+                                    _menuState = MenuState.Main;
+                                    break;
+                            }
+                        }
+                        else if (tl.State == TouchLocationState.Released) b.unpress();
+                    }
+                    else
+                    {
+                        if (b.location.Contains(touchPosition) && tl.State == TouchLocationState.Pressed)
+                        {
+                            b.press();
+                        }
+                    }
+                }
+            }
+
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            {
+                _menuState = MenuState.Main;
+            }
+        }
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
@@ -756,11 +801,13 @@ namespace SpaceShooter
                 case MenuState.EndOfGame:
                     DrawEndOfGame(gameTime);
                     break;
+                case MenuState.Instructions:
+                    DrawInstructions(gameTime);
+                    break;
             }
 
             spriteBatch.End();
         }
-
         private void DrawMainMenu(GameTime gameTime)
         {
             //drawing highest score string
@@ -772,7 +819,6 @@ namespace SpaceShooter
                 b.Draw(spriteBatch);
             }
         }
-
         private void DrawSkinsMenu(GameTime gameTime)
         {
             //drawing top skins texture
@@ -787,7 +833,6 @@ namespace SpaceShooter
             //drawing selected ship cover
             spriteBatch.Draw(selectedShipCover, new Rectangle(0, 390 + (390 * selectedShip), 1080, 290), Color.White);
         }
-
         private void DrawGameplay(GameTime gametime)
         {
             spriteBatch.Begin(transformMatrix: matrix);
@@ -832,12 +877,8 @@ namespace SpaceShooter
 
             spriteBatch.End();
         }
-
         private void DrawEndOfGame(GameTime gameTime)
         {
-            //drawing background
-            mainMenuBackground.Draw(spriteBatch);
-
             //drawing NEW HIGH SCORE string 
             if (newHighScoreVisible) spriteBatch.DrawString(Font, "NEW HIGH SCORE!", new Vector2(150, 600), Color.White);
 
@@ -850,7 +891,15 @@ namespace SpaceShooter
                 b.Draw(spriteBatch);
             }
         }
+        private void DrawInstructions(GameTime gameTime)
+        {
+            spriteBatch.Draw(instructionsTexture, new Rectangle(40, 300, 1000, 2000), Color.White);
 
+            foreach (Button b in instructionsButtons)
+            {
+                b.Draw(spriteBatch);
+            }
+        }
         private void ResetGame(GameTime deltaTime)
         {
             _gameplayState = GameplayState.Unpaused;
@@ -869,7 +918,6 @@ namespace SpaceShooter
             skillCheck.damage = 25;
             nextSkilCheck = r.Next((int)deltaTime.TotalGameTime.TotalSeconds + 20, (int)deltaTime.TotalGameTime.TotalSeconds + 40);
         }
-
         private void SaveSettings()
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
@@ -888,7 +936,6 @@ namespace SpaceShooter
             }
             catch { }
         }
-
         private void LoadSettings()
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
@@ -905,9 +952,9 @@ namespace SpaceShooter
                     else if (Int32.Parse(parm[2]) == 0)
                     {
                         soundOn = false;
-                        mainMenuButtons[3].texture = soundOffButtonTexture;
-                        mainMenuButtons[3].mainTexture = soundOffButtonTexture;
-                        mainMenuButtons[3].pressedTexture = soundOffButtonPressedTexture;
+                        mainMenuButtons[4].texture = soundOffButtonTexture;
+                        mainMenuButtons[4].mainTexture = soundOffButtonTexture;
+                        mainMenuButtons[4].pressedTexture = soundOffButtonPressedTexture;
                     }
                 }
             }

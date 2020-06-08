@@ -16,32 +16,6 @@ namespace SpaceShooter
             int x = 0, i = 0;
             this.speed = speed;
             Random r = new Random();
-
-            /*
-            switch (actualWave)
-            {
-                case EnemyWave.First:
-                    health = 25;
-                    texture = textures[0];
-                    break;
-                case EnemyWave.Second:
-                    health = 50;
-                    texture = textures[1];
-                    break;
-                case EnemyWave.Third:
-                    health = 75;
-                    texture = textures[2];
-                    break;
-                case EnemyWave.Fourth:
-                    health = 100;
-                    texture = textures[3];
-                    break;
-                case EnemyWave.Fifth:
-                    health = 125;
-                    texture = textures[4];
-                    break;
-            }
-            */
             switch (actualWave)
             {
                 case EnemyWave.First:

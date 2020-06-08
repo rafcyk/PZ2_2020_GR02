@@ -114,6 +114,9 @@
     <Content Include="Content\exitButton.png" />
     <Content Include="Content\exitButtonPressed.png" />
     <Content Include="Content\heart.png" />
+    <Content Include="Content\instructions.png" />
+    <Content Include="Content\instructionsButton.png" />
+    <Content Include="Content\instructionsButtonPressed.png" />
     <Content Include="Content\menuButton.png" />
     <Content Include="Content\menuButtonPressed.png" />
     <Content Include="Content\missile1.png" />
