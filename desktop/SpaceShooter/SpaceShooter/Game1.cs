@@ -535,11 +535,11 @@ namespace SpaceShooter
                     _currentEnemyWave = EnemyWave.Fifth;
                     enemySpeed = 2;
                 }
-                else if (actualScore > 500 && actualScore % 40 == 0 && isSpeedUpReady == true) {
+                else if (actualScore > 500 && actualScore % 60 == 0 && isSpeedUpReady == true) {
                     enemySpeed++;
                     isSpeedUpReady = false;
                 }
-                else if (actualScore > 500 && actualScore % 40 != 0 )
+                else if (actualScore > 500 && actualScore % 60 != 0 )
                 {
                     isSpeedUpReady = true;
                 }
@@ -607,7 +607,7 @@ namespace SpaceShooter
                             else e.Hit(25);
 
                             m.isDestroyed = true;
-                            if (actualScore % 10 == 0 && enemySpeed != 5) enemySpeed++;
+                            if (actualScore % 10 == 0 && enemySpeed != 6) enemySpeed++;
                         }
                     }
 
@@ -762,7 +762,7 @@ namespace SpaceShooter
             scroll1.speed = 1;
             scroll2.speed = 1;
             player.health = 3;
-            player.speed = 5;
+            player.speed = 6;
             shootingSpeed = 4;
             actualScore = 0;
             _currentEnemyWave = EnemyWave.First;
