@@ -1,0 +1,138 @@
+.authorsEn .wrapAuthorsEn {
+    width: 70%;
+    height: 60vh;
+    margin: 0 auto;
+    border: 2px solid black;
+    box-shadow: 10px 10px 5px black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .3);
+}
+
+.authorsEn .wrapAuthorsEn .authorEn {
+    width: 300px;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 10px 10px 5px black;
+    background-color: rgba(0, 0, 0, .3);
+    padding: 10px;
+}
+
+.authorsEn .wrapAuthorsEn .authorEn img {
+    width: 100px;
+    border-radius: 50%;
+    display: block;
+}
+
+.authorsEn .wrapAuthorsEn .authorEn p.name {
+    font-size: 2rem;
+    color: white;
+    font-style: italic;
+    opacity: .8;
+}
+
+.authorsEn .wrapAuthorsEn .authorEn p.desc{
+    color:white;
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+@media screen and (max-width:1200px){
+    .authorsEn .wrapAuthorsEn {
+        width: 80%;
+    }
+
+    
+    
+    .authorsEn .wrapAuthorsEn .authorEn img {
+        width: 80px;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn p.name {
+        font-size: 2rem;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn p.desc{
+        font-size: 1.3rem;
+    }
+}
+
+@media screen and (max-width:900px){
+    .authorsEn .wrapAuthorsEn {
+        width: 90%;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn img {
+        width: 70px;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn p.name {
+        font-size: 1.9rem;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn p.desc{
+        font-size: 1.3rem;
+    }
+}
+
+@media screen and (max-width:700px){
+
+    .authorsEn .wrapAuthorsEn{
+        flex-direction: column;
+    }
+
+    .authorsEn .wrapAuthorsEn .authorEn {
+        width: 80%;
+        height: 200px;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn img {
+        width: 60px;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn p.name {
+        font-size: 1.9rem;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn p.desc{
+        font-size: 1.3rem;
+    }
+}
+
+
+@media screen and (max-width:370px){
+    .authorsEn .wrapAuthorsEn .authorEn {
+        height: 150px;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn img {
+        width:40px;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn p.name {
+        font-size: 1.7rem;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn p.desc{
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (max-height:500px){
+    .authorsEn .wrapAuthorsEn .authorEn {
+        height: 90%;
+    }    
+    .authorsEn .wrapAuthorsEn{
+        flex-direction: row;
+    }
+
+    .authorsEn .wrapAuthorsEn .authorEn img {
+        width:30px;
+    }
+}
+

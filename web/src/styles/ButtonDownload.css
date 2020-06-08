@@ -1,0 +1,40 @@
+a.downloadSection{
+    position: fixed;
+    top:5%;
+    right: 5%;
+    width: 180px;
+    height: 80px;   
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    background-color: rgb(184, 23, 23);
+    color:white;
+    border:2px solid black;
+    border-radius: 10px;
+    z-index: 9999 !important;
+    box-shadow: 10px 10px 5px black;
+    transition: .2s;
+}
+
+a.downloadSection:hover{
+    font-size: 2.2rem;
+}
+
+@media screen and (max-width:900px){
+    a.downloadSection{
+        width: 150px;
+        height: 60px;   
+        font-size: 2.5rem;
+    }
+}
+
+@media screen and (max-width:700px){
+    a.downloadSection{
+        width: 120px;
+        height: 40px;   
+        font-size: 2.2rem;
+    }
+}
+

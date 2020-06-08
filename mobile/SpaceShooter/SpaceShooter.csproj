@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B620BD30-D85E-468E-9E0F-0CDC224C6AA0}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SpaceShooter</RootNamespace>
+    <AssemblyName>SpaceShooter</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AndroidApplication>true</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AndroidSupportedAbis>armeabi-v7a%3bx86</AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions>.m4a</AndroidStoreUncompressedFileExtensions>
+    <MandroidI18n />
+    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
+    <MonoGamePlatform>Android</MonoGamePlatform>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;ANDROID</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <BundleAssemblies>false</BundleAssemblies>
+    <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
+    <AndroidUseAapt2>true</AndroidUseAapt2>
+    <AndroidSupportedAbis />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;ANDROID</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Android" />
+    <Reference Include="mscorlib" />
+    <Reference Include="OpenTK-1.0" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="MonoGame.Framework">
+      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Android\MonoGame.Framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Activity1.cs" />
+    <Compile Include="GameplayBackground.cs" />
+    <Compile Include="Button.cs" />
+    <Compile Include="Enemy.cs" />
+    <Compile Include="Game1.cs" />
+    <Compile Include="MainMenuBackground.cs" />
+    <Compile Include="Missile.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SkillCheck.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\pixel_f70.spritefont" />
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Assets\AboutAssets.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Values\Strings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Layout\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Drawable\Splash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Values\Styles.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\AndroidManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\backButton.png" />
+    <Content Include="Content\backButtonPressed.png" />
+    <Content Include="Content\background1.png" />
+    <Content Include="Content\background2.png" />
+    <Content Include="Content\enemy1.png" />
+    <Content Include="Content\enemy2.png" />
+    <Content Include="Content\enemy3.png" />
+    <Content Include="Content\enemy4.png" />
+    <Content Include="Content\exitButton.png" />
+    <Content Include="Content\exitButtonPressed.png" />
+    <Content Include="Content\heart.png" />
+    <Content Include="Content\instructions.png" />
+    <Content Include="Content\instructionsButton.png" />
+    <Content Include="Content\instructionsButtonPressed.png" />
+    <Content Include="Content\menuButton.png" />
+    <Content Include="Content\menuButtonPressed.png" />
+    <Content Include="Content\missile1.png" />
+    <Content Include="Content\missile2.png" />
+    <Content Include="Content\missile3.png" />
+    <Content Include="Content\missile4.png" />
+    <Content Include="Content\missile5.png" />
+    <Content Include="Content\pauseBackground.png" />
+    <Content Include="Content\pauseButton.png" />
+    <Content Include="Content\pauseButtonPressed.png" />
+    <Content Include="Content\pauseTexture.png" />
+    <Content Include="Content\restartButton.png" />
+    <Content Include="Content\restartButtonPressed.png" />
+    <Content Include="Content\resumeButton.png" />
+    <Content Include="Content\resumeButtonPressed.png" />
+    <Content Include="Content\selectedShipCover.png" />
+    <Content Include="Content\skillCheckBackground.png" />
+    <Content Include="Content\skillCheckPointer.png" />
+    <Content Include="Content\skin1.png" />
+    <Content Include="Content\skin1Pressed.png" />
+    <Content Include="Content\skin2.png" />
+    <Content Include="Content\skin2Pressed.png" />
+    <Content Include="Content\skin3.png" />
+    <Content Include="Content\skin3Pressed.png" />
+    <Content Include="Content\skin4.png" />
+    <Content Include="Content\skin4Pressed.png" />
+    <Content Include="Content\skin5.png" />
+    <Content Include="Content\skin5Pressed.png" />
+    <Content Include="Content\skinsButton.png" />
+    <Content Include="Content\skinsButtonPressed.png" />
+    <Content Include="Content\soundOffButton.png" />
+    <Content Include="Content\soundOffButtonPressed.png" />
+    <Content Include="Content\soundOnButton.png" />
+    <Content Include="Content\soundOnButtonPressed.png" />
+    <Content Include="Content\spaceShip1.png" />
+    <Content Include="Content\spaceShip2.png" />
+    <Content Include="Content\spaceShip3.png" />
+    <Content Include="Content\spaceShip4.png" />
+    <Content Include="Content\spaceShip5.png" />
+    <Content Include="Content\startButton.png" />
+    <Content Include="Content\startButtonPressed.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,138 @@
+.improve .wrapImprove{
+    width: 70%;
+    height: 60vh;
+    margin:0 auto;
+    border:2px solid black;
+    box-shadow: 10px 10px 5px black;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .3);
+}
+
+.improve .wrapImprove img{
+    width: 350px;
+    padding: 20px;
+}
+
+.improve .wrapImprove p {
+    padding: 30px;
+    color: #fff;
+    font-size:3rem;
+    line-height: 5rem;
+    text-align: center;
+}
+
+@media screen and (max-width:1200px){
+    .improve .wrapImprove{
+        width: 80%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .improve .wrapImprove img{
+        width: 250px;
+        padding: 20px;
+    }
+    
+    .improve .wrapImprove p {
+        padding: 30px;
+        font-size: 3rem;
+        line-height: 4rem;
+    }
+
+}
+
+@media screen and (max-width:900px){
+    .improve .wrapImprove{
+        width: 90%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .improve .wrapImprove img{
+        width: 200px;
+        padding: 20px;
+    }
+    
+    .improve .wrapImprove p {
+        padding: 25px;
+        font-size: 2.5rem;
+        line-height: 4rem;
+    }
+}
+
+@media screen and (max-width:700px){
+    .improve .wrapImprove{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .improve .wrapImprove img{
+        width: 150px;
+        padding: 15px;
+    }
+    
+    .improve .wrapImprove p {
+        padding: 20px;
+        font-size: 2.2rem;
+        line-height: 3rem;
+    }
+}
+
+@media screen and (max-width:500px){
+    .improve .wrapImprove{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .improve .wrapImprove img{
+        width: 150px;
+        padding: 15px;
+    }
+    
+    .improve .wrapImprove p {
+        padding: 20px;
+        font-size: 2rem;
+        line-height: 3rem;
+    }
+}
+
+@media screen and (max-width:370px){
+    .improve .wrapImprove{
+        width: 90%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .improve .wrapImprove img{
+        width: 150px;
+        padding: 15px;
+    }
+    
+    .improve .wrapImprove p {
+        padding: 20px;
+        font-size: 1.9rem;
+        line-height: 2.5rem;
+    }
+}
+
+@media screen and (max-width:330px){
+    
+    .improve .wrapImprove img{
+        width: 100px;
+        padding: 15px;
+    }
+    
+    .improve .wrapImprove p {
+        padding: 20px;
+        font-size: 1.8rem;
+        line-height: 2.5rem;
+    }
+}

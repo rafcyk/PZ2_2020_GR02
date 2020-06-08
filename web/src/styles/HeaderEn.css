@@ -1,0 +1,46 @@
+.headerEn{
+    position: relative;
+    width:100%;
+    height: 95vh;
+}
+
+.headerEn h2{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    color:white;
+    font-size: 7rem;
+    padding: 5px 20px;
+    text-transform: uppercase;
+    box-shadow: 5px 5px 10px black;
+    text-align: center;
+}
+
+@media screen and (max-width:1200px){
+    .headerEn h2{
+        font-size: 5rem;
+        width: 70%;
+    }
+}
+
+@media screen and (max-width:900px){
+    .headerEn h2{
+        font-size: 5rem;
+        width: 80%;
+    }
+}
+
+@media screen and (max-width:700px){
+    .headerEn h2{
+        font-size: 4rem;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:500px){
+    .headerEn h2{
+        font-size: 3rem;
+        width: 100%;
+    }
+}

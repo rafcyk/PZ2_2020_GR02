@@ -1,0 +1,139 @@
+.about .wrapAbout{
+    width: 70%;
+    height: 60vh;
+    margin:0 auto;
+    border:2px solid black;
+    box-shadow: 10px 10px 5px black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .3);
+}
+
+.about .wrapAbout img{
+    width: 350px;
+    padding: 20px;
+}
+
+.about .wrapAbout p {
+    padding: 30px;
+    color: #fff;
+    font-size: 3rem;
+    line-height: 5rem;
+    text-align: center;
+}
+
+@media screen and (max-width:1200px){
+    .about .wrapAbout{
+        width: 80%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .about .wrapAbout img{
+        width: 250px;
+        padding: 20px;
+    }
+    
+    .about .wrapAbout p {
+        padding: 30px;
+        font-size: 3rem;
+        line-height: 4rem;
+    }
+
+}
+
+@media screen and (max-width:900px){
+    .about .wrapAbout{
+        width: 90%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .about .wrapAbout img{
+        width: 200px;
+        padding: 20px;
+    }
+    
+    .about .wrapAbout p {
+        padding: 25px;
+        font-size: 2.5rem;
+        line-height: 4rem;
+    }
+}
+
+@media screen and (max-width:700px){
+    .about .wrapAbout{
+        width: 90%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .about .wrapAbout img{
+        width: 150px;
+        padding: 15px;
+    }
+    
+    .about .wrapAbout p {
+        padding: 20px;
+        font-size: 2.2rem;
+        line-height: 3rem;
+    }
+}
+
+@media screen and (max-width:500px){
+    .about .wrapAbout{
+        width: 90%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .about .wrapAbout img{
+        width: 150px;
+        padding: 15px;
+    }
+    
+    .about .wrapAbout p {
+        padding: 20px;
+        font-size: 2rem;
+        line-height: 3rem;
+    }
+}
+
+@media screen and (max-width:370px){
+    .about .wrapAbout{
+        width: 90%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .about .wrapAbout img{
+        width: 150px;
+        padding: 15px;
+    }
+    
+    .about .wrapAbout p {
+        padding: 20px;
+        font-size: 1.9rem;
+        line-height: 2.5rem;
+    }
+}
+
+@media screen and (max-width:330px){
+    
+    .about .wrapAbout img{
+        width: 100px;
+        padding: 15px;
+    }
+    
+    .about .wrapAbout p {
+        padding: 20px;
+        font-size: 1.8rem;
+        line-height: 2.5rem;
+    }
+}

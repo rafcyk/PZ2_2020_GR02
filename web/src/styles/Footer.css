@@ -1,0 +1,33 @@
+footer{
+    text-align: center;
+    height: 15vh;
+    color:white;
+    font-size: 1.7rem;
+}
+
+
+@media screen and (max-width:700px){
+
+    footer{
+        font-size: 1.5rem;
+    }
+    
+}
+
+@media screen and (max-width:500px){
+    footer{
+        font-size: 1.4rem;
+    }
+}
+
+@media screen and (max-width:370px){
+    footer{
+        font-size: 1.3rem;
+    }
+}
+
+@media screen and (max-width:330px){
+    footer{
+        font-size: 1.2rem;
+    }
+}
