@@ -16,3 +16,27 @@
     color:white;
     text-align: center;
 }
+
+@media screen and (max-width:900px) {
+    .promoEn .wrapPromoEn {
+        width: 90%;
+    }
+
+    .promoEn h2 {
+        font-size: 5rem;
+    }
+}
+
+@media screen and (max-width:700px) {
+
+    .promoEn h2 {
+        font-size: 4rem;
+    }
+}
+
+@media screen and (max-width:500px) {
+
+    .promoEn h2 {
+        font-size: 3rem;
+    }
+}

@@ -41,3 +41,98 @@
     text-align: center;
     font-weight: bold;
 }
+
+@media screen and (max-width:1200px){
+    .authorsEn .wrapAuthorsEn {
+        width: 80%;
+    }
+
+    
+    
+    .authorsEn .wrapAuthorsEn .authorEn img {
+        width: 80px;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn p.name {
+        font-size: 2rem;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn p.desc{
+        font-size: 1.3rem;
+    }
+}
+
+@media screen and (max-width:900px){
+    .authorsEn .wrapAuthorsEn {
+        width: 90%;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn img {
+        width: 70px;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn p.name {
+        font-size: 1.9rem;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn p.desc{
+        font-size: 1.3rem;
+    }
+}
+
+@media screen and (max-width:700px){
+
+    .authorsEn .wrapAuthorsEn{
+        flex-direction: column;
+    }
+
+    .authorsEn .wrapAuthorsEn .authorEn {
+        width: 80%;
+        height: 200px;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn img {
+        width: 60px;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn p.name {
+        font-size: 1.9rem;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn p.desc{
+        font-size: 1.3rem;
+    }
+}
+
+
+@media screen and (max-width:370px){
+    .authorsEn .wrapAuthorsEn .authorEn {
+        height: 150px;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn img {
+        width:40px;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn p.name {
+        font-size: 1.7rem;
+    }
+    
+    .authorsEn .wrapAuthorsEn .authorEn p.desc{
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (max-height:500px){
+    .authorsEn .wrapAuthorsEn .authorEn {
+        height: 90%;
+    }    
+    .authorsEn .wrapAuthorsEn{
+        flex-direction: row;
+    }
+
+    .authorsEn .wrapAuthorsEn .authorEn img {
+        width:30px;
+    }
+}
+

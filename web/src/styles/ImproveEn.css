@@ -23,3 +23,116 @@
     line-height: 5rem;
     text-align: center;
 }
+
+@media screen and (max-width:1200px){
+    .improveEn .wrapImproveEn{
+        width: 80%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .improveEn .wrapImproveEn img{
+        width: 250px;
+        padding: 20px;
+    }
+    
+    .improveEn .wrapImproveEn p {
+        padding: 30px;
+        font-size: 3rem;
+        line-height: 4rem;
+    }
+
+}
+
+@media screen and (max-width:900px){
+    .improveEn .wrapImproveEn{
+        width: 90%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .improveEn .wrapImproveEn img{
+        width: 200px;
+        padding: 20px;
+    }
+    
+    .improveEn .wrapImproveEn p {
+        padding: 25px;
+        font-size: 2.5rem;
+        line-height: 4rem;
+    }
+}
+
+@media screen and (max-width:700px){
+    .improveEn .wrapImproveEn{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .improveEn .wrapImproveEn img{
+        width: 150px;
+        padding: 15px;
+    }
+    
+    .improveEn .wrapImproveEn p {
+        padding: 20px;
+        font-size: 2.2rem;
+        line-height: 3rem;
+    }
+}
+
+@media screen and (max-width:500px){
+    .improveEn .wrapImproveEn{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .improveEn .wrapImproveEn img{
+        width: 150px;
+        padding: 15px;
+    }
+    
+    .improveEn .wrapImproveEn p {
+        padding: 20px;
+        font-size: 2rem;
+        line-height: 3rem;
+    }
+}
+
+@media screen and (max-width:370px){
+    .improveEn .wrapImproveEn{
+        width: 90%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .improveEn .wrapImproveEn img{
+        width: 150px;
+        padding: 15px;
+    }
+    
+    .improveEn .wrapImproveEn p {
+        padding: 20px;
+        font-size: 1.9rem;
+        line-height: 2.5rem;
+    }
+}
+
+@media screen and (max-width:330px){
+    
+    .improveEn .wrapImproveEn img{
+        width: 100px;
+        padding: 15px;
+    }
+    
+    .improveEn .wrapImproveEn p {
+        padding: 20px;
+        font-size: 1.8rem;
+        line-height: 2.5rem;
+    }
+}

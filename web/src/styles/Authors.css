@@ -41,3 +41,96 @@
     text-align: center;
     font-weight: bold;
 }
+
+@media screen and (max-width:1200px){
+    .authors .wrapAuthors {
+        width: 80%;
+    }
+
+    
+    
+    .authors .wrapAuthors .author img {
+        width: 80px;
+    }
+    
+    .authors .wrapAuthors .author p.name {
+        font-size: 2rem;
+    }
+    
+    .authors .wrapAuthors .author p.desc{
+        font-size: 1.3rem;
+    }
+}
+
+@media screen and (max-width:900px){
+    .authors .wrapAuthors {
+        width: 90%;
+    }
+    
+    .authors .wrapAuthors .author img {
+        width: 70px;
+    }
+    
+    .authors .wrapAuthors .author p.name {
+        font-size: 1.9rem;
+    }
+    
+    .authors .wrapAuthors .author p.desc{
+        font-size: 1.3rem;
+    }
+}
+
+@media screen and (max-width:700px){
+
+    .authors .wrapAuthors{
+        flex-direction: column;
+    }
+
+    .authors .wrapAuthors .author {
+        width: 80%;
+        height: 200px;
+    }
+    
+    .authors .wrapAuthors .author img {
+        width: 60px;
+    }
+    
+    .authors .wrapAuthors .author p.name {
+        font-size: 1.9rem;
+    }
+    
+    .authors .wrapAuthors .author p.desc{
+        font-size: 1.3rem;
+    }
+}
+
+
+@media screen and (max-width:370px){
+    .authors .wrapAuthors .author {
+        height: 150px;
+    }
+    
+    .authors .wrapAuthors .author {
+        height: 150px;
+    }
+    
+    .authors .wrapAuthors .author p.name {
+        font-size: 1.7rem;
+    }
+    
+    .authors .wrapAuthors .author p.desc{
+        font-size: 1.1rem;
+    }
+}
+
+
+@media screen and (max-height:500px){
+    .authors .wrapAuthors .author {
+        height: 90%;
+    }    .authors .wrapAuthors{
+        flex-direction: row;
+    }
+    .authors .wrapAuthors .author img {
+        width:30px;
+    }
+}

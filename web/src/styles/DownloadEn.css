@@ -11,7 +11,7 @@
     background-color: rgba(0, 0, 0, .3);
 }
 
-.downloadEn .wrapButtons button{
+.downloadEn .wrapButtons a{
     width:300px;
     height: 100px;
     font-size: 4.5rem;
@@ -22,6 +22,10 @@
     border-radius: 10px;
     transition: .2s;
     text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
 }
 
 .wrapButtons{
@@ -34,6 +38,7 @@
 .downloadEn .wrapDownloadEn p{
     color:white;
     font-size: 5rem;
+    text-align: center;
 }
 
 .downloadEn .mobile{
@@ -44,7 +49,139 @@
     background-color: rgb(29, 68, 197);
 }
 
-.downloadEn button:hover{
+.downloadEn a:hover{
     font-size: 3.5rem;
     opacity: .8;
+}
+
+@media screen and (max-width:1200px){
+    .downloadEn .wrapDownloadEn{
+        width: 80%;
+    }
+    
+    .downloadEn .wrapButtons a{
+        width:280px;
+        height: 90px;
+        font-size: 4.2rem;
+    }
+    
+    
+    .downloadEn .wrapDownloadEn p{
+        color:white;
+        font-size: 4.5rem;
+    }
+    
+    .downloadEn a:hover{
+        font-size: 3.2rem;
+        opacity: .8;
+    }
+}
+
+@media screen and (max-width:900px){
+    .downloadEn .wrapDownloadEn{
+        width: 90%;
+    }
+
+
+    
+    .downloadEn .wrapButtons a{
+        width:250px;
+        height: 80px;
+        font-size: 3.6rem;
+    }
+    
+    
+    .downloadEn .wrapDownloadEn p{
+        color:white;
+        font-size: 4.5rem;
+    }
+    
+    .downloadEn a:hover{
+        font-size: 2.3rem;
+        opacity: .8;
+    }
+}
+
+@media screen and (max-width:700px){
+
+    .downloadEn .wrapButtons a{
+        margin-top: 20px;
+    }
+    
+    .wrapButtons{
+        flex-direction: column;
+    }
+    
+    .downloadEn .wrapDownloadEn p{
+        margin-bottom: -20px;
+    }
+    
+}
+
+@media screen and (max-width:500px){
+    .downloadEn .wrapButtons a{
+        width:280px;
+        height: 80px;
+        font-size: 3.6rem;
+        margin-top: 20px;
+    }
+    
+    .wrapButtons{
+        flex-direction: column;
+    }
+    
+    .downloadEn .wrapDownloadEn p{
+        color:white;
+        font-size: 4.5rem;
+    }
+    
+    .downloadEn a:hover{
+        font-size: 2.3rem;
+        opacity: .8;
+    }
+}
+
+@media screen and (max-width:370px){
+    .downloadEn .wrapButtons a{
+        width:280px;
+        height: 80px;
+        font-size: 3.6rem;
+        margin-top: 20px;
+    }
+    
+    .downloadEn .wrapDownloadEn p{
+        color:white;
+        font-size: 4.5rem;
+    }
+    
+    .downloadEn a:hover{
+        font-size: 2.3rem;
+        opacity: .8;
+    }
+}
+
+@media screen and (max-width:330px){
+
+    .downloadEn .wrapButtons a{
+        width:260px;
+        height: 60px;
+        font-size: 3rem;
+        margin-top: 20px;
+    }
+    
+    .downloadEn .wrapDownloadEn p{
+        color:white;
+        font-size: 4rem;
+    }
+    
+    .downloadEn a:hover{
+        font-size: 2.3rem;
+        opacity: .8;
+    }
+}
+
+@media screen and (max-height:400px){
+    .wrapDownloadEn .wrapButtons{
+        flex-direction: row;
+    }
 }

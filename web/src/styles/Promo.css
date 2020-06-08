@@ -1,8 +1,8 @@
-.promo .wrapPromo{
+.promo .wrapPromo {
     width: 70%;
     height: 60vh;
-    margin:0 auto;
-    border:2px solid black;
+    margin: 0 auto;
+    border: 2px solid black;
     box-shadow: 10px 10px 5px black;
     display: flex;
     flex-direction: row-reverse;
@@ -11,8 +11,34 @@
     background-color: rgba(0, 0, 0, .3);
 }
 
-.promo h2{
-    font-size:7rem;
-    color:white;
+.promo h2 {
+    font-size: 7rem;
+    color: white;
     text-align: center;
+}
+
+
+
+@media screen and (max-width:900px) {
+    .promo .wrapPromo {
+        width: 90%;
+    }
+
+    .promo h2 {
+        font-size: 5rem;
+    }
+}
+
+@media screen and (max-width:700px) {
+
+    .promo h2 {
+        font-size: 4rem;
+    }
+}
+
+@media screen and (max-width:500px) {
+
+    .promo h2 {
+        font-size: 3rem;
+    }
 }
